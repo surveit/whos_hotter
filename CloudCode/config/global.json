@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Hotter": {
+            "applicationId": "ZSuSP6FYo8JfpSgPHrdETAPz8DCCjuGVNXGRXfS3", 
+            "masterKey": "GlQi1HlWxK0y3YzWTVSTNh7Ls4EmAtnc4ZTC1aR1"
+        }, 
+        "_default": {
+            "link": "Hotter"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.13"
+    }
+}
