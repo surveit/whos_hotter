@@ -12,6 +12,7 @@
 
 @interface CompetitionCache : NSObject
 
-- (Competition *)next;
++ (void)initialize;
++ (Competition *)next;
 
 @end

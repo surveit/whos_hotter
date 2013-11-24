@@ -6,16 +6,27 @@
 //  Copyright (c) 2013 Awesome Apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Utility.h"
+
+typedef enum {
+    MALE = 0,
+    FEMALE = 1,
+} Gender;
 
 @interface User : NSObject
 
 + (User *)sharedUser;
 + (NSString *)identifier;
++ (NSString *)username;
 
 - (void)createLogin:(NSString *)username
-           password:(NSString *)password;
-- (void)setProfileImage:(UIImage *)image;
+           password:(NSString *)password
+             gender:(Gender)gender
+         completion:(CompletionHandler)handler;
 
+- (void)setProfileImage:(UIImage *)image;
+- (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
+- (void)submitForCompetition:(ObjectsCompletionHandler)completionHandler;
+- (UIImage *)profileImage;
 
 @end

@@ -22,6 +22,22 @@
     return object;
 }
 
++ (instancetype)objectWithModel:(PFObject *)model {
+    PersistedObject *object = [[self alloc] init];
+    object.model = model;
+    [object objectCreatedFromModel];
+    return object;
+}
+
++ (NSArray *)objectsWithModels:(NSArray *)models {
+    NSMutableArray *objects = [NSMutableArray array];
+    for (PFObject *model in models) {
+        PersistedObject *object = [self objectWithModel:model];
+        [objects addObject:object];
+    }
+    return objects;
+}
+
 - (void)saveInBackgroundWithCompletionHandler:(void (^)(BOOL success, NSError *error))completionBlock {
     [self.model saveInBackgroundWithBlock:completionBlock];
 }
@@ -36,6 +52,14 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     [self.model setObject:value forKey:key];
+}
+
+- (NSString *)identifier {
+    return self.model.objectId;
+}
+
+- (void)objectCreatedFromModel {
+    //do nothing. override
 }
 
 @end

@@ -14,4 +14,20 @@
     return 10;
 }
 
++ (NSInteger)maxCommentLength {
+    return 140;
+}
+
++ (NSInteger)maxStamina {
+    return 100;
+}
+
++ (NSInteger)staminaPerVote {
+    return 10;
+}
+
++ (NSInteger)secondsToRecoverStamina {
+    return 3600;
+}
+
 @end

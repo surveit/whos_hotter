@@ -9,6 +9,8 @@
 #import "InitializationManager.h"
 
 #import "User.h"
+#import "CompetitionCache.h"
+#import "FileCache.h"
 
 #import <Parse/Parse.h>
 
@@ -23,6 +25,13 @@
     [Parse setApplicationId:@"ZSuSP6FYo8JfpSgPHrdETAPz8DCCjuGVNXGRXfS3"
                   clientKey:@"xztuf8Gy8RNdecL9l2uKDDlvjz3iLFujk2mLmNez"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
+    
+    [self initializeCaches];
+}
+
+- (void)initializeCaches {
+    [FileCache initialize];
+    [CompetitionCache initialize];
 }
 
 - (void)receivedConfigs {

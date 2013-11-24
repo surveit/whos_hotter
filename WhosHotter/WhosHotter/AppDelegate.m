@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "InitializationManager.h"
 
+#import <Parse/Parse.h>
+
 @interface AppDelegate ()
 
 @property (nonatomic, readwrite, strong) InitializationManager *initializationManager;
@@ -49,6 +51,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [PFFacebookUtils handleOpenURL:url];
 }
 
 @end

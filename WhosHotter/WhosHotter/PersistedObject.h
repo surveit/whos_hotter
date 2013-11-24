@@ -13,12 +13,13 @@
 @interface PersistedObject : NSObject
 
 + (instancetype)newObject;
-
-@property (nonatomic, readonly, strong) PFObject *model;
++ (instancetype)objectWithModel:(PFObject *)model;
++ (NSArray *)objectsWithModels:(NSArray *)models;
 
 - (id)valueForKey:(NSString *)key;
 - (void)incrementKey:(NSString *)key;
 - (void)setValue:(id)value forKey:(NSString *)key;
 - (void)saveInBackgroundWithCompletionHandler:(void (^)(BOOL success, NSError *error))completionBlock;
+- (NSString *)identifier;
 
 @end

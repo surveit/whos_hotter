@@ -8,15 +8,28 @@
 
 #import "PersistedObject.h"
 
-@interface Competition : PersistedObject
+#import "Downloadable.h"
+#import "Utility.h"
+
+@interface Competition : PersistedObject <Downloadable>
 
 + (NSArray *)myRecentCompetitions:(NSInteger)count
-                completionHandler:(void (^)(BOOL success, NSError *error))completionBlock;
+                completionHandler:(ObjectsCompletionHandler)completionBlock;
++ (void)createCompetition:(CompletionHandler)completionHandler;
+
++ (NSArray *)competitionsFromPersistentCompetitions:(NSArray *)objects;
+
+@property (nonatomic, readonly, assign) BOOL invalid;
 
 - (NSInteger)votes0;
 - (NSInteger)votes1;
+- (NSInteger)totalVotes;
 
 - (void)voteFor0;
 - (void)voteFor1;
+
+- (UIImage *)topImage;
+- (UIImage *)bottomImage;
+- (NSArray *)comments;
 
 @end

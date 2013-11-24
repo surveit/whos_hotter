@@ -10,6 +10,6 @@
 
 @class User;
 
-@interface ViewController : UIViewController
+@interface ViewController : UITabBarController
 
 @end

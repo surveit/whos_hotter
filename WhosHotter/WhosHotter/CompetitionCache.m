@@ -11,25 +11,43 @@
 
 #import <Parse/Parse.h>
 
+static CompetitionCache *sharedInstance = nil;
+
 @interface CompetitionCache ()
 
+@property (nonatomic, readwrite, strong) Competition *currentCompetition;
 @property (nonatomic, readwrite, strong) NSMutableArray *cachedCompetitions;
 
 @end
 
 @implementation CompetitionCache
 
++ (CompetitionCache *)sharedInstance {
+    if (!sharedInstance) {
+        sharedInstance = [[CompetitionCache alloc] init];
+    }
+    return sharedInstance;
+}
+
++ (void)initialize {
+    [[self sharedInstance] populate];
+}
+
++ (Competition *)next {
+    return [[self sharedInstance] next];
+}
+
 - (void)populate {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Competition.class)];
     query.limit = [Config competitionsToCache];
-    CGFloat rand = arc4random_uniform(1000000)/1000000.0f;
-    [query whereKey:NSStringFromSelector(@selector(rand)) greaterThan:@(rand)];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            for (id object in objects) {
-                [self.cachedCompetitions addObject:object];
+            if (!self.cachedCompetitions) {
+                self.cachedCompetitions = [NSMutableArray array];
             }
+            
+            [self.cachedCompetitions addObjectsFromArray:[Competition competitionsFromPersistentCompetitions:objects]];
             
             if (self.cachedCompetitions.count < [Config competitionsToCache]) {
                 [self populate];
@@ -39,10 +57,34 @@
 }
 
 - (Competition *)next {
-    if (self.cachedCompetitions.count > 0) {
-        return self.cachedCompetitions.lastObject;
+    self.currentCompetition = nil;
+    
+    for (Competition *competition in self.cachedCompetitions) {
+        if ([competition hasAllAssets]) {
+            self.currentCompetition = competition;
+            break;
+        }
     }
-    return nil;
+    
+    [self.cachedCompetitions removeObject:self.currentCompetition];
+    [self removeInvalidCompetitions];
+    
+    if (self.cachedCompetitions.count < [Config competitionsToCache]) {
+        [self populate];
+    }
+    
+    return self.currentCompetition;
+}
+
+- (void)removeInvalidCompetitions {
+    NSMutableArray *invalidCompetitions = [NSMutableArray array];
+    for (Competition *competition in self.cachedCompetitions) {
+        if ([competition invalid]) {
+            [invalidCompetitions addObject:competition];
+        }
+    }
+    
+    [self.cachedCompetitions removeObjectsInArray:invalidCompetitions];
 }
 
 @end

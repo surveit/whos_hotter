@@ -5,6 +5,19 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
 });
 
+Parse.Cloud.define("randomUser", function(request,response) {
+    var query = new Parse.Query("User");
+    query.find({
+	success: function(results) {
+	    randomIndex = Math.floor(Math.random()*results.length);
+	    response = results[randomIndex];
+	},
+	error: function(error) {
+	    reponse = error;
+	}
+    });
+});
+
 Parse.Cloud.job("createCompetitions", function(request, status) {
     // Set up to modify user data
     Parse.Cloud.useMasterKey();

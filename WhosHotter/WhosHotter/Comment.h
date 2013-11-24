@@ -13,4 +13,8 @@
 + (Comment *)postCommentWithCompetitionId:(NSString *)identifier
                                      text:(NSString *)text;
 
++ (NSArray *)commentsFromArrayOfCommentModels:(NSArray *)models;
+
++ (NSString *)isValidCommentText:(NSString *)text;
+
 @end

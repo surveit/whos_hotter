@@ -11,5 +11,9 @@
 @interface Config : NSObject
 
 + (NSInteger)competitionsToCache;
++ (NSInteger)maxCommentLength;
++ (NSInteger)maxStamina;
++ (NSInteger)staminaPerVote;
++ (NSInteger)secondsToRecoverStamina;
 
 @end

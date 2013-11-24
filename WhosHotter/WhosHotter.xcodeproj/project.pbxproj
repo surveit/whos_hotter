@@ -40,6 +40,14 @@
 		3BA6713C1839C33100246822 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6713B1839C33100246822 /* Config.m */; };
 		3BA671401839C69C00246822 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6713F1839C69C00246822 /* Comment.m */; };
 		3BA671431839D85600246822 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA671421839D85600246822 /* FileManager.m */; };
+		3BA67151183B30E700246822 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA67150183B30E700246822 /* Utility.m */; };
+		3BA67154183B35B500246822 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA67153183B35B500246822 /* ProfileViewController.m */; };
+		3BA67157183B35BF00246822 /* VoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA67156183B35BF00246822 /* VoteViewController.m */; };
+		3BA6715A183B3A7100246822 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA67159183B3A7100246822 /* FileCache.m */; };
+		3BA6715D183B3EF700246822 /* TappableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6715C183B3EF700246822 /* TappableImageView.m */; };
+		3BA67163183B509B00246822 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA67162183B509B00246822 /* CommentViewController.m */; };
+		3BA6716618416CAE00246822 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6716518416CAE00246822 /* FacebookManager.m */; };
+		3BA6716818416D2700246822 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA6716718416D2700246822 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +115,22 @@
 		3BA671411839D85600246822 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		3BA671421839D85600246822 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		3BA671441839DFEC00246822 /* CloudBackendIOSClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CloudBackendIOSClient.xcodeproj; path = "../gae_backend/solutions-mobile-backend-starter-ios-client/CloudBackendIOSClient.xcodeproj"; sourceTree = "<group>"; };
+		3BA6714F183B30E700246822 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		3BA67150183B30E700246822 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		3BA67152183B35B500246822 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		3BA67153183B35B500246822 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		3BA67155183B35BF00246822 /* VoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteViewController.h; sourceTree = "<group>"; };
+		3BA67156183B35BF00246822 /* VoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteViewController.m; sourceTree = "<group>"; };
+		3BA67158183B3A7100246822 /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
+		3BA67159183B3A7100246822 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
+		3BA6715B183B3EF700246822 /* TappableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TappableImageView.h; sourceTree = "<group>"; };
+		3BA6715C183B3EF700246822 /* TappableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TappableImageView.m; sourceTree = "<group>"; };
+		3BA67160183B41F700246822 /* Downloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloadable.h; sourceTree = "<group>"; };
+		3BA67161183B509B00246822 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		3BA67162183B509B00246822 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		3BA6716418416CAE00246822 /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
+		3BA6716518416CAE00246822 /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
+		3BA6716718416D2700246822 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +151,7 @@
 				3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */,
 				3BA671161839B87000246822 /* Parse.framework in Frameworks */,
 				3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */,
+				3BA6716818416D2700246822 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +171,7 @@
 		3BA670D11839B84F00246822 = {
 			isa = PBXGroup;
 			children = (
+				3BA6716718416D2700246822 /* FacebookSDK.framework */,
 				3BA670E31839B84F00246822 /* WhosHotter */,
 				3BA671051839B84F00246822 /* WhosHotterTests */,
 				3BA670DC1839B84F00246822 /* Frameworks */,
@@ -186,6 +212,8 @@
 		3BA670E31839B84F00246822 /* WhosHotter */ = {
 			isa = PBXGroup;
 			children = (
+				3BA6715F183B41E600246822 /* Protocols */,
+				3BA6715E183B3EFA00246822 /* ViewController */,
 				3BA6713D1839C52B00246822 /* Views */,
 				3BA6711E1839BF4D00246822 /* PFModels */,
 				3BA671171839B8CC00246822 /* Models */,
@@ -244,6 +272,12 @@
 				3BA671261839C03D00246822 /* CompetitionCache.m */,
 				3BA671411839D85600246822 /* FileManager.h */,
 				3BA671421839D85600246822 /* FileManager.m */,
+				3BA6714F183B30E700246822 /* Utility.h */,
+				3BA67150183B30E700246822 /* Utility.m */,
+				3BA67158183B3A7100246822 /* FileCache.h */,
+				3BA67159183B3A7100246822 /* FileCache.m */,
+				3BA6716418416CAE00246822 /* FacebookManager.h */,
+				3BA6716518416CAE00246822 /* FacebookManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -264,6 +298,8 @@
 		3BA6713D1839C52B00246822 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BA6715B183B3EF700246822 /* TappableImageView.h */,
+				3BA6715C183B3EF700246822 /* TappableImageView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -274,6 +310,27 @@
 				3BA671491839DFED00246822 /* dev.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3BA6715E183B3EFA00246822 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3BA67152183B35B500246822 /* ProfileViewController.h */,
+				3BA67153183B35B500246822 /* ProfileViewController.m */,
+				3BA67155183B35BF00246822 /* VoteViewController.h */,
+				3BA67156183B35BF00246822 /* VoteViewController.m */,
+				3BA67161183B509B00246822 /* CommentViewController.h */,
+				3BA67162183B509B00246822 /* CommentViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		3BA6715F183B41E600246822 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3BA67160183B41F700246822 /* Downloadable.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,14 +447,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA67157183B35BF00246822 /* VoteViewController.m in Sources */,
 				3BA6711A1839B8DC00246822 /* User.m in Sources */,
 				3BA670F71839B84F00246822 /* ViewController.m in Sources */,
 				3BA670EE1839B84F00246822 /* AppDelegate.m in Sources */,
 				3BA671401839C69C00246822 /* Comment.m in Sources */,
+				3BA6715D183B3EF700246822 /* TappableImageView.m in Sources */,
+				3BA67151183B30E700246822 /* Utility.m in Sources */,
+				3BA6716618416CAE00246822 /* FacebookManager.m in Sources */,
 				3BA671211839BF6000246822 /* Competition.m in Sources */,
 				3BA671271839C03D00246822 /* CompetitionCache.m in Sources */,
 				3BA671431839D85600246822 /* FileManager.m in Sources */,
+				3BA67163183B509B00246822 /* CommentViewController.m in Sources */,
+				3BA6715A183B3A7100246822 /* FileCache.m in Sources */,
 				3BA671241839BF6A00246822 /* PersistedObject.m in Sources */,
+				3BA67154183B35B500246822 /* ProfileViewController.m in Sources */,
 				3BA6711D1839B93C00246822 /* InitializationManager.m in Sources */,
 				3BA6713C1839C33100246822 /* Config.m in Sources */,
 				3BA670EA1839B84F00246822 /* main.m in Sources */,
@@ -540,11 +604,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/shuhan/whos_hotter/WhosHotter,
+					/Users/shuhan/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhosHotter/WhosHotter-Prefix.pch";
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -557,11 +623,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/shuhan/whos_hotter/WhosHotter,
+					/Users/shuhan/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhosHotter/WhosHotter-Prefix.pch";
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -627,6 +695,7 @@
 				3BA671111839B84F00246822 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3BA671121839B84F00246822 /* Build configuration list for PBXNativeTarget "WhosHotterTests" */ = {
 			isa = XCConfigurationList;
@@ -635,6 +704,7 @@
 				3BA671141839B84F00246822 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
