@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 
+#import "FacebookManager.h"
 #import "FileManager.h"
 #import "User.h"
 
@@ -23,10 +24,6 @@
 @end
 
 @implementation ProfileViewController
-
-- (UITabBarItem *)tabBarItem {
-    return [[UITabBarItem alloc] initWithTitle:@"Profile" image:nil selectedImage:nil];
-}
 
 - (IBAction)didTapCreateAccount:(id)sender {
     [[User sharedUser] createLogin:self.userNameTextField.text
@@ -81,6 +78,10 @@
 
 - (IBAction)didTapComments:(id)sender {
     //[self performSegueWithIdentifier:@"profileToComments" sender:self];
+}
+
+- (IBAction)didTapLoginToFacebook:(id)sender {
+    [FacebookManager login];
 }
 
 - (void)updateView {

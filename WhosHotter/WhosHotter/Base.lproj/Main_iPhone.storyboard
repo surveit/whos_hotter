@@ -66,6 +66,16 @@
                                     <action selector="didTapComments:" destination="YqP-6w-5ah" eventType="touchUpInside" id="Ab3-KI-6DZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xxn-uB-dp8">
+                                <rect key="frame" x="21" y="310" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="facebook">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapLoginToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="imi-QQ-1h6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -191,8 +201,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapComment:" destination="hhh-eZ-qad" eventType="touchUpInside" id="q6S-fK-RNj"/>
-                                    <segue destination="8GW-Xd-OsB" kind="modal" identifier="voteToComments" modalTransitionStyle="flipHorizontal" id="kZD-PA-t5a"/>
+                                    <segue destination="8GW-Xd-OsB" kind="modal" identifier="voteToComments" modalTransitionStyle="coverVertical" id="kZD-PA-t5a"/>
                                 </connections>
                             </button>
                         </subviews>

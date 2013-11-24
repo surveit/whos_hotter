@@ -24,10 +24,6 @@
 
 @implementation VoteViewController
 
-- (UITabBarItem *)tabBarItem {
-    return [[UITabBarItem alloc] initWithTitle:@"Vote" image:nil selectedImage:nil];
-}
-
 - (void)updateView {
     [self.topImage setImage:self.currentCompetition.topImage];
     [self.bottomImage setImage:self.currentCompetition.bottomImage];
@@ -67,10 +63,6 @@
     [self goToNextCompetition];
 }
 
-- (IBAction)didTapComment:(id)sender {
-    //[self performSegueWithIdentifier:@"voteToComments" sender:self];
-}
-
 - (void)goToNextCompetition {
     [self.topImage setImage:nil];
     [self.bottomImage setImage:nil];
@@ -102,12 +94,6 @@
     
     self.topImage.userInteractionEnabled = YES;
     self.bottomImage.userInteractionEnabled = YES;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
