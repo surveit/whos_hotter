@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Awesome Apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Utility.h"
 
 @interface FacebookManager : NSObject
 
-+ (void)login;
++ (void)loginWithCompletionHandler:(CompletionHandler)handler;
 
 @end

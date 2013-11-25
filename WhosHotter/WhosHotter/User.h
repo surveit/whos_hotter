@@ -9,8 +9,9 @@
 #import "Utility.h"
 
 typedef enum {
-    MALE = 0,
-    FEMALE = 1,
+    UNKNOWN = 0,
+    MALE = 1,
+    FEMALE = 2,
 } Gender;
 
 @interface User : NSObject
@@ -18,15 +19,20 @@ typedef enum {
 + (User *)sharedUser;
 + (NSString *)identifier;
 + (NSString *)username;
++ (BOOL)isUserNameValid:(NSString *)username;
 
 - (void)createLogin:(NSString *)username
            password:(NSString *)password
              gender:(Gender)gender
          completion:(CompletionHandler)handler;
 
+- (BOOL)isLoggedIn;
 - (void)setProfileImage:(UIImage *)image;
 - (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
 - (void)submitForCompetition:(ObjectsCompletionHandler)completionHandler;
 - (UIImage *)profileImage;
+
+- (void)spendEnergy:(NSInteger)energy;
+- (NSInteger)energy;
 
 @end

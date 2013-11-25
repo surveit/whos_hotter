@@ -58,4 +58,8 @@
     return [PFFacebookUtils handleOpenURL:url];
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [PFFacebookUtils handleOpenURL:url];
+}
+
 @end

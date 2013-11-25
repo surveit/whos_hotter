@@ -48,6 +48,49 @@
 		3BA67163183B509B00246822 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA67162183B509B00246822 /* CommentViewController.m */; };
 		3BA6716618416CAE00246822 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6716518416CAE00246822 /* FacebookManager.m */; };
 		3BA6716818416D2700246822 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA6716718416D2700246822 /* FacebookSDK.framework */; };
+		3BA6716B1842A74D00246822 /* ImageCroppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6716A1842A74D00246822 /* ImageCroppingViewController.m */; };
+		3BA671741842BBD200246822 /* UserCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA671731842BBD200246822 /* UserCreationViewController.m */; };
+		3BA671F21842F6F500246822 /* Back button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671C91842F6F500246822 /* Back button@2x.png */; };
+		3BA671F31842F6F500246822 /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671CA1842F6F500246822 /* Background@2x.png */; };
+		3BA671F41842F6F500246822 /* Disabled Gender@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671CB1842F6F500246822 /* Disabled Gender@2x.png */; };
+		3BA671F51842F6F500246822 /* Empty profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671CC1842F6F500246822 /* Empty profile@2x.png */; };
+		3BA671F61842F6F500246822 /* Energy bar filler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671CD1842F6F500246822 /* Energy bar filler@2x.png */; };
+		3BA671F71842F6F500246822 /* Energy bar outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671CE1842F6F500246822 /* Energy bar outline@2x.png */; };
+		3BA671F81842F6F500246822 /* Facebook Connect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671CF1842F6F500246822 /* Facebook Connect@2x.png */; };
+		3BA671F91842F6F500246822 /* Facebook Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D01842F6F500246822 /* Facebook Share@2x.png */; };
+		3BA671FA1842F6F500246822 /* Female button opaque@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D11842F6F500246822 /* Female button opaque@2x.png */; };
+		3BA671FB1842F6F500246822 /* Female button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D21842F6F500246822 /* Female button@2x.png */; };
+		3BA671FC1842F6F500246822 /* Fire button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D31842F6F500246822 /* Fire button@2x.png */; };
+		3BA671FD1842F6F500246822 /* Fire layer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D41842F6F500246822 /* Fire layer@2x.png */; };
+		3BA671FE1842F6F500246822 /* Flame header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D51842F6F500246822 /* Flame header@2x.png */; };
+		3BA671FF1842F6F500246822 /* Flame profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D61842F6F500246822 /* Flame profile@2x.png */; };
+		3BA672001842F6F500246822 /* Frame Last Result@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D71842F6F500246822 /* Frame Last Result@2x.png */; };
+		3BA672011842F6F500246822 /* Gallery w Overlap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D81842F6F500246822 /* Gallery w Overlap@2x.png */; };
+		3BA672021842F6F500246822 /* Green square (profile)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671D91842F6F500246822 /* Green square (profile)@2x.png */; };
+		3BA672031842F6F500246822 /* Hotter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671DA1842F6F500246822 /* Hotter@2x.png */; };
+		3BA672041842F6F500246822 /* iPhone5-splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671DB1842F6F500246822 /* iPhone5-splash@2x.png */; };
+		3BA672051842F6F500246822 /* Male button opaque@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671DC1842F6F500246822 /* Male button opaque@2x.png */; };
+		3BA672061842F6F500246822 /* Male button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671DD1842F6F500246822 /* Male button@2x.png */; };
+		3BA672071842F6F500246822 /* Red square (profile)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671DE1842F6F500246822 /* Red square (profile)@2x.png */; };
+		3BA672081842F6F500246822 /* refresh cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671DF1842F6F500246822 /* refresh cloud@2x.png */; };
+		3BA672091842F6F500246822 /* Sample Comment View Headshot 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E01842F6F500246822 /* Sample Comment View Headshot 2@2x.png */; };
+		3BA6720A1842F6F500246822 /* Sample Comment View Headshot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E11842F6F500246822 /* Sample Comment View Headshot@2x.png */; };
+		3BA6720B1842F6F500246822 /* Sample Matching View Headshot Botton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E21842F6F500246822 /* Sample Matching View Headshot Botton@2x.png */; };
+		3BA6720C1842F6F500246822 /* Sample Matching View Headshot Top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E31842F6F500246822 /* Sample Matching View Headshot Top@2x.png */; };
+		3BA6720D1842F6F500246822 /* Save Image button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E41842F6F500246822 /* Save Image button@2x.png */; };
+		3BA6720E1842F6F500246822 /* Save profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E51842F6F500246822 /* Save profile@2x.png */; };
+		3BA6720F1842F6F500246822 /* Share on Facebook profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E61842F6F500246822 /* Share on Facebook profile@2x.png */; };
+		3BA672101842F6F500246822 /* Small green square (matching)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E71842F6F500246822 /* Small green square (matching)@2x.png */; };
+		3BA672111842F6F500246822 /* Small red square matching@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E81842F6F500246822 /* Small red square matching@2x.png */; };
+		3BA672121842F6F500246822 /* Splash screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671E91842F6F500246822 /* Splash screen@2x.png */; };
+		3BA672131842F6F500246822 /* Splash-Screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671EA1842F6F500246822 /* Splash-Screen@2x.png */; };
+		3BA672141842F6F500246822 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671EB1842F6F500246822 /* star@2x.png */; };
+		3BA672151842F6F500246822 /* Tab Bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671EC1842F6F500246822 /* Tab Bar@2x.png */; };
+		3BA672161842F6F500246822 /* Tall green rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671ED1842F6F500246822 /* Tall green rectangle@2x.png */; };
+		3BA672171842F6F500246822 /* Text input@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671EE1842F6F500246822 /* Text input@2x.png */; };
+		3BA672181842F6F500246822 /* Upload Photo button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671EF1842F6F500246822 /* Upload Photo button@2x.png */; };
+		3BA672191842F6F500246822 /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671F01842F6F500246822 /* user@2x.png */; };
+		3BA6721A1842F6F500246822 /* Wide green rectangle profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671F11842F6F500246822 /* Wide green rectangle profile@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +174,51 @@
 		3BA6716418416CAE00246822 /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
 		3BA6716518416CAE00246822 /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
 		3BA6716718416D2700246822 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		3BA671691842A74D00246822 /* ImageCroppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCroppingViewController.h; sourceTree = "<group>"; };
+		3BA6716A1842A74D00246822 /* ImageCroppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCroppingViewController.m; sourceTree = "<group>"; };
+		3BA671721842BBD200246822 /* UserCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCreationViewController.h; sourceTree = "<group>"; };
+		3BA671731842BBD200246822 /* UserCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCreationViewController.m; sourceTree = "<group>"; };
+		3BA671C91842F6F500246822 /* Back button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back button@2x.png"; sourceTree = "<group>"; };
+		3BA671CA1842F6F500246822 /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
+		3BA671CB1842F6F500246822 /* Disabled Gender@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Disabled Gender@2x.png"; sourceTree = "<group>"; };
+		3BA671CC1842F6F500246822 /* Empty profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Empty profile@2x.png"; sourceTree = "<group>"; };
+		3BA671CD1842F6F500246822 /* Energy bar filler@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Energy bar filler@2x.png"; sourceTree = "<group>"; };
+		3BA671CE1842F6F500246822 /* Energy bar outline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Energy bar outline@2x.png"; sourceTree = "<group>"; };
+		3BA671CF1842F6F500246822 /* Facebook Connect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Facebook Connect@2x.png"; sourceTree = "<group>"; };
+		3BA671D01842F6F500246822 /* Facebook Share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Facebook Share@2x.png"; sourceTree = "<group>"; };
+		3BA671D11842F6F500246822 /* Female button opaque@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female button opaque@2x.png"; sourceTree = "<group>"; };
+		3BA671D21842F6F500246822 /* Female button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Female button@2x.png"; sourceTree = "<group>"; };
+		3BA671D31842F6F500246822 /* Fire button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fire button@2x.png"; sourceTree = "<group>"; };
+		3BA671D41842F6F500246822 /* Fire layer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fire layer@2x.png"; sourceTree = "<group>"; };
+		3BA671D51842F6F500246822 /* Flame header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flame header@2x.png"; sourceTree = "<group>"; };
+		3BA671D61842F6F500246822 /* Flame profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flame profile@2x.png"; sourceTree = "<group>"; };
+		3BA671D71842F6F500246822 /* Frame Last Result@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Frame Last Result@2x.png"; sourceTree = "<group>"; };
+		3BA671D81842F6F500246822 /* Gallery w Overlap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gallery w Overlap@2x.png"; sourceTree = "<group>"; };
+		3BA671D91842F6F500246822 /* Green square (profile)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Green square (profile)@2x.png"; sourceTree = "<group>"; };
+		3BA671DA1842F6F500246822 /* Hotter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hotter@2x.png"; sourceTree = "<group>"; };
+		3BA671DB1842F6F500246822 /* iPhone5-splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5-splash@2x.png"; sourceTree = "<group>"; };
+		3BA671DC1842F6F500246822 /* Male button opaque@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Male button opaque@2x.png"; sourceTree = "<group>"; };
+		3BA671DD1842F6F500246822 /* Male button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Male button@2x.png"; sourceTree = "<group>"; };
+		3BA671DE1842F6F500246822 /* Red square (profile)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red square (profile)@2x.png"; sourceTree = "<group>"; };
+		3BA671DF1842F6F500246822 /* refresh cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh cloud@2x.png"; sourceTree = "<group>"; };
+		3BA671E01842F6F500246822 /* Sample Comment View Headshot 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sample Comment View Headshot 2@2x.png"; sourceTree = "<group>"; };
+		3BA671E11842F6F500246822 /* Sample Comment View Headshot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sample Comment View Headshot@2x.png"; sourceTree = "<group>"; };
+		3BA671E21842F6F500246822 /* Sample Matching View Headshot Botton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sample Matching View Headshot Botton@2x.png"; sourceTree = "<group>"; };
+		3BA671E31842F6F500246822 /* Sample Matching View Headshot Top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sample Matching View Headshot Top@2x.png"; sourceTree = "<group>"; };
+		3BA671E41842F6F500246822 /* Save Image button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Save Image button@2x.png"; sourceTree = "<group>"; };
+		3BA671E51842F6F500246822 /* Save profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Save profile@2x.png"; sourceTree = "<group>"; };
+		3BA671E61842F6F500246822 /* Share on Facebook profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share on Facebook profile@2x.png"; sourceTree = "<group>"; };
+		3BA671E71842F6F500246822 /* Small green square (matching)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Small green square (matching)@2x.png"; sourceTree = "<group>"; };
+		3BA671E81842F6F500246822 /* Small red square matching@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Small red square matching@2x.png"; sourceTree = "<group>"; };
+		3BA671E91842F6F500246822 /* Splash screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splash screen@2x.png"; sourceTree = "<group>"; };
+		3BA671EA1842F6F500246822 /* Splash-Screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splash-Screen@2x.png"; sourceTree = "<group>"; };
+		3BA671EB1842F6F500246822 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
+		3BA671EC1842F6F500246822 /* Tab Bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tab Bar@2x.png"; sourceTree = "<group>"; };
+		3BA671ED1842F6F500246822 /* Tall green rectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tall green rectangle@2x.png"; sourceTree = "<group>"; };
+		3BA671EE1842F6F500246822 /* Text input@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text input@2x.png"; sourceTree = "<group>"; };
+		3BA671EF1842F6F500246822 /* Upload Photo button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Upload Photo button@2x.png"; sourceTree = "<group>"; };
+		3BA671F01842F6F500246822 /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
+		3BA671F11842F6F500246822 /* Wide green rectangle profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wide green rectangle profile@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +259,7 @@
 		3BA670D11839B84F00246822 = {
 			isa = PBXGroup;
 			children = (
+				3BA671C81842F6F500246822 /* Images */,
 				3BA6716718416D2700246822 /* FacebookSDK.framework */,
 				3BA670E31839B84F00246822 /* WhosHotter */,
 				3BA671051839B84F00246822 /* WhosHotterTests */,
@@ -321,6 +410,10 @@
 				3BA67156183B35BF00246822 /* VoteViewController.m */,
 				3BA67161183B509B00246822 /* CommentViewController.h */,
 				3BA67162183B509B00246822 /* CommentViewController.m */,
+				3BA671691842A74D00246822 /* ImageCroppingViewController.h */,
+				3BA6716A1842A74D00246822 /* ImageCroppingViewController.m */,
+				3BA671721842BBD200246822 /* UserCreationViewController.h */,
+				3BA671731842BBD200246822 /* UserCreationViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -331,6 +424,55 @@
 				3BA67160183B41F700246822 /* Downloadable.h */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		3BA671C81842F6F500246822 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3BA671C91842F6F500246822 /* Back button@2x.png */,
+				3BA671CA1842F6F500246822 /* Background@2x.png */,
+				3BA671CB1842F6F500246822 /* Disabled Gender@2x.png */,
+				3BA671CC1842F6F500246822 /* Empty profile@2x.png */,
+				3BA671CD1842F6F500246822 /* Energy bar filler@2x.png */,
+				3BA671CE1842F6F500246822 /* Energy bar outline@2x.png */,
+				3BA671CF1842F6F500246822 /* Facebook Connect@2x.png */,
+				3BA671D01842F6F500246822 /* Facebook Share@2x.png */,
+				3BA671D11842F6F500246822 /* Female button opaque@2x.png */,
+				3BA671D21842F6F500246822 /* Female button@2x.png */,
+				3BA671D31842F6F500246822 /* Fire button@2x.png */,
+				3BA671D41842F6F500246822 /* Fire layer@2x.png */,
+				3BA671D51842F6F500246822 /* Flame header@2x.png */,
+				3BA671D61842F6F500246822 /* Flame profile@2x.png */,
+				3BA671D71842F6F500246822 /* Frame Last Result@2x.png */,
+				3BA671D81842F6F500246822 /* Gallery w Overlap@2x.png */,
+				3BA671D91842F6F500246822 /* Green square (profile)@2x.png */,
+				3BA671DA1842F6F500246822 /* Hotter@2x.png */,
+				3BA671DB1842F6F500246822 /* iPhone5-splash@2x.png */,
+				3BA671DC1842F6F500246822 /* Male button opaque@2x.png */,
+				3BA671DD1842F6F500246822 /* Male button@2x.png */,
+				3BA671DE1842F6F500246822 /* Red square (profile)@2x.png */,
+				3BA671DF1842F6F500246822 /* refresh cloud@2x.png */,
+				3BA671E01842F6F500246822 /* Sample Comment View Headshot 2@2x.png */,
+				3BA671E11842F6F500246822 /* Sample Comment View Headshot@2x.png */,
+				3BA671E21842F6F500246822 /* Sample Matching View Headshot Botton@2x.png */,
+				3BA671E31842F6F500246822 /* Sample Matching View Headshot Top@2x.png */,
+				3BA671E41842F6F500246822 /* Save Image button@2x.png */,
+				3BA671E51842F6F500246822 /* Save profile@2x.png */,
+				3BA671E61842F6F500246822 /* Share on Facebook profile@2x.png */,
+				3BA671E71842F6F500246822 /* Small green square (matching)@2x.png */,
+				3BA671E81842F6F500246822 /* Small red square matching@2x.png */,
+				3BA671E91842F6F500246822 /* Splash screen@2x.png */,
+				3BA671EA1842F6F500246822 /* Splash-Screen@2x.png */,
+				3BA671EB1842F6F500246822 /* star@2x.png */,
+				3BA671EC1842F6F500246822 /* Tab Bar@2x.png */,
+				3BA671ED1842F6F500246822 /* Tall green rectangle@2x.png */,
+				3BA671EE1842F6F500246822 /* Text input@2x.png */,
+				3BA671EF1842F6F500246822 /* Upload Photo button@2x.png */,
+				3BA671F01842F6F500246822 /* user@2x.png */,
+				3BA671F11842F6F500246822 /* Wide green rectangle profile@2x.png */,
+			);
+			name = Images;
+			path = Resources/Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,10 +567,51 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA672181842F6F500246822 /* Upload Photo button@2x.png in Resources */,
+				3BA672161842F6F500246822 /* Tall green rectangle@2x.png in Resources */,
+				3BA671F31842F6F500246822 /* Background@2x.png in Resources */,
+				3BA671FD1842F6F500246822 /* Fire layer@2x.png in Resources */,
+				3BA672111842F6F500246822 /* Small red square matching@2x.png in Resources */,
+				3BA671F71842F6F500246822 /* Energy bar outline@2x.png in Resources */,
+				3BA6720D1842F6F500246822 /* Save Image button@2x.png in Resources */,
+				3BA671F51842F6F500246822 /* Empty profile@2x.png in Resources */,
+				3BA671F91842F6F500246822 /* Facebook Share@2x.png in Resources */,
+				3BA671F41842F6F500246822 /* Disabled Gender@2x.png in Resources */,
+				3BA672101842F6F500246822 /* Small green square (matching)@2x.png in Resources */,
+				3BA672131842F6F500246822 /* Splash-Screen@2x.png in Resources */,
+				3BA6720B1842F6F500246822 /* Sample Matching View Headshot Botton@2x.png in Resources */,
+				3BA671F81842F6F500246822 /* Facebook Connect@2x.png in Resources */,
+				3BA671FF1842F6F500246822 /* Flame profile@2x.png in Resources */,
+				3BA672091842F6F500246822 /* Sample Comment View Headshot 2@2x.png in Resources */,
+				3BA671FC1842F6F500246822 /* Fire button@2x.png in Resources */,
+				3BA6720F1842F6F500246822 /* Share on Facebook profile@2x.png in Resources */,
+				3BA672081842F6F500246822 /* refresh cloud@2x.png in Resources */,
+				3BA672011842F6F500246822 /* Gallery w Overlap@2x.png in Resources */,
+				3BA672171842F6F500246822 /* Text input@2x.png in Resources */,
+				3BA671FE1842F6F500246822 /* Flame header@2x.png in Resources */,
+				3BA672121842F6F500246822 /* Splash screen@2x.png in Resources */,
 				3BA670F41839B84F00246822 /* Main_iPad.storyboard in Resources */,
+				3BA672141842F6F500246822 /* star@2x.png in Resources */,
+				3BA672051842F6F500246822 /* Male button opaque@2x.png in Resources */,
+				3BA672151842F6F500246822 /* Tab Bar@2x.png in Resources */,
 				3BA670F91839B84F00246822 /* Images.xcassets in Resources */,
+				3BA671F61842F6F500246822 /* Energy bar filler@2x.png in Resources */,
+				3BA672031842F6F500246822 /* Hotter@2x.png in Resources */,
+				3BA6720C1842F6F500246822 /* Sample Matching View Headshot Top@2x.png in Resources */,
+				3BA671FA1842F6F500246822 /* Female button opaque@2x.png in Resources */,
 				3BA670F11839B84F00246822 /* Main_iPhone.storyboard in Resources */,
+				3BA671F21842F6F500246822 /* Back button@2x.png in Resources */,
+				3BA6720E1842F6F500246822 /* Save profile@2x.png in Resources */,
 				3BA670E81839B84F00246822 /* InfoPlist.strings in Resources */,
+				3BA672061842F6F500246822 /* Male button@2x.png in Resources */,
+				3BA672001842F6F500246822 /* Frame Last Result@2x.png in Resources */,
+				3BA6720A1842F6F500246822 /* Sample Comment View Headshot@2x.png in Resources */,
+				3BA671FB1842F6F500246822 /* Female button@2x.png in Resources */,
+				3BA672041842F6F500246822 /* iPhone5-splash@2x.png in Resources */,
+				3BA6721A1842F6F500246822 /* Wide green rectangle profile@2x.png in Resources */,
+				3BA672071842F6F500246822 /* Red square (profile)@2x.png in Resources */,
+				3BA672021842F6F500246822 /* Green square (profile)@2x.png in Resources */,
+				3BA672191842F6F500246822 /* user@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,11 +634,13 @@
 				3BA6711A1839B8DC00246822 /* User.m in Sources */,
 				3BA670F71839B84F00246822 /* ViewController.m in Sources */,
 				3BA670EE1839B84F00246822 /* AppDelegate.m in Sources */,
+				3BA6716B1842A74D00246822 /* ImageCroppingViewController.m in Sources */,
 				3BA671401839C69C00246822 /* Comment.m in Sources */,
 				3BA6715D183B3EF700246822 /* TappableImageView.m in Sources */,
 				3BA67151183B30E700246822 /* Utility.m in Sources */,
 				3BA6716618416CAE00246822 /* FacebookManager.m in Sources */,
 				3BA671211839BF6000246822 /* Competition.m in Sources */,
+				3BA671741842BBD200246822 /* UserCreationViewController.m in Sources */,
 				3BA671271839C03D00246822 /* CompetitionCache.m in Sources */,
 				3BA671431839D85600246822 /* FileManager.m in Sources */,
 				3BA67163183B509B00246822 /* CommentViewController.m in Sources */,

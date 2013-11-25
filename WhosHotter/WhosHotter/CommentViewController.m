@@ -29,14 +29,22 @@
     }
     
     NSString *competitionIdentifier = self.competition.identifier;
-    [Comment postCommentWithCompetitionId:competitionIdentifier
-                                     text:self.commentInputTextField.text];
+    Comment *comment = [Comment postCommentWithCompetitionId:competitionIdentifier
+                                                        text:self.commentInputTextField.text];
+    [self.competition addCommentToCache:comment];
+    [self updateView];
+    self.commentInputTextField.text = @"";
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)updateView {
     [self.bottomImageView setImage:self.competition.bottomImage];
     [self.topImageView setImage:self.competition.topImage];
     self.commentTextField.text = self.competition.comments.description;
+}
+
+- (IBAction)didTapClose:(id)sender {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
 
 #pragma mark - uitextfielddelegate
@@ -44,6 +52,8 @@
     NSString *error = [Comment isValidCommentText:textField.text];
     if (error) {
         [self showAlertViewForMessage:error];
+    } else {
+        [textField resignFirstResponder];
     }
     return !error;
 }
@@ -52,8 +62,15 @@
     NSString *error = [Comment isValidCommentText:textField.text];
     if (error) {
         [self showAlertViewForMessage:error];
+    } else {
+        [textField resignFirstResponder];
     }
     return !error;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self postNewComment];
 }
 
 #pragma mark - helper function
@@ -67,6 +84,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.commentInputTextField.delegate = self;
+    [self updateView];
 }
 
 - (void)didReceiveMemoryWarning

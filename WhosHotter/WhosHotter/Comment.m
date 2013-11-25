@@ -29,7 +29,7 @@
 
 + (NSString *)isValidCommentText:(NSString *)text {
     if (text.length >= [Config maxCommentLength]) {
-        return [NSString stringWithFormat:@"Comments must be fewer than %d characeters!",[Config maxCommentLength]];
+        return [NSString stringWithFormat:@"Comments must be fewer than %ld characeters!",[Config maxCommentLength]];
     }
     return nil;
 }
@@ -41,6 +41,10 @@
         [comments addObject:comment];
     }
     return comments;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ says: %@",[self valueForKey:@"username"],[self valueForKey:@"text"]];
 }
 
 @end

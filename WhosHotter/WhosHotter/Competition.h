@@ -11,6 +11,8 @@
 #import "Downloadable.h"
 #import "Utility.h"
 
+@class Comment;
+
 @interface Competition : PersistedObject <Downloadable>
 
 + (NSArray *)myRecentCompetitions:(NSInteger)count
@@ -21,6 +23,7 @@
 
 @property (nonatomic, readonly, assign) BOOL invalid;
 
+- (BOOL)canAffrdEnergy;
 - (NSInteger)votes0;
 - (NSInteger)votes1;
 - (NSInteger)totalVotes;
@@ -31,5 +34,6 @@
 - (UIImage *)topImage;
 - (UIImage *)bottomImage;
 - (NSArray *)comments;
+- (void)addCommentToCache:(Comment *)comment;
 
 @end

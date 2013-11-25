@@ -22,11 +22,15 @@
 @implementation InitializationManager
 
 - (void)start {
+    [self initializeParse];
+    [self initializeCaches];
+    [self setupConfig];
+}
+
+- (void)initializeParse {
     [Parse setApplicationId:@"ZSuSP6FYo8JfpSgPHrdETAPz8DCCjuGVNXGRXfS3"
                   clientKey:@"xztuf8Gy8RNdecL9l2uKDDlvjz3iLFujk2mLmNez"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
-    
-    [self initializeCaches];
 }
 
 - (void)initializeCaches {
@@ -34,8 +38,8 @@
     [CompetitionCache initialize];
 }
 
-- (void)receivedConfigs {
-    
+- (void)setupConfig {
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Fire layer"] forBarMetrics:UIBarMetricsDefault];
 }
 
 @end

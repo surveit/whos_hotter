@@ -18,7 +18,7 @@
     return 140;
 }
 
-+ (NSInteger)maxStamina {
++ (NSInteger)maxEnergy {
     return 100;
 }
 
@@ -28,6 +28,10 @@
 
 + (NSInteger)secondsToRecoverStamina {
     return 3600;
+}
+
++ (NSInteger)energyCostPerVote {
+    return 5;
 }
 
 @end

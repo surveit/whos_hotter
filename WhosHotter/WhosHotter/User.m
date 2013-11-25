@@ -40,11 +40,39 @@ static User *user = nil;
     return [[[User sharedUser] pfUser] username];
 }
 
++ (BOOL)isUserNameValid:(NSString *)username {
+    if ([username rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].location != NSNotFound) {
+        return NO;
+    }
+    if (username.length <= 3) {
+        return NO;
+    }
+    if (username.length > 20) {
+        return NO;
+    }
+    return YES;
+}
+
 - (id)init {
     if (self = [super init]) {
         _pfUser = [PFUser currentUser];
+        if (!_pfUser) {
+            [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+                if (error) {
+                    NSLog(@"Anonymous login failed.");
+                } else {
+                    _pfUser = user;
+                    [self addDefaultStatsToUser:_pfUser];
+                    [_pfUser saveInBackground];
+                }
+            }];
+        }
     }
     return self;
+}
+
+- (BOOL)isLoggedIn {
+    return ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]];
 }
 
 - (NSString *)userName {
@@ -60,13 +88,21 @@ static User *user = nil;
     user.password = password;
     [user setObject:@(gender) forKey:@"gender"];
     [user setObject:@(NO) forKey:@"isPaired"];
+    [self addDefaultStatsToUser:user];
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         self.pfUser = user;
+        [self submitForCompetition:nil];
+        
         if (handler) {
             handler(succeeded,error);
         }
     }];
+}
+
+- (void)addDefaultStatsToUser:(PFUser *)pfUser {
+    pfUser[@"energy"] = @([Config maxEnergy]);
+    pfUser[@"timeToRefill"] = @([Config maxEnergy] * [Config secondsToRecoverStamina]);
 }
 
 - (void)setProfileImage:(UIImage *)image {
@@ -98,19 +134,26 @@ static User *user = nil;
     }];
 }
 
-- (UIImage *)profileImage {
-    return [UIImage imageWithData:[FileManager dataFromFileName:kProfileImageFilename]];
+- (void)spendEnergy:(NSInteger)energy {
+    if (energy > 0 && self.energy >= energy) {
+        self.pfUser[@"energy"] = @(self.energy - energy);
+        NSLog(@"Energy %@",self.pfUser[@"energy"]);
+        [self.pfUser saveInBackground];
+    }
 }
 
-- (void)userCreated {
-    self.pfUser[@"stamina"] = @([Config maxStamina]);
-    self.pfUser[@"timeToRefill"] = @([Config maxStamina] * [Config secondsToRecoverStamina]);
-    
-    [self.pfUser saveEventually];
+- (NSInteger)energy {
+    return [self.pfUser[@"energy"] intValue];
+}
+
+- (UIImage *)profileImage {
+    return [UIImage imageWithData:[FileManager dataFromFileName:kProfileImageFilename]];
 }
 
 - (void)showError:(NSError *)error {
     
 }
+
+
 
 @end

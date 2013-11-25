@@ -7,7 +7,9 @@
 //
 
 #import "Competition.h"
+
 #import "Comment.h"
+#import "Config.h"
 #import "FileCache.h"
 #import "User.h"
 
@@ -32,7 +34,9 @@ static NSMutableArray *myRecentCompetitions = nil;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         myRecentCompetitions = objects.mutableCopy;
-        completionBlock(objects,error);
+        if (completionBlock) {
+            completionBlock(objects,error);
+        }
     }];
     
     if (myRecentCompetitions) {
@@ -68,6 +72,10 @@ static NSMutableArray *myRecentCompetitions = nil;
     return competitions;
 }
 
+- (BOOL)canAffrdEnergy {
+    return [[User sharedUser] energy] >= [Config energyCostPerVote];
+}
+
 - (void)objectCreatedFromModel {
     NSArray *userIdentifiers = [self valueForKey:@"userIdentifiers"];
     if (userIdentifiers.count != 2) {
@@ -81,7 +89,7 @@ static NSMutableArray *myRecentCompetitions = nil;
 
 - (void)getComments {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Comment.class)];
-    [query whereKey:@"competitionId" equalTo:self.identifier];
+    [query whereKey:@"competitionIdentifier" equalTo:self.identifier];
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -90,6 +98,12 @@ static NSMutableArray *myRecentCompetitions = nil;
             [Utility showError:error.description];
         }
     }];
+}
+
+- (void)addCommentToCache:(Comment *)comment {
+    NSMutableArray *mutableComments = self.comments.mutableCopy;
+    [mutableComments addObject:comment];
+    self.comments = mutableComments;
 }
 
 - (void)getImageForUserIdentifier:(NSString *)identifier saveSelector:(SEL)saveSelector {
@@ -143,11 +157,13 @@ static NSMutableArray *myRecentCompetitions = nil;
 - (void)voteFor0 {
     [self incrementKey:@"votes0"];
     [self saveInBackgroundWithCompletionHandler:nil];
+    [[User sharedUser] spendEnergy:[Config energyCostPerVote]];
 }
 
 - (void)voteFor1 {
     [self incrementKey:@"votes1"];
     [self saveInBackgroundWithCompletionHandler:nil];
+    [[User sharedUser] spendEnergy:[Config energyCostPerVote]];
 }
 
 @end

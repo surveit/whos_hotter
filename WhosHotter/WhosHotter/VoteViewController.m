@@ -11,10 +11,13 @@
 #import "CommentViewController.h"
 #import "Competition.h"
 #import "CompetitionCache.h"
+#import "Config.h"
 #import "TappableImageView.h"
+#import "User.h"
 
 @interface VoteViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *energyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *topPercentageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bottomPercentageLabel;
 @property (nonatomic, readwrite, strong) Competition *currentCompetition;
@@ -52,15 +55,32 @@
     return (CGFloat)self.currentCompetition.votes1/self.currentCompetition.totalVotes*100.0f;
 }
 
+- (void)showOutOfEnergyPopup {
+    [[[UIAlertView alloc] initWithTitle:@"HI" message:@"OUT OF ENERGY" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+}
+
 #pragma mark - tap handling
 - (void)didTapTop {
-    [self.currentCompetition voteFor0];
-    [self goToNextCompetition];
+    if ([self.currentCompetition canAffrdEnergy]) {
+        [self.currentCompetition voteFor0];
+        [self didVote];
+    } else {
+        [self showOutOfEnergyPopup];
+    }
 }
 
 - (void)didTapBottom {
-    [self.currentCompetition voteFor1];
+    if ([self.currentCompetition canAffrdEnergy]) {
+        [self.currentCompetition voteFor1];
+        [self didVote];
+    } else {
+        [self showOutOfEnergyPopup];
+    }
+}
+
+- (void)didVote {
     [self goToNextCompetition];
+    [self updateEnergy];
 }
 
 - (void)goToNextCompetition {
@@ -72,10 +92,14 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"voteToComment"]) {
+    if ([segue.identifier isEqualToString:@"voteToComments"]) {
         CommentViewController *destinationViewController = [segue destinationViewController];
         destinationViewController.competition = self.currentCompetition;
     }
+}
+
+- (void)updateEnergy {
+    self.energyLabel.text = [NSString stringWithFormat:@"%ld",[[User sharedUser] energy]];
 }
 
 - (void)viewDidLoad
@@ -83,6 +107,7 @@
     [super viewDidLoad];
 
     [self tickUpdate];
+    [self updateEnergy];
     
     __weak VoteViewController *weakSelf = self;
     [self.topImage setTapHandler:^(){
