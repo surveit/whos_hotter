@@ -11,6 +11,7 @@
 #import "Competition.h"
 #import "Config.h"
 #import "FileManager.h"
+#import "NotificationNames.h"
 #import <Parse/Parse.h>
 
 static User *user = nil;
@@ -72,7 +73,7 @@ static User *user = nil;
 }
 
 - (BOOL)isLoggedIn {
-    return ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]];
+    return ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]] || [PFUser currentUser] == nil;
 }
 
 - (NSString *)userName {
@@ -93,11 +94,16 @@ static User *user = nil;
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         self.pfUser = user;
         [self submitForCompetition:nil];
-        
+        [self notifyOfUserCreated];
         if (handler) {
             handler(succeeded,error);
         }
     }];
+}
+
+- (void)notifyOfUserCreated {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_USER_CREATED
+                                                        object:nil];
 }
 
 - (void)addDefaultStatsToUser:(PFUser *)pfUser {

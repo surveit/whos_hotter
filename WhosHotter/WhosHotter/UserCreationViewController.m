@@ -12,11 +12,16 @@
 
 @interface UserCreationViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (nonatomic, readwrite, assign) Gender gender;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
+@property (weak, nonatomic) IBOutlet UILabel *enterUsernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameTakenLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -26,17 +31,59 @@
 
 - (IBAction)didTapFemale:(id)sender {
     self.gender = FEMALE;
-    [self updateView];
+    [self transitionInUsername];
+    [self animateFemaleResponse];
 }
 
 - (IBAction)didTapMale:(id)sender {
     self.gender = MALE;
-    [self updateView];
+    [self transitionInUsername];
+    [self animateMaleResponse];
 }
 
-- (void)updateView {
-    self.maleButton.titleLabel.textColor = self.gender == MALE ? [UIColor blueColor] : [UIColor grayColor];
-    self.femaleButton.titleLabel.textColor = self.gender == FEMALE ? [UIColor blueColor] : [UIColor grayColor];
+- (void)animateMaleResponse {
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         [self.maleButton setImage:[self maleButtonImage] forState:UIControlStateNormal];
+                         [self.femaleButton setImage:[self blankImage] forState:UIControlStateNormal];
+                     }];
+}
+
+- (void)animateFemaleResponse {
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         [self.femaleButton setImage:[self femaleButtonImage] forState:UIControlStateNormal];
+                         [self.maleButton setImage:[self blankImage] forState:UIControlStateNormal];
+                     }];
+}
+
+- (UIImage *)blankImage {
+    return [UIImage imageNamed:@"Disabled Gender@2x"];
+}
+
+- (UIImage *)maleButtonImage {
+    return [UIImage imageNamed:@"Male button@2x"];
+}
+
+- (UIImage *)femaleButtonImage {
+    return [UIImage imageNamed:@"Female button@2x"];
+}
+
+- (void)transitionInUsername {
+    self.enterUsernameLabel.hidden = NO;
+    self.usernameTextField.hidden = NO;
+    self.createButton.hidden = NO;
+    
+    self.enterUsernameLabel.alpha = 0;
+    self.usernameTextField.alpha = 0;
+    self.createButton.alpha = 0;
+    
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         self.enterUsernameLabel.alpha = 1.0;
+                         self.usernameTextField.alpha = 1.0;
+                         self.createButton.alpha = 1.0;
+                     }];
 }
 
 - (IBAction)didTapDone:(id)sender {
@@ -45,6 +92,8 @@
     } else if (self.usernameTextField.text.length == 0) {
         [self showAlertForInvalidUserName];
     } else {
+        self.spinner.hidden = NO;
+        [self.spinner startAnimating];
         [[User sharedUser] createLogin:self.usernameTextField.text password:@"NOPASSWORD"
                                 gender:self.gender
                             completion:^(BOOL success, NSError *error) {
@@ -54,6 +103,8 @@
 }
 
 - (void)userCreated:(BOOL)success {
+    self.spinner.hidden = YES;
+    [self.spinner stopAnimating];
     if (!success) {
         [self showAlertForUserNameTaken];
     } else {
@@ -63,6 +114,10 @@
 }
 
 #pragma mark -- Text field delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.usernameTakenLabel.hidden = YES;
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if ([User isUserNameValid:textField.text]) {
         [textField resignFirstResponder];
@@ -85,11 +140,7 @@
 
 #pragma mark -- Error handling
 - (void)showAlertForUserNameTaken {
-    [[[UIAlertView alloc] initWithTitle:@"Error"
-                                message:@"Username already exists. Please try a different username"
-                               delegate:nil
-                      cancelButtonTitle:@"Okay"
-                      otherButtonTitles:nil] show];
+    self.usernameTakenLabel.hidden = NO;
 }
 
 - (void)showAlertForInvalidUserName {
@@ -110,7 +161,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.profileImageView.image = self.profileImage;
+    self.spinner.hidden = YES;
     self.usernameTextField.delegate = self;
 }
 
