@@ -39,6 +39,7 @@ static CompetitionCache *sharedInstance = nil;
 
 - (void)populate {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Competition.class)];
+    query.skip = arc4random_uniform(60);
     query.limit = [Config competitionsToCache];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -52,6 +53,9 @@ static CompetitionCache *sharedInstance = nil;
             if (self.cachedCompetitions.count < [Config competitionsToCache]) {
                 [self populate];
             }
+        } else {
+            NSLog(@"ERROR %@",error);
+            [self populate];
         }
     }];
 }
