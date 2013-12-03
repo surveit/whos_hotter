@@ -41,5 +41,6 @@ typedef enum {
 
 - (void)spendEnergy:(NSInteger)energy;
 - (NSInteger)energy;
+- (void)refillEnergy;
 
 @end

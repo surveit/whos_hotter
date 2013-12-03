@@ -5,6 +5,42 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
+        <!--Test View Controller-->
+        <scene sceneID="1Zv-Hd-TbA">
+            <objects>
+                <viewController id="DPl-hK-sTo" customClass="TestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ikV-YI-SPF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N9l-hy-zwz">
+                                <rect key="frame" x="222" y="48" width="40" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapClose:" destination="DPl-hK-sTo" eventType="touchUpInside" id="WIh-kg-KL7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jlx-nb-nFg">
+                                <rect key="frame" x="26" y="93" width="85" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Refill Energy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapEnergy:" destination="DPl-hK-sTo" eventType="touchUpInside" id="VQU-bn-ozP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ST0-wh-i0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="510" y="-510"/>
+        </scene>
         <!--Profile View Controller - Profile-->
         <scene sceneID="899-7E-Ywl">
             <objects>
@@ -55,6 +91,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="Di9-f8-CYI" kind="push" identifier="login" id="j9i-lc-nGJ"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZzC-4y-lOm">
                                         <rect key="frame" x="0.0" y="112" width="106" height="106"/>
@@ -142,6 +181,9 @@
                                 <state key="normal" image="Facebook Connect.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapLoginToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="m8Q-Ra-Oq0"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flame profile.png" id="hTv-Fu-212">
                                 <rect key="frame" x="150" y="72" width="47" height="79"/>
@@ -153,6 +195,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QX0-GP-iDC">
+                                <rect key="frame" x="264" y="102" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cheat">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="DPl-hK-sTo" kind="modal" id="Rol-kw-bJh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -165,29 +217,11 @@
                         <outlet property="userName" destination="nwo-Az-4FX" id="g5M-0r-w6p"/>
                         <outlet property="userNameLabel" destination="nwo-Az-4FX" id="bna-vu-w6E"/>
                         <segue destination="8GW-Xd-OsB" kind="push" identifier="profileToComments" id="iYN-DM-HIf"/>
-                        <segue destination="bee-ub-OVz" kind="modal" identifier="login" id="1cP-kQ-xKx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXQ-pK-VRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-38" y="126"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="0nk-xB-GIy">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="bee-ub-OVz" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Pqp-D9-2Vf"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Az-00-X6j">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Di9-f8-CYI" kind="relationship" relationship="rootViewController" id="4C6-Ow-3re"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y4n-8V-s1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="523" y="-235"/>
         </scene>
         <!--Image Picker View Controller - Hotter-->
         <scene sceneID="fby-E0-LQm">
@@ -217,7 +251,7 @@
             </objects>
             <point key="canvasLocation" x="1024" y="-243"/>
         </scene>
-        <!--Image Cropping View Controller - Hotter-->
+        <!--Image Cropping View Controller-->
         <scene sceneID="9w3-JV-I8u">
             <objects>
                 <viewController id="h2B-gi-U95" customClass="ImageCroppingViewController" sceneMemberID="viewController">
@@ -259,7 +293,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Hotter" id="Nqe-pw-HHd" customClass="BasicNavigationItem"/>
+                    <navigationItem key="navigationItem" id="Nqe-pw-HHd"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -272,7 +306,7 @@
             </objects>
             <point key="canvasLocation" x="1501" y="-243"/>
         </scene>
-        <!--User Creation View Controller - Hotter-->
+        <!--User Creation View Controller-->
         <scene sceneID="qwQ-hX-kk1">
             <objects>
                 <viewController id="P9z-hQ-fhQ" customClass="UserCreationViewController" sceneMemberID="viewController">
@@ -348,7 +382,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Hotter" id="6DY-pF-Ms9" customClass="BasicNavigationItem"/>
+                    <navigationItem key="navigationItem" id="6DY-pF-Ms9"/>
                     <connections>
                         <outlet property="createButton" destination="E5P-Wf-YpF" id="s50-XD-gL1"/>
                         <outlet property="enterUsernameLabel" destination="fLt-7f-kad" id="e8j-90-YuO"/>
@@ -363,7 +397,7 @@
             </objects>
             <point key="canvasLocation" x="2031" y="-243"/>
         </scene>
-        <!--Comment View Controller - Hotter-->
+        <!--Comment View Controller-->
         <scene sceneID="wEr-E0-YnY">
             <objects>
                 <viewController id="8GW-Xd-OsB" customClass="CommentViewController" sceneMemberID="viewController">
@@ -396,7 +430,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Hotter" id="1bS-ZT-uQe" customClass="BasicNavigationItem"/>
+                    <navigationItem key="navigationItem" id="1bS-ZT-uQe"/>
                     <connections>
                         <outlet property="bottomImageView" destination="02q-Tr-jVx" id="UTE-Xj-qNY"/>
                         <outlet property="commentInputTextField" destination="qJG-ff-MIj" id="ljl-ug-uMG"/>
@@ -408,11 +442,11 @@
             </objects>
             <point key="canvasLocation" x="568" y="450"/>
         </scene>
-        <!--Tab Bar Controller - Hotter-->
+        <!--Tab Bar Controller-->
         <scene sceneID="GWL-Tb-jJz">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="ADo-fI-6pC" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Hotter" id="lhU-MN-U7A"/>
+                    <navigationItem key="navigationItem" id="lhU-MN-U7A"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="eeF-I5-wG3">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -428,10 +462,10 @@
             </objects>
             <point key="canvasLocation" x="-584" y="439"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main View Controller-->
         <scene sceneID="pop-MZ-Fbi">
             <objects>
-                <navigationController definesPresentationContext="YES" id="R23-EB-ePK" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="R23-EB-ePK" customClass="MainViewController" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="erH-dd-KKi" customClass="BasicNavigationBar">
                         <autoresizingMask key="autoresizingMask"/>

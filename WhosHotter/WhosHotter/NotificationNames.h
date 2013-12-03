@@ -9,3 +9,4 @@
 #define NOTIFICATION_USER_CREATED @"userCreated"
 
 #define NOTIFICATION_COMPETITIONS_UPDATED @"competitionsUpdated"
+#define NOTIFICATION_USED_STAMINA @"usedStamina"

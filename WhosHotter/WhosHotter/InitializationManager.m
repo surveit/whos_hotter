@@ -47,11 +47,11 @@
 }
 
 - (void)setupConfig {
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Fire layer@2x"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"Back button@2x"]];
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Back button@2x"]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor clearColor]}];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50.f) forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)setupUser {

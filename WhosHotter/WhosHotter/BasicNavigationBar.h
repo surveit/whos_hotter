@@ -10,4 +10,6 @@
 
 @interface BasicNavigationBar : UINavigationBar
 
+- (void)changedTopViewController;
+
 @end

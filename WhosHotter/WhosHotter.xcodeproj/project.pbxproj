@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3B24E51F184D9B8000461568 /* BasicNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E51E184D9B8000461568 /* BasicNavigationBarView.m */; };
+		3B24E523184DBBCE00461568 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E522184DBBCE00461568 /* MainViewController.m */; };
+		3B24E526184DC35B00461568 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E525184DC35B00461568 /* TestViewController.m */; };
 		3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DD1839B84F00246822 /* Foundation.framework */; };
 		3BA670E01839B84F00246822 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DF1839B84F00246822 /* CoreGraphics.framework */; };
 		3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670E11839B84F00246822 /* UIKit.framework */; };
@@ -196,6 +198,10 @@
 /* Begin PBXFileReference section */
 		3B24E51D184D9B8000461568 /* BasicNavigationBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNavigationBarView.h; sourceTree = "<group>"; };
 		3B24E51E184D9B8000461568 /* BasicNavigationBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicNavigationBarView.m; sourceTree = "<group>"; };
+		3B24E521184DBBCE00461568 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		3B24E522184DBBCE00461568 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3B24E524184DC35B00461568 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		3B24E525184DC35B00461568 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		3BA670DA1839B84F00246822 /* WhosHotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhosHotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA670DD1839B84F00246822 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BA670DF1839B84F00246822 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -596,6 +602,10 @@
 				3BA6721C1843007D00246822 /* ImagePickerViewController.m */,
 				3BA672211843198000246822 /* StatusBarFreeImagePickerViewController.h */,
 				3BA672221843198000246822 /* StatusBarFreeImagePickerViewController.m */,
+				3B24E521184DBBCE00461568 /* MainViewController.h */,
+				3B24E522184DBBCE00461568 /* MainViewController.m */,
+				3B24E524184DC35B00461568 /* TestViewController.h */,
+				3B24E525184DC35B00461568 /* TestViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -996,6 +1006,7 @@
 				3BA67157183B35BF00246822 /* VoteViewController.m in Sources */,
 				3BA6711A1839B8DC00246822 /* User.m in Sources */,
 				3BA670F71839B84F00246822 /* ViewController.m in Sources */,
+				3B24E523184DBBCE00461568 /* MainViewController.m in Sources */,
 				3BCF65CC184D96AD00C9996A /* BasicNavigationBar.m in Sources */,
 				3BA670EE1839B84F00246822 /* AppDelegate.m in Sources */,
 				3B24E51F184D9B8000461568 /* BasicNavigationBarView.m in Sources */,
@@ -1006,6 +1017,7 @@
 				3BA6716618416CAE00246822 /* FacebookManager.m in Sources */,
 				3BA671211839BF6000246822 /* Competition.m in Sources */,
 				3BA671741842BBD200246822 /* UserCreationViewController.m in Sources */,
+				3B24E526184DC35B00461568 /* TestViewController.m in Sources */,
 				3BA671271839C03D00246822 /* CompetitionCache.m in Sources */,
 				3BA671431839D85600246822 /* FileManager.m in Sources */,
 				3BA672231843198000246822 /* StatusBarFreeImagePickerViewController.m in Sources */,

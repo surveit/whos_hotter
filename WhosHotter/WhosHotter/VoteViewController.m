@@ -68,20 +68,24 @@
 
 #pragma mark - tap handling
 - (void)didTapTop {
-    if ([self.currentCompetition canAffrdEnergy]) {
-        [self.currentCompetition voteFor0];
-        [self didVote];
-    } else {
-        [self showOutOfEnergyPopup];
+    if (self.currentCompetition) {
+        if ([self.currentCompetition canAffrdEnergy]) {
+            [self.currentCompetition voteFor0];
+            [self didVote];
+        } else {
+            [self showOutOfEnergyPopup];
+        }
     }
 }
 
 - (void)didTapBottom {
-    if ([self.currentCompetition canAffrdEnergy]) {
-        [self.currentCompetition voteFor1];
-        [self didVote];
-    } else {
-        [self showOutOfEnergyPopup];
+    if (self.currentCompetition) {
+        if ([self.currentCompetition canAffrdEnergy]) {
+            [self.currentCompetition voteFor1];
+            [self didVote];
+        } else {
+            [self showOutOfEnergyPopup];
+        }
     }
 }
 
@@ -126,6 +130,8 @@
     
     self.topImage.userInteractionEnabled = YES;
     self.bottomImage.userInteractionEnabled = YES;
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"B" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 @end

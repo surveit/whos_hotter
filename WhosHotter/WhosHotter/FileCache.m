@@ -37,10 +37,12 @@ static NSMutableDictionary *cache = nil;
     }
     
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        cache[file.name] = data;
-        [FileManager saveData:data fileName:file.name];
-        if (completionHandler) {
-            completionHandler(data,error);
+        if (data && !error) {
+            cache[file.name] = data;
+            [FileManager saveData:data fileName:file.name];
+            if (completionHandler) {
+                completionHandler(data,error);
+            }
         }
     }];
 }

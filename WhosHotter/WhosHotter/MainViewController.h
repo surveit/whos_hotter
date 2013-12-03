@@ -1,5 +1,5 @@
 //
-//  BasicNavigationBarView.h
+//  MainViewController.h
 //  WhosHotter
 //
 //  Created by Shuhan Bao on 12/2/13.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BasicNavigationBarView : UIView
-
-- (void)hideEnergy;
-- (void)showEnergy;
+@interface MainViewController : UINavigationController <UINavigationControllerDelegate>
 
 @end

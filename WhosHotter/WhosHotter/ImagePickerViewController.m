@@ -35,7 +35,7 @@
 - (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
 {
     StatusBarFreeImagePickerViewController *imagePickerController = [[StatusBarFreeImagePickerViewController alloc] init];
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     imagePickerController.modalPresentationCapturesStatusBarAppearance = YES;
     imagePickerController.sourceType = sourceType;
     imagePickerController.delegate = self;
@@ -59,6 +59,5 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 @end

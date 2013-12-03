@@ -280,6 +280,7 @@ static int counter = 1;
         self.model[@"energy"] = @(self.energy - energy);
         NSLog(@"Energy %@",self.model[@"energy"]);
         [self.model saveInBackground];
+        [self notifyEnergyUpdated];
     }
 }
 
@@ -289,6 +290,18 @@ static int counter = 1;
 
 - (UIImage *)profileImage {
     return [UIImage imageWithData:[FileManager dataFromFileName:kProfileImageFilename]];
+}
+
+- (void)refillEnergy {
+    self.model[@"energy"] = @([Config maxEnergy]);
+    [self.model saveInBackground];
+    [self notifyEnergyUpdated];
+}
+
+- (void)notifyEnergyUpdated {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_USED_STAMINA
+                                                        object:nil
+                                                      userInfo:@{@"percent" : @((CGFloat)self.energy / [Config maxEnergy])}];
 }
 
 - (void)showError:(NSError *)error {

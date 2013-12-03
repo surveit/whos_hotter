@@ -20,10 +20,15 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     if (newSuperview && !_barView) {
-        for (UIView *subView in self.subviews) {
-            [subView removeFromSuperview];
-        }
         [self addSubview:self.barView];
+    }
+}
+
+- (void)changedTopViewController {
+    if (self.items.count == 1) {
+        [self.barView showEnergy];
+    } else {
+        [self.barView hideEnergy];
     }
 }
 

@@ -40,10 +40,6 @@
     [self startLoginFlow];
 }
 
-- (IBAction)didTapComments:(id)sender {
-    //[self performSegueWithIdentifier:@"profileToComments" sender:self];
-}
-
 - (IBAction)didTapLoginToFacebook:(id)sender {
     [FacebookManager loginWithCompletionHandler:nil];
 }
