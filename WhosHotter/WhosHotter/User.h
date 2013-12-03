@@ -8,29 +8,36 @@
 
 #import "Utility.h"
 
+#import "PersistedObject.h"
+
 typedef enum {
     UNKNOWN = 0,
     MALE = 1,
     FEMALE = 2,
 } Gender;
 
-@interface User : NSObject
+@interface User : PersistedObject
 
 + (User *)sharedUser;
 + (NSString *)identifier;
 + (NSString *)username;
 + (BOOL)isUserNameValid:(NSString *)username;
++ (void)createFakeUser;
+
 
 - (void)createLogin:(NSString *)username
            password:(NSString *)password
              gender:(Gender)gender
+              image:(UIImage *)profileImage
          completion:(CompletionHandler)handler;
 
+- (void)populate;
+
 - (BOOL)isLoggedIn;
-- (void)setProfileImage:(UIImage *)image;
 - (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
-- (void)submitForCompetition:(ObjectsCompletionHandler)completionHandler;
+- (void)submitForCompetition:(SingleObjectCompletionHandler)completionHandler;
 - (UIImage *)profileImage;
+- (NSArray *)pastCompetitions;
 
 - (void)spendEnergy:(NSInteger)energy;
 - (NSInteger)energy;

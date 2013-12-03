@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment version="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1" customClass="BasicNavigationBarView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Fire layer.png" translatesAutoresizingMaskIntoConstraints="NO" id="o64-Qh-rKO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Flame header.png" translatesAutoresizingMaskIntoConstraints="NO" id="bts-5A-t2c">
+                    <rect key="frame" x="11" y="8" width="15" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" progressImage="Energy bar outline.png" trackImage="Energy bar filler.png" translatesAutoresizingMaskIntoConstraints="NO" id="7sh-re-Tfl">
+                    <rect key="frame" x="35" y="14.5" width="50" height="11"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Hotter.png" translatesAutoresizingMaskIntoConstraints="NO" id="r57-Jw-kfD">
+                    <rect key="frame" x="135" y="12.5" width="50" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="flameHeader" destination="bts-5A-t2c" id="vxL-23-zwS"/>
+                <outlet property="staminaBar" destination="7sh-re-Tfl" id="G9Z-D8-Hxx"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="Energy bar filler.png" width="46" height="6"/>
+        <image name="Energy bar outline.png" width="51" height="11"/>
+        <image name="Fire layer.png" width="320" height="37"/>
+        <image name="Flame header.png" width="14" height="24"/>
+        <image name="Hotter.png" width="50" height="15"/>
+    </resources>
+</document>

@@ -48,10 +48,17 @@
 }
 
 - (CGFloat)topPercentage {
+    if (self.currentCompetition.totalVotes == 0) {
+        return 50.0;
+    }
     return (CGFloat)self.currentCompetition.votes0/self.currentCompetition.totalVotes*100.0f;
 }
 
 - (CGFloat)bottomPercentage {
+    if (self.currentCompetition.totalVotes == 0) {
+        return 50.0f;
+    }
+    
     return (CGFloat)self.currentCompetition.votes1/self.currentCompetition.totalVotes*100.0f;
 }
 

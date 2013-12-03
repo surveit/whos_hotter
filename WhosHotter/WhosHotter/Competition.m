@@ -11,6 +11,7 @@
 #import "Comment.h"
 #import "Config.h"
 #import "FileCache.h"
+#import "NotificationNames.h"
 #import "User.h"
 
 static NSMutableArray *myRecentCompetitions = nil;
@@ -45,22 +46,15 @@ static NSMutableArray *myRecentCompetitions = nil;
     return nil;
 }
 
-+ (void)createCompetition:(CompletionHandler)completionHandler {
-    //get a random user
-    PFQuery *query = [PFUser query];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (objects.count > 0) {
-            PFUser *user = objects[arc4random_uniform(objects.count)];
-            Competition *competition = [Competition newObject];
-            [competition setValue:@[[User identifier],user.objectId] forKey:@"userIdentifiers"];
-            [competition saveInBackgroundWithCompletionHandler:^(BOOL success, NSError *error) {
-                if (completionHandler) {
-                    completionHandler(success,error);
-                }
-            }];
-        }
-    }];
++ (void)createCompetition:(SingleObjectCompletionHandler)completionHandler {
+    [PFCloud callFunctionInBackground:@"pairUser"
+                       withParameters:@{}
+                                block:^(NSString *result, NSError *error) {
+                                    NSLog(@"Cloud code result: %@. Error: %@",result, error);
+                                    if (completionHandler) {
+                                        completionHandler(result,error);
+                                    }
+                                }];
 }
 
 + (NSArray *)competitionsFromPersistentCompetitions:(NSArray *)objects {
@@ -82,8 +76,8 @@ static NSMutableArray *myRecentCompetitions = nil;
         [Utility showError:[NSString stringWithFormat:@"Competition user identifiers has count %lu",userIdentifiers.count]];
     }
     
-    [self getImageForUserIdentifier:userIdentifiers[0] saveSelector:@selector(setTopImageData:)];
-    [self getImageForUserIdentifier:userIdentifiers[1] saveSelector:@selector(setBottomImageData:)];
+    [self getImageFromFile:[self valueForKey:@"image0"] saveSelector:@selector(setTopImageData:)];
+    [self getImageFromFile:[self valueForKey:@"image1"] saveSelector:@selector(setBottomImageData:)];
     [self getComments];
 }
 
@@ -106,24 +100,16 @@ static NSMutableArray *myRecentCompetitions = nil;
     self.comments = mutableComments;
 }
 
-- (void)getImageForUserIdentifier:(NSString *)identifier saveSelector:(SEL)saveSelector {
-    PFQuery *query = [PFUser query];
-    [query getObjectInBackgroundWithId:identifier
-                                 block:^(PFObject *object, NSError *error) {
-                                     if (!error) {
-                                         PFFile *file = object[@"profileImage"];
-                                         [FileCache dataForPFFile:file
-                                                completionHandler:^(NSData *data, NSError *error) {
-                                                    if (!error) {
-                                                        [self performSelector:saveSelector withObject:data];
-                                                    } else {
-                                                        [self markAsInvalid];
-                                                    }
-                                                }];
-                                     } else {
-                                         [self markAsInvalid];
-                                     }
-                                 }];
+- (void)getImageFromFile:(PFFile *)file saveSelector:(SEL)saveSelector {
+    [FileCache dataForPFFile:file
+           completionHandler:^(NSData *data, NSError *error) {
+               if (!error) {
+                   [self performSelector:saveSelector withObject:data];
+                   [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_COMPETITIONS_UPDATED object:nil];
+               } else {
+                   [self markAsInvalid];
+               }
+           }];
 }
 
 - (void)markAsInvalid {
@@ -164,6 +150,35 @@ static NSMutableArray *myRecentCompetitions = nil;
     [self incrementKey:@"votes1"];
     [self saveInBackgroundWithCompletionHandler:nil];
     [[User sharedUser] spendEnergy:[Config energyCostPerVote]];
+}
+
+- (CGFloat)myPercentage {
+    NSUInteger index = [self myIndex];
+    if (index != NSNotFound && [self totalVotes] > 0) {
+        NSInteger votesForMe = index == 0 ? [self votes0] : [self votes1];
+        return (CGFloat)votesForMe / [self totalVotes];
+    }
+    return 0.0f;
+}
+
+- (UIImage *)opponentsImage {
+    NSUInteger index = [self myIndex];
+    if (index != NSNotFound) {
+        return index == 0 ? [self bottomImage] : [self topImage];
+    }
+    return nil;
+}
+
+- (NSInteger)timeUntilExpiration {
+    return [[self valueForKey:@"startTime"] intValue] + [Config timePerCompetition] - [NSDate timeIntervalSinceReferenceDate];
+}
+
+- (NSUInteger)myIndex {
+    return [self.userIdentifiers indexOfObject:[User identifier]];
+}
+
+- (NSArray *)userIdentifiers {
+    return [self valueForKey:@"userIdentifiers"];
 }
 
 @end

@@ -31,7 +31,11 @@
 }
 
 + (NSInteger)energyCostPerVote {
-    return 0;
+    return 5;
+}
+
++ (NSInteger)timePerCompetition {
+    return 86400;
 }
 
 @end

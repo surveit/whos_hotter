@@ -84,13 +84,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.commentInputTextField.delegate = self;
+    self.commentTextField.userInteractionEnabled = NO;
     [self updateView];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

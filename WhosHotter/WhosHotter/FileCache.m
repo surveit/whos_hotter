@@ -7,6 +7,7 @@
 //
 
 #import "FileCache.h"
+#import "FileManager.h"
 
 #import <Parse/Parse.h>
 
@@ -19,15 +20,25 @@ static NSMutableDictionary *cache = nil;
 }
 
 + (void)dataForPFFile:(PFFile *)file completionHandler:(DataCompletionHandler)completionHandler {
-    if (cache[file.url]) {
+    if (cache[file.name]) {
         if (completionHandler) {
-            completionHandler(cache[file.url],nil);
+            completionHandler(cache[file.name],nil);
+        }
+        return;
+    }
+    
+    NSData *localData = [FileManager dataFromFileName:file.name];
+    if (localData) {
+        cache[file.name] = localData;
+        if (completionHandler) {
+            completionHandler(localData,nil);
         }
         return;
     }
     
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        cache[file.url] = data;
+        cache[file.name] = data;
+        [FileManager saveData:data fileName:file.name];
         if (completionHandler) {
             completionHandler(data,error);
         }

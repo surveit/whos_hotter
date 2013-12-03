@@ -16,5 +16,6 @@
 + (NSInteger)staminaPerVote;
 + (NSInteger)secondsToRecoverStamina;
 + (NSInteger)energyCostPerVote;
++ (NSInteger)timePerCompetition;
 
 @end

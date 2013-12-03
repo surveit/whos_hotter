@@ -16,4 +16,12 @@
                       cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
++ (NSString *)percentageStringFromFloat:(CGFloat)value {
+    CGFloat percentage = value * 100;
+    if (percentage < 10.0) {
+        return [NSString stringWithFormat:@"%01.f%%",value];
+    }
+    return [NSString stringWithFormat:@"%02.f%%",value];
+}
+
 @end

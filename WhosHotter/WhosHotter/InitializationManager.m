@@ -10,6 +10,7 @@
 
 #import "User.h"
 #import "CompetitionCache.h"
+#import "Config.h"
 #import "FileCache.h"
 
 #import <Parse/Parse.h>
@@ -25,6 +26,11 @@
     [self initializeParse];
     [self initializeCaches];
     [self setupConfig];
+#ifdef CREATING_USER_FLOW
+    [self performSelector:@selector(createFakeUser) withObject:nil afterDelay:5];
+#else
+    [self setupUser];
+#endif
 }
 
 - (void)initializeParse {
@@ -35,7 +41,9 @@
 
 - (void)initializeCaches {
     [FileCache initialize];
+#ifndef CREATING_USER_FLOW
     [CompetitionCache initialize];
+#endif
 }
 
 - (void)setupConfig {
@@ -44,6 +52,17 @@
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Back button@2x"]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor whiteColor]}];
+}
+
+- (void)setupUser {
+    [[User sharedUser] populate];
+}
+
+- (void)createFakeUser {
+    [User createFakeUser];
+    [self performSelector:@selector(createFakeUser)
+               withObject:nil
+               afterDelay:15];
 }
 
 @end

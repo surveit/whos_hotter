@@ -17,7 +17,7 @@
 
 + (NSArray *)myRecentCompetitions:(NSInteger)count
                 completionHandler:(ObjectsCompletionHandler)completionBlock;
-+ (void)createCompetition:(CompletionHandler)completionHandler;
++ (void)createCompetition:(SingleObjectCompletionHandler)completionHandler;
 
 + (NSArray *)competitionsFromPersistentCompetitions:(NSArray *)objects;
 
@@ -35,5 +35,9 @@
 - (UIImage *)bottomImage;
 - (NSArray *)comments;
 - (void)addCommentToCache:(Comment *)comment;
+
+- (CGFloat)myPercentage;
+- (UIImage *)opponentsImage;
+- (NSInteger)timeUntilExpiration;
 
 @end

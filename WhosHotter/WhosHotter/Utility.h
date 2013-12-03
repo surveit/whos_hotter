@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^CompletionHandler)(BOOL success, NSError *error);
+typedef void (^SingleObjectCompletionHandler)(id object, NSError *error);
 typedef void (^ObjectsCompletionHandler)(NSArray *objects, NSError *error);
 typedef void (^DataCompletionHandler)(NSData *data, NSError *error);
 typedef void (^BasicHandler)();;
@@ -16,5 +17,6 @@ typedef void (^BasicHandler)();;
 @interface Utility : NSObject
 
 + (void)showError:(NSString *)error;
++ (NSString *)percentageStringFromFloat:(CGFloat)value;
 
 @end

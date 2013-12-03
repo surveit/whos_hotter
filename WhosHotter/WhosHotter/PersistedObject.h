@@ -7,18 +7,23 @@
 //
 
 #import <Parse/Parse.h>
-
-
+#import "Utility.h"
 
 @interface PersistedObject : NSObject
 
 + (instancetype)newObject;
 + (instancetype)objectWithModel:(PFObject *)model;
 + (NSArray *)objectsWithModels:(NSArray *)models;
++ (instancetype)objectWithIdentifier:(NSString *)identifier
+                   completionHandler:(SingleObjectCompletionHandler)handler;
+
++ (instancetype)cachedObjectWithIdentifier:(NSString *)identifier
+                         completionHandler:(SingleObjectCompletionHandler)handler;
 
 - (id)valueForKey:(NSString *)key;
 - (void)incrementKey:(NSString *)key;
 - (void)setValue:(id)value forKey:(NSString *)key;
+- (void)removeObjectForKey:(NSString *)key;
 - (void)saveInBackgroundWithCompletionHandler:(void (^)(BOOL success, NSError *error))completionBlock;
 - (NSString *)identifier;
 

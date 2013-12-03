@@ -15,12 +15,17 @@
 #import <Parse/Parse.h>
 
 static User *user = nil;
+static int counter = 1;
 
 #define kProfileImageFilename @"user_profile.png"
 
 @interface User ()
 
-@property (nonatomic, readwrite, strong) PFUser *pfUser;
+@property (nonatomic, readwrite, strong) PFUser *model;
+@property (nonatomic, readwrite, strong) PFFile *profileImageFile;
+
+@property (nonatomic, readwrite, strong) Competition *currentCompetition;
+@property (nonatomic, readwrite, strong) NSMutableArray *privatePastCompetitions;
 
 @end
 
@@ -34,11 +39,11 @@ static User *user = nil;
 }
 
 + (NSString *)identifier {
-    return [[[User sharedUser] pfUser] objectId];
+    return [[[User sharedUser] model] objectId];
 }
 
 + (NSString *)username {
-    return [[[User sharedUser] pfUser] username];
+    return [[[User sharedUser] model] username];
 }
 
 + (BOOL)isUserNameValid:(NSString *)username {
@@ -54,35 +59,65 @@ static User *user = nil;
     return YES;
 }
 
++ (void)createFakeUser {
+    User *newUser = [[User alloc] init];
+    user = newUser;
+    NSString *imageName = [NSString stringWithFormat:@"rs_female_0000%02d.jpg",counter];
+    [newUser createLogin:[NSString stringWithFormat:@"user_%d",counter]
+                password:@"noMatter"
+                  gender:FEMALE
+                   image:[UIImage imageNamed:imageName]
+              completion:nil];
+    counter++;
+}
+
 - (id)init {
     if (self = [super init]) {
-        _pfUser = [PFUser currentUser];
-        if (!_pfUser) {
-            [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
-                if (error) {
-                    NSLog(@"Anonymous login failed.");
-                } else {
-                    _pfUser = user;
-                    [self addDefaultStatsToUser:_pfUser];
-                    [_pfUser saveInBackground];
-                }
-            }];
+        _model = [PFUser currentUser];
+        if (!_model) {
+            [self createAnonymousUser];
+        } else {
+            [_model refreshInBackgroundWithBlock:nil];
         }
     }
     return self;
 }
 
-- (BOOL)isLoggedIn {
-    return ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]] || [PFUser currentUser] == nil;
+- (NSArray *)pastCompetitions {
+    return _privatePastCompetitions;
 }
 
-- (NSString *)userName {
-    return self.pfUser.username;
+- (NSMutableArray *)privatePastCompetitions {
+    if (!_privatePastCompetitions) {
+        _privatePastCompetitions = [NSMutableArray array];
+    }
+    return _privatePastCompetitions;
+}
+
+- (void)populate {
+    if (self.model) {
+        [self getCompetitions:nil];
+        [self updateCompetition];
+        [self checkStamina];
+    }
+}
+
+- (void)createAnonymousUser {
+    [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (error) {
+            NSLog(@"Anonymous login failed.");
+        } else {
+            _model = user;
+            [self addDefaultStatsToUser:_model];
+            [_model saveInBackground];
+        }
+    }];
 }
 
 - (void)createLogin:(NSString *)username
            password:(NSString *)password
              gender:(Gender)gender
+              image:(UIImage *)profileImage
          completion:(CompletionHandler)handler {
     PFUser *user = [PFUser user];
     user.username = username;
@@ -91,14 +126,107 @@ static User *user = nil;
     [user setObject:@(NO) forKey:@"isPaired"];
     [self addDefaultStatsToUser:user];
     
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        self.pfUser = user;
-        [self submitForCompetition:nil];
-        [self notifyOfUserCreated];
-        if (handler) {
-            handler(succeeded,error);
+    __weak User *weakSelf = self;
+    
+    [self setProfileImage:profileImage
+     completionHandler:^(BOOL success, NSError *error) {
+         if (success) {
+             [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                 if (succeeded) {
+                     weakSelf.model = user;
+                     [weakSelf setValue:weakSelf.profileImageFile forKey:@"profileImage"];
+                     [weakSelf saveInBackgroundWithCompletionHandler:^(BOOL success, NSError *error) {
+                         if (success) {
+                             [weakSelf notifyOfUserCreated];
+                             [weakSelf submitForCompetition:nil];
+                         }
+                     }];
+                 }
+                 
+                 if (handler) {
+                     handler(succeeded,error);
+                 }
+             }];
+         }
+     }];
+
+}
+
+#pragma mark -- model getters
+- (NSString *)competitionIdentifier {
+    return self.model[@"activeCompetitionIdentifier"];
+}
+
+- (NSArray *)pastCompetitionIdentifiers {
+    return self.model[@"competitionIdentifiers"];
+}
+
+- (void)updateCompetition {
+    if ([self isLoggedIn]) {
+        if ([self competitionIdentifier]) {
+            self.currentCompetition = [Competition objectWithIdentifier:[self competitionIdentifier]
+                                                      completionHandler:^(id object, NSError *error) {
+                                                          [self checkCompetitionExpiration];
+                                                      }];
+        } else {
+            [self submitForCompetition:nil];
         }
-    }];
+        [self fetchPastCompetitions];
+    }
+}
+
+- (void)fetchPastCompetitions {
+    for (NSString *competitionIdentifier in self.pastCompetitionIdentifiers) {
+        [self fetchCompetitionWithIdentifier:competitionIdentifier];
+    }
+}
+
+- (void)fetchCompetitionWithIdentifier:(NSString *)identifier {
+    [Competition cachedObjectWithIdentifier:identifier
+                          completionHandler:^(id object, NSError *error) {
+                              Competition *competition = (Competition *)object;
+                              [self.privatePastCompetitions addObject:competition];
+                              if (self.privatePastCompetitions.count == self.pastCompetitionIdentifiers.count) {
+                                  [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_COMPETITIONS_UPDATED
+                                                                                      object:nil];
+                              }
+                          }];
+}
+
+- (void)checkCompetitionExpiration {
+    if ([self.currentCompetition timeUntilExpiration] < 0) {
+        self.currentCompetition = nil;
+        [self submitForCompetition:nil];
+    }
+}
+
+- (BOOL)isLoggedIn {
+    return ![PFAnonymousUtils isLinkedWithUser:[PFUser currentUser]] &&
+    [PFUser currentUser] != nil &&
+    self.model != nil;
+}
+
+- (NSString *)userName {
+    return self.model.username;
+}
+
+- (void)checkStamina {
+    if (!self.model) {
+        return;
+    }
+    
+    if ([self timeUntilStaminaRefill] <= 0) {
+        self.model[@"energy"] = @([Config maxEnergy]);
+        self.model[@"timeToRefill"] = @([NSDate timeIntervalSinceReferenceDate] + [Config secondsToRecoverStamina]);
+        [self.model saveInBackground];
+        [self performSelector:@selector(checkStamina) withObject:nil afterDelay:[Config secondsToRecoverStamina]];
+    } else {
+        [self performSelector:@selector(checkStamina) withObject:nil afterDelay:[self timeUntilStaminaRefill]];
+    }
+}
+
+- (CGFloat)timeUntilStaminaRefill {
+    return [self.model[@"timeToRefill"] floatValue] - [NSDate timeIntervalSinceReferenceDate];
 }
 
 - (void)notifyOfUserCreated {
@@ -108,48 +236,55 @@ static User *user = nil;
 
 - (void)addDefaultStatsToUser:(PFUser *)pfUser {
     pfUser[@"energy"] = @([Config maxEnergy]);
-    pfUser[@"timeToRefill"] = @([Config maxEnergy] * [Config secondsToRecoverStamina]);
+    pfUser[@"timeToRefill"] = @([NSDate timeIntervalSinceReferenceDate] + [Config secondsToRecoverStamina]);
 }
 
-- (void)setProfileImage:(UIImage *)image {
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
-    PFFile *imageFile = [PFFile fileWithData:imageData];
-    [FileManager saveData:imageData fileName:@"profileImage.png"];
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            self.pfUser[@"profileImage"] = imageFile;
-            [self.pfUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    [FileManager saveData:imageData fileName:kProfileImageFilename];
-                }
-            }];
-        }
-    }];
+- (void)setProfileImage:(UIImage *)image
+      completionHandler:(CompletionHandler)completionHandler {
+    if (image) {
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+        PFFile *imageFile = [PFFile fileWithData:imageData];
+        [FileManager saveData:imageData fileName:kProfileImageFilename];
+        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                self.profileImageFile = imageFile;
+            }
+            
+            if (completionHandler) {
+                completionHandler(succeeded,error);
+            }
+        }];
+    }
 }
 
 - (void)getCompetitions:(ObjectsCompletionHandler)completionHandler {
-    [Competition myRecentCompetitions:10
+    [Competition myRecentCompetitions:9
                     completionHandler:completionHandler];
 }
 
-- (void)submitForCompetition:(ObjectsCompletionHandler)completionHandler {
-    [Competition createCompetition:^(BOOL success, NSError *error) {
-        if (success) {
-            [self getCompetitions:completionHandler];
+- (void)submitForCompetition:(SingleObjectCompletionHandler)completionHandler {
+    [Competition createCompetition:^(id object, NSError *error) {
+        if (!error) {
+            NSString *competitionIdentifier = (NSString *)object;
+            [self fetchCompetitionWithIdentifier:competitionIdentifier];
+        }
+        
+        if (completionHandler) {
+            completionHandler(object,error);
         }
     }];
 }
 
 - (void)spendEnergy:(NSInteger)energy {
     if (energy > 0 && self.energy >= energy) {
-        self.pfUser[@"energy"] = @(self.energy - energy);
-        NSLog(@"Energy %@",self.pfUser[@"energy"]);
-        [self.pfUser saveInBackground];
+        self.model[@"energy"] = @(self.energy - energy);
+        NSLog(@"Energy %@",self.model[@"energy"]);
+        [self.model saveInBackground];
     }
 }
 
 - (NSInteger)energy {
-    return [self.pfUser[@"energy"] intValue];
+    return [self.model[@"energy"] intValue];
 }
 
 - (UIImage *)profileImage {
@@ -159,7 +294,5 @@ static User *user = nil;
 - (void)showError:(NSError *)error {
     
 }
-
-
 
 @end

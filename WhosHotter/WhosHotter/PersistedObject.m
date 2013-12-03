@@ -29,6 +29,41 @@
     return object;
 }
 
++ (instancetype)objectWithIdentifier:(NSString *)identifier
+                   completionHandler:(SingleObjectCompletionHandler)handler {
+    PersistedObject *persistedObject = [[self alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(self)];
+    [query getObjectInBackgroundWithId:identifier
+                                 block:^(PFObject *object, NSError *error) {
+                                     if (object) {
+                                         persistedObject.model = object;
+                                         [persistedObject objectCreatedFromModel];
+                                     }
+                                     if (handler) {
+                                         handler(persistedObject,error);
+                                     }
+                                 }];
+    return persistedObject;
+}
+
++ (instancetype)cachedObjectWithIdentifier:(NSString *)identifier
+                         completionHandler:(SingleObjectCompletionHandler)handler {
+    PersistedObject *persistedObject = [[self alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(self)];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [query getObjectInBackgroundWithId:identifier
+                                 block:^(PFObject *object, NSError *error) {
+                                     if (object) {
+                                         persistedObject.model = object;
+                                         [persistedObject objectCreatedFromModel];
+                                     }
+                                     if (handler) {
+                                         handler(persistedObject,error);
+                                     }
+                                 }];
+    return persistedObject;
+}
+
 + (NSArray *)objectsWithModels:(NSArray *)models {
     NSMutableArray *objects = [NSMutableArray array];
     for (PFObject *model in models) {
@@ -52,6 +87,10 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     [self.model setObject:value forKey:key];
+}
+
+- (void)removeObjectForKey:(NSString *)key {
+    [self.model removeObjectForKey:key];
 }
 
 - (NSString *)identifier {
