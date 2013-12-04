@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Awesome Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface UserCreationViewController : UIViewController
 
 @property (nonatomic, readwrite, strong) UIImage *profileImage;
+@property (nonatomic, readwrite, assign) Gender gender;
 
 @end

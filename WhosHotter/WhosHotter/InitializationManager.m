@@ -47,8 +47,8 @@
 }
 
 - (void)setupConfig {
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"Back button@2x"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Back button@2x"]];
+    [[UINavigationBar appearance] setBackIndicatorImage:[Utility imageNamed:@"Back button@2x" scale:2.0]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[Utility imageNamed:@"Back button@2x" scale:2.0]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor clearColor]}];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50.f) forBarMetrics:UIBarMetricsDefault];

@@ -155,22 +155,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="B6X-Bi-NS1">
-                                <rect key="frame" x="87" y="367" width="146" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Upload Photo button.png" backgroundImage="Upload Photo button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapUploadPhoto:" destination="YqP-6w-5ah" eventType="touchUpInside" id="XxA-3X-uAQ"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anonymous" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nwo-Az-4FX">
-                                <rect key="frame" x="163" y="59.5" width="92" height="21"/>
+                                <rect key="frame" x="163" y="59.5" width="150" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gallery w Overlap.png" id="SbT-FM-NLk">
+                                <rect key="frame" x="0.0" y="187" width="320" height="334"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty profile.png" id="OiS-om-AJW">
                                 <rect key="frame" x="0.0" y="44" width="150" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -182,7 +176,18 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapLoginToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="m8Q-Ra-Oq0"/>
+                                    <action selector="didTapLoginToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="t9Z-5l-KdP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XQ2-dB-Rn4">
+                                <rect key="frame" x="112" y="153" width="246" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Share on Facebook profile.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapLoginToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="bcm-PC-ZGX"/>
+                                    <action selector="didTapShareToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="gsT-OB-olE"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flame profile.png" id="hTv-Fu-212">
@@ -192,7 +197,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T9m-WW-ZqT">
                                 <rect key="frame" x="190" y="107.5" width="39" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QX0-GP-iDC">
@@ -205,6 +210,16 @@
                                     <segue destination="DPl-hK-sTo" kind="modal" id="Rol-kw-bJh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="B6X-Bi-NS1">
+                                <rect key="frame" x="87" y="367" width="146" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Upload Photo button.png" backgroundImage="Upload Photo button.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapUploadPhoto:" destination="YqP-6w-5ah" eventType="touchUpInside" id="XxA-3X-uAQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -212,16 +227,20 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="createAccount" destination="B6X-Bi-NS1" id="IH2-z2-J6L"/>
+                        <outlet property="fbLoginButton" destination="Xxn-uB-dp8" id="Sly-RI-nS0"/>
+                        <outlet property="fbShareButton" destination="XQ2-dB-Rn4" id="Nap-ho-Dx7"/>
+                        <outlet property="galleryView" destination="SbT-FM-NLk" id="Ttt-Ln-mzr"/>
                         <outlet property="pastCompetitions" destination="zC1-2S-q79" id="bg4-Ag-0kT"/>
                         <outlet property="profilePicture" destination="OiS-om-AJW" id="b3C-1h-jgY"/>
                         <outlet property="userName" destination="nwo-Az-4FX" id="g5M-0r-w6p"/>
                         <outlet property="userNameLabel" destination="nwo-Az-4FX" id="bna-vu-w6E"/>
                         <segue destination="8GW-Xd-OsB" kind="push" identifier="profileToComments" id="iYN-DM-HIf"/>
+                        <segue destination="h2B-gi-U95" kind="push" identifier="profileToImageCrop" id="QnA-fC-gWt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXQ-pK-VRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="126"/>
+            <point key="canvasLocation" x="-64" y="100"/>
         </scene>
         <!--Image Picker View Controller - Hotter-->
         <scene sceneID="fby-E0-LQm">
@@ -286,7 +305,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag To Position" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7MF-qM-g1X">
                                 <rect key="frame" x="0.0" y="51.5" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -364,14 +383,14 @@
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="That name is taken. Please try another." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KM5-bC-urz">
                                 <rect key="frame" x="35" y="357" width="251" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zks-IV-k8A">
                                 <rect key="frame" x="0.0" y="85.5" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -454,13 +473,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="hhh-eZ-qad" kind="relationship" relationship="viewControllers" id="Hjs-Mh-GMf"/>
                         <segue destination="YqP-6w-5ah" kind="relationship" relationship="viewControllers" id="OG9-3C-WsX"/>
-                        <segue destination="hhh-eZ-qad" kind="relationship" relationship="viewControllers" id="Nao-n8-hQz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONI-UG-wVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584" y="439"/>
+            <point key="canvasLocation" x="-556" y="439"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="pop-MZ-Fbi">
@@ -486,6 +505,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background.png" id="N3u-6e-qkB">
+                                <rect key="frame" x="0.0" y="44" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7b7-e4-nrf" customClass="TappableImageView">
                                 <rect key="frame" x="0.0" y="45" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -494,72 +517,76 @@
                                 <rect key="frame" x="0.0" y="280" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eF5-FV-xEM">
-                                <rect key="frame" x="220" y="234" width="80" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PBV-ua-Y84">
-                                <rect key="frame" x="220" y="479" width="80" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sJd-Zf-s3r">
-                                <rect key="frame" x="126" y="475" width="68" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Comment">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="8GW-Xd-OsB" kind="push" identifier="voteToComments" id="kZD-PA-t5a"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eGA-2f-3zZ">
-                                <rect key="frame" x="20" y="20" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fire button.png" id="DL4-Rz-yoq">
-                                <rect key="frame" x="252" y="61" width="48" height="48"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame Last Result.png" id="8Nx-HW-I8i">
+                                <rect key="frame" x="8" y="51" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fire button.png" id="UW9-99-UBl">
-                                <rect key="frame" x="15" y="452" width="48" height="48"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flame header.png" id="DL4-Rz-yoq">
+                                <rect key="frame" x="131" y="117" width="58" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flame header.png" id="UW9-99-UBl">
+                                <rect key="frame" x="131" y="352" width="58" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Small green square (matching).png" id="ek5-1b-Mya">
+                                <rect key="frame" x="41.5" y="96" width="33" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="versus.png" id="GBF-em-cO0">
+                                <rect key="frame" x="0.0" y="264" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eF5-FV-xEM">
+                                <rect key="frame" x="46" y="94" width="30" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Vote" image="star.png" id="UBC-jL-kJT"/>
                     <connections>
+                        <outlet property="bottomFire" destination="UW9-99-UBl" id="C4y-YB-1dm"/>
                         <outlet property="bottomImage" destination="bw7-uh-ffN" id="a6B-Yy-6pA"/>
-                        <outlet property="bottomPercentageLabel" destination="PBV-ua-Y84" id="Uom-TS-yaf"/>
-                        <outlet property="energyLabel" destination="eGA-2f-3zZ" id="4o4-nc-516"/>
+                        <outlet property="frameImage" destination="8Nx-HW-I8i" id="WdZ-Ai-E2m"/>
+                        <outlet property="greenSqure" destination="ek5-1b-Mya" id="ncO-5r-PoL"/>
+                        <outlet property="percentageLabel" destination="eF5-FV-xEM" id="dke-Yv-gHv"/>
+                        <outlet property="topFire" destination="DL4-Rz-yoq" id="C8c-f1-fGR"/>
                         <outlet property="topImage" destination="7b7-e4-nrf" id="aFP-GT-Dhf"/>
-                        <outlet property="topPercentageLabel" destination="eF5-FV-xEM" id="SCy-TR-WbR"/>
+                        <segue destination="8GW-Xd-OsB" kind="push" identifier="voteToComments" id="kwB-PJ-ZYS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iF-of-WII" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="799"/>
+            <point key="canvasLocation" x="-64" y="829"/>
         </scene>
     </scenes>
     <resources>
         <image name="Background.png" width="320" height="480"/>
+        <image name="Background.png" width="320" height="480"/>
+        <image name="Background.png" width="320" height="480"/>
+        <image name="Background.png" width="320" height="480"/>
         <image name="Empty profile.png" width="150" height="146"/>
         <image name="Facebook Connect.png" width="170" height="37"/>
         <image name="Female button opaque.png" width="87" height="88"/>
-        <image name="Fire button.png" width="48" height="48"/>
+        <image name="Flame header.png" width="14" height="24"/>
+        <image name="Flame header.png" width="14" height="24"/>
         <image name="Flame profile.png" width="20" height="31"/>
+        <image name="Frame Last Result.png" width="69" height="69"/>
+        <image name="Gallery w Overlap.png" width="320" height="335"/>
         <image name="Male button opaque.png" width="87" height="88"/>
         <image name="Save Image button.png" width="146" height="57"/>
         <image name="Save profile.png" width="114" height="44"/>
+        <image name="Share on Facebook profile.png" width="170" height="36"/>
+        <image name="Small green square (matching).png" width="22" height="19"/>
+        <image name="Upload Photo button.png" width="146" height="57"/>
         <image name="Upload Photo button.png" width="146" height="57"/>
         <image name="star.png" width="27" height="25"/>
         <image name="user.png" width="24" height="24"/>
+        <image name="versus.png" width="320" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -567,6 +594,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="iYN-DM-HIf"/>
+        <segue reference="QnA-fC-gWt"/>
+        <segue reference="kwB-PJ-ZYS"/>
     </inferredMetricsTieBreakers>
 </document>

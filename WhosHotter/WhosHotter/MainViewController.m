@@ -16,6 +16,10 @@
     [(BasicNavigationBar *)self.navigationBar changedTopViewController];
 }
 
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [(BasicNavigationBar *)self.navigationBar hideEnergy];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;

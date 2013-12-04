@@ -33,7 +33,7 @@
     self.imageView.frame = CGRectMake(0, 0, self.profileImage.size.width, self.profileImage.size.height);
     
     [self.scrollView setContentSize:self.profileImage.size];
-    [self.scrollView setMaximumZoomScale:1.0];
+    [self.scrollView setMaximumZoomScale:MAX(1.0,[self minZoomScale])];
     [self.scrollView setMinimumZoomScale:[self minZoomScale]];
     self.scrollView.zoomScale = [self minZoomScale];
     

@@ -10,6 +10,7 @@
 		3B24E51F184D9B8000461568 /* BasicNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E51E184D9B8000461568 /* BasicNavigationBarView.m */; };
 		3B24E523184DBBCE00461568 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E522184DBBCE00461568 /* MainViewController.m */; };
 		3B24E526184DC35B00461568 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E525184DC35B00461568 /* TestViewController.m */; };
+		3B24E528184F142000461568 /* versus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B24E527184F142000461568 /* versus@2x.png */; };
 		3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DD1839B84F00246822 /* Foundation.framework */; };
 		3BA670E01839B84F00246822 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DF1839B84F00246822 /* CoreGraphics.framework */; };
 		3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670E11839B84F00246822 /* UIKit.framework */; };
@@ -202,6 +203,7 @@
 		3B24E522184DBBCE00461568 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3B24E524184DC35B00461568 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		3B24E525184DC35B00461568 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		3B24E527184F142000461568 /* versus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "versus@2x.png"; sourceTree = "<group>"; };
 		3BA670DA1839B84F00246822 /* WhosHotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhosHotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA670DD1839B84F00246822 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BA670DF1839B84F00246822 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -661,6 +663,7 @@
 				3BA671EE1842F6F500246822 /* Text input@2x.png */,
 				3BA671EF1842F6F500246822 /* Upload Photo button@2x.png */,
 				3BA671F01842F6F500246822 /* user@2x.png */,
+				3B24E527184F142000461568 /* versus@2x.png */,
 				3BA671F11842F6F500246822 /* Wide green rectangle profile@2x.png */,
 			);
 			name = Images;
@@ -893,6 +896,7 @@
 				3BA672B5184477AA00246822 /* rs_female_000065.jpg in Resources */,
 				3BA672B4184477AA00246822 /* rs_female_000064.jpg in Resources */,
 				3BA672101842F6F500246822 /* Small green square (matching)@2x.png in Resources */,
+				3B24E528184F142000461568 /* versus@2x.png in Resources */,
 				3BA672B6184477AA00246822 /* rs_female_000066.jpg in Resources */,
 				3BA672131842F6F500246822 /* Splash-Screen@2x.png in Resources */,
 				3BA672BB184477AA00246822 /* rs_female_000071.jpg in Resources */,

@@ -32,6 +32,10 @@
     }
 }
 
+- (void)hideEnergy {
+    [self.barView hideEnergy];
+}
+
 - (UIView *)barView {
     if (!_barView) {
         _barView = [[BasicNavigationBarView alloc] initWithFrame:[self bounds]];

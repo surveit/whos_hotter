@@ -12,11 +12,17 @@ typedef void (^CompletionHandler)(BOOL success, NSError *error);
 typedef void (^SingleObjectCompletionHandler)(id object, NSError *error);
 typedef void (^ObjectsCompletionHandler)(NSArray *objects, NSError *error);
 typedef void (^DataCompletionHandler)(NSData *data, NSError *error);
-typedef void (^BasicHandler)();;
+typedef void (^BasicHandler)();
+typedef void (^AnimationHandler)(BOOL finished);
 
 @interface Utility : NSObject
 
 + (void)showError:(NSString *)error;
 + (NSString *)percentageStringFromFloat:(CGFloat)value;
+
+
++ (CGPoint)addPoint:(CGPoint)p1 to:(CGPoint)p2;
++ (CGPoint)multiplyPoint:(CGPoint)p1 scalar:(CGFloat)s;
++ (UIImage *)imageNamed:(NSString *)name scale:(CGFloat)scale;
 
 @end

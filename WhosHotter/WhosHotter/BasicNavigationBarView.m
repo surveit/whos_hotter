@@ -8,7 +8,9 @@
 
 #import "BasicNavigationBarView.h"
 
+#import "Config.h"
 #import "NotificationNames.h"
+#import "User.h"
 
 @interface BasicNavigationBarView ()
 
@@ -34,8 +36,21 @@
                                                      name:NOTIFICATION_USED_STAMINA
                                                    object:nil];
         self.userInteractionEnabled = NO;
+        
+        UIImage *progressImage = [Utility imageNamed:@"Energy bar filler@2x" scale:2.0];
+        [self.actualView.staminaBar setProgressImage:progressImage];
+        [self.actualView.staminaBar setTrackImage:[Utility imageNamed:@"Energy bar outline@2x" scale:2.0]];
+        self.actualView.staminaBar.frame = CGRectMake(self.actualView.staminaBar.frame.origin.x,
+                                                      self.actualView.staminaBar.frame.origin.y,
+                                                      progressImage.size.width,
+                                                      progressImage.size.height);
+        [self.actualView.staminaBar setProgress:[self progress] animated:YES];
     }
     return self;
+}
+
+- (CGFloat)progress {
+    return (CGFloat)[[User sharedUser] energy] / [Config maxEnergy];
 }
 
 - (void)updateStamina:(NSNotification *)notification {
@@ -53,9 +68,11 @@
 }
 
 - (void)_hideEnergy {
-    self.staminaBar.hidden = YES;
-    self.flameHeader.hidden = YES;
-    self.backButton.hidden = NO;
+    [UIView animateWithDuration:0.4
+                     animations:^{
+                         self.staminaBar.alpha = 0;
+                         self.flameHeader.alpha = 0;
+                     }];
 }
 
 - (void)showEnergy {
@@ -63,9 +80,11 @@
 }
 
 - (void)_showEnergy {
-    self.staminaBar.hidden = NO;
-    self.flameHeader.hidden = NO;
-    self.backButton.hidden = YES;
+    [UIView animateWithDuration:0.4
+                     animations:^{
+                         self.staminaBar.alpha = 1;
+                         self.flameHeader.alpha = 1;
+                     }];
 }
 
 @end

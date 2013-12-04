@@ -11,5 +11,6 @@
 @interface BasicNavigationBar : UINavigationBar
 
 - (void)changedTopViewController;
+- (void)hideEnergy;
 
 @end

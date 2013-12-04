@@ -14,6 +14,7 @@
 #import "FileManager.h"
 #import "NotificationNames.h"
 #import "User.h"
+#import "ImageCroppingViewController.h"
 #import "Utility.h"
 
 @interface ProfileViewController () <UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
@@ -23,8 +24,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *createAccount;
 
+@property (weak, nonatomic) IBOutlet UIButton *fbLoginButton;
+@property (weak, nonatomic) IBOutlet UIButton *fbShareButton;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *pastCompetitions;
 @property (nonatomic, readwrite, strong) Competition *competitionToSegueTo;
+@property (weak, nonatomic) IBOutlet UIImageView *galleryView;
 
 @property (nonatomic, assign) Gender gender;
 
@@ -41,8 +46,16 @@
 }
 
 - (IBAction)didTapLoginToFacebook:(id)sender {
-    [FacebookManager loginWithCompletionHandler:nil];
+    [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+        if (success) {
+            [self performSegueWithIdentifier:@"profileToImageCrop" sender:self];
+        }
+    }];
 }
+
+- (IBAction)didTapShareToFacebook:(id)sender {
+}
+
 
 - (void)updateView {
     if ([[User sharedUser] isLoggedIn]) {
@@ -50,7 +63,12 @@
         self.profilePicture.image = [[User sharedUser] profileImage];
         [self.pastCompetitions reloadData];
         self.createAccount.hidden = YES;
+        self.galleryView.hidden = YES;
     }
+    
+    BOOL isLoggedInToFacebook = [FacebookManager isLoggedInToFacebook];
+    self.fbLoginButton.hidden = isLoggedInToFacebook;
+    self.fbShareButton.hidden = !isLoggedInToFacebook;
 }
 
 - (void)registerForNotifications {
@@ -109,6 +127,9 @@
     if ([segue.identifier isEqualToString:@"profileToComments"]) {
         CommentViewController *viewController = (CommentViewController *)[segue destinationViewController];
         [viewController setCompetition:self.competitionToSegueTo];
+    } else if ([segue.identifier isEqualToString:@"profileToImageCrop"]) {
+        ImageCroppingViewController *viewController = (ImageCroppingViewController *)[segue destinationViewController];
+        [viewController setProfileImage:[FacebookManager profileImage]];
     }
 }
 

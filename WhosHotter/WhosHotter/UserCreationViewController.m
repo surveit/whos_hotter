@@ -8,6 +8,7 @@
 
 #import "UserCreationViewController.h"
 
+#import "FacebookManager.h"
 #import "User.h"
 
 @interface UserCreationViewController () <UITextFieldDelegate>
@@ -15,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (nonatomic, readwrite, assign) Gender gender;
-
 
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (weak, nonatomic) IBOutlet UILabel *enterUsernameLabel;
@@ -26,8 +25,6 @@
 @end
 
 @implementation UserCreationViewController
-
-
 
 - (IBAction)didTapFemale:(id)sender {
     self.gender = FEMALE;
@@ -109,7 +106,7 @@
     if (!success) {
         [self showAlertForUserNameTaken];
     } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [[self navigationController] popToRootViewControllerAnimated:YES];
     }
 }
 
@@ -163,6 +160,15 @@
     [super viewDidLoad];
     self.spinner.hidden = YES;
     self.usernameTextField.delegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([FacebookManager gender] == MALE) {
+        [self didTapMale:nil];
+    } else if ([FacebookManager gender] == FEMALE) {
+        [self didTapFemale:nil];
+    }
 }
 
 @end

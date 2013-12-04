@@ -24,4 +24,19 @@
     return [NSString stringWithFormat:@"%02.f%%",value];
 }
 
++ (CGPoint)addPoint:(CGPoint)p1 to:(CGPoint)p2 {
+    return CGPointMake(p1.x + p2.x, p1.y+p2.y);
+}
+
++ (CGPoint)multiplyPoint:(CGPoint)p1 scalar:(CGFloat)s {
+    return CGPointMake(p1.x*s, p1.y*s);
+}
+
++ (UIImage *)imageNamed:(NSString *)name scale:(CGFloat)scale {
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage imageWithData:data scale:scale];
+    return image;
+}
+
 @end

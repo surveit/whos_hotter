@@ -7,9 +7,14 @@
 //
 
 #import "Utility.h"
+#import "User.h"
 
 @interface FacebookManager : NSObject
 
 + (void)loginWithCompletionHandler:(CompletionHandler)handler;
++ (BOOL)isLoggedInToFacebook;
+
++ (UIImage *)profileImage;
++ (Gender)gender;
 
 @end
