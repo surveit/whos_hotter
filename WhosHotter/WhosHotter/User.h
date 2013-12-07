@@ -33,6 +33,10 @@ typedef enum {
 
 - (void)populate;
 
+- (void)setProfileImage:(UIImage *)image
+      completionHandler:(CompletionHandler)completionHandler;
+
+- (NSInteger)flamePoints;
 - (BOOL)isLoggedIn;
 - (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
 - (void)submitForCompetition:(SingleObjectCompletionHandler)completionHandler;

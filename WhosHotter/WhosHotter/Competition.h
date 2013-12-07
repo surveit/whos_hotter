@@ -36,7 +36,7 @@
 - (NSArray *)comments;
 - (void)addCommentToCache:(Comment *)comment;
 
-- (CGFloat)myPercentage;
+- (CGFloat)myRatio;
 - (UIImage *)opponentsImage;
 - (NSInteger)timeUntilExpiration;
 

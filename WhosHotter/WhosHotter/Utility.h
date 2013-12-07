@@ -24,5 +24,6 @@ typedef void (^AnimationHandler)(BOOL finished);
 + (CGPoint)addPoint:(CGPoint)p1 to:(CGPoint)p2;
 + (CGPoint)multiplyPoint:(CGPoint)p1 scalar:(CGFloat)s;
 + (UIImage *)imageNamed:(NSString *)name scale:(CGFloat)scale;
++ (NSString *)getHHMMSSFromSeconds:(NSInteger)seconds;
 
 @end

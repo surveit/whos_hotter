@@ -39,4 +39,12 @@
     return image;
 }
 
++ (NSString *)getHHMMSSFromSeconds:(NSInteger)seconds {
+    NSInteger hours = seconds / 3600;
+    seconds %= 3600;
+    NSInteger minutes = seconds / 60;
+    seconds %= 60;
+    return [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)hours,(long)minutes,(long)seconds];
+}
+
 @end

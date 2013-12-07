@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *frameImage;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomFire;
 @property (weak, nonatomic) IBOutlet UIImageView *topFire;
+@property (weak, nonatomic) IBOutlet UIImageView *versusBar;
 
 @property (nonatomic, readwrite, strong) TappableImageView *topImageView;
 @property (nonatomic, readwrite, strong) TappableImageView *bottomImageView;
@@ -121,11 +122,11 @@
                                           animations:^{
                                               imageView.alpha = 0;
                                           }
-                          completion:^(BOOL finished) {
-                              if (handler) {
-                                  handler(finished);
-                              }
-                          }];
+                                          completion:^(BOOL finished) {
+                                              if (handler) {
+                                                  handler(finished);
+                                              }
+                                          }];
                      }];
 }
 
@@ -156,7 +157,10 @@
                          imageView.tintColor = [UIColor blackColor];
                          CGPoint newCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:4.0]
                                                             to:[Utility multiplyPoint:self.view.center scalar:-3.0]];
+                         CGPoint versusBarNewCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:3.0]
+                                                                     to:[Utility multiplyPoint:self.view.center scalar:-2.0]];
                          imageView.center = newCenter;
+                         self.versusBar.center = versusBarNewCenter;
                      }
                      completion:^(BOOL finished) {
                          [imageView removeFromSuperview];
@@ -200,10 +204,13 @@
     
     self.topImageView.alpha = 0.0;
     self.bottomImageView.alpha = 0.0;
+    self.versusBar.center = self.view.center;
+    self.versusBar.alpha = 0;
     [UIView animateWithDuration:0.6
                      animations:^{
                          self.topImageView.alpha = 1.0;
                          self.bottomImageView.alpha = 1.0;
+                         self.versusBar.alpha = 1.0;
                      }];
     
     __weak VoteViewController *weakSelf = self;

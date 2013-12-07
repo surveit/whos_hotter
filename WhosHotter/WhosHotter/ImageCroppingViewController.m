@@ -8,6 +8,7 @@
 
 #import "ImageCroppingViewController.h"
 
+#import "User.h"
 #import "UserCreationViewController.h"
 
 @interface ImageCroppingViewController () <UIScrollViewDelegate>
@@ -61,9 +62,19 @@
                                      imageSize.height);
     
     CGImageRef imageRef = CGImageCreateWithImageInRect([self.profileImage CGImage], clippedRect);
-    self.croppedImage = [UIImage imageWithCGImage:imageRef scale:self.scrollView.zoomScale orientation:UIImageOrientationUp];
+    self.croppedImage = [UIImage imageWithCGImage:imageRef scale:self.scrollView.zoomScale orientation:self.imageView.image.imageOrientation];
     CGImageRelease(imageRef);
-    [self performSegueWithIdentifier:@"imageCropperToUserCreation" sender:self];
+    
+    if ([[User sharedUser] isLoggedIn]) {
+        [[User sharedUser] setProfileImage:self.croppedImage
+                         completionHandler:^(BOOL success, NSError *error) {
+                             if (success) {
+                                 [self.navigationController popToRootViewControllerAnimated:YES];
+                             }
+                         }];
+    } else {
+        [self performSegueWithIdentifier:@"imageCropperToUserCreation" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

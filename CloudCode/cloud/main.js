@@ -58,6 +58,7 @@ Parse.Cloud.define("pairUser", function(request,response) {
     console.log("Start!");
     var userObject = request.user;
     if (userObject.get("isPaired")) {
+	
 	response.error("User is already paired");
     } else {
 	var query = new Parse.Query("User");

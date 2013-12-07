@@ -44,7 +44,15 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ says: %@",[self valueForKey:@"username"],[self valueForKey:@"text"]];
+    return [NSString stringWithFormat:@"%@ says %@",[self valueForKey:@"username"],[self valueForKey:@"text"]];
+}
+
+- (NSString *)username {
+    return [self valueForKey:@"username"];
+}
+
+- (NSString *)text {
+    return [self valueForKey:@"text"];
 }
 
 @end

@@ -17,4 +17,7 @@
 
 + (NSString *)isValidCommentText:(NSString *)text;
 
+- (NSString *)username;
+- (NSString *)text;
+
 @end

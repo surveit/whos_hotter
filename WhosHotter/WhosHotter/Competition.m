@@ -12,6 +12,7 @@
 #import "Config.h"
 #import "FileCache.h"
 #import "NotificationNames.h"
+#import "TimeManager.h"
 #import "User.h"
 
 static NSMutableArray *myRecentCompetitions = nil;
@@ -152,11 +153,11 @@ static NSMutableArray *myRecentCompetitions = nil;
     [[User sharedUser] spendEnergy:[Config energyCostPerVote]];
 }
 
-- (CGFloat)myPercentage {
+- (CGFloat)myRatio {
     NSUInteger index = [self myIndex];
     if (index != NSNotFound && [self totalVotes] > 0) {
         NSInteger votesForMe = index == 0 ? [self votes0] : [self votes1];
-        return (CGFloat)votesForMe / [self totalVotes];
+        return (CGFloat)votesForMe * 100.0f / [self totalVotes];
     }
     return 0.0f;
 }
@@ -170,7 +171,7 @@ static NSMutableArray *myRecentCompetitions = nil;
 }
 
 - (NSInteger)timeUntilExpiration {
-    return [[self valueForKey:@"startTime"] intValue] + [Config timePerCompetition] - [NSDate timeIntervalSinceReferenceDate];
+    return [[self valueForKey:@"startTime"] doubleValue] / 1000.0f + (double)[Config timePerCompetition] - [TimeManager time];
 }
 
 - (NSUInteger)myIndex {

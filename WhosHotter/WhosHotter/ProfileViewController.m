@@ -15,14 +15,16 @@
 #import "NotificationNames.h"
 #import "User.h"
 #import "ImageCroppingViewController.h"
+#import "TappableImageView.h"
 #import "Utility.h"
 
 @interface ProfileViewController () <UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet TappableImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *createAccount;
+@property (weak, nonatomic) IBOutlet UILabel *flamePointsLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *fbLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *fbShareButton;
@@ -30,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *pastCompetitions;
 @property (nonatomic, readwrite, strong) Competition *competitionToSegueTo;
 @property (weak, nonatomic) IBOutlet UIImageView *galleryView;
+
+@property (nonatomic, readwrite, strong) NSMutableSet *cellsToRefresh;
 
 @property (nonatomic, assign) Gender gender;
 
@@ -46,16 +50,27 @@
 }
 
 - (IBAction)didTapLoginToFacebook:(id)sender {
-    [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
-        if (success) {
-            [self performSegueWithIdentifier:@"profileToImageCrop" sender:self];
-        }
-    }];
+    if ([[User sharedUser] isLoggedIn]) {
+        [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+            if (success) {
+                [self updateView];
+            }
+        }];
+    } else {
+        [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+            if (success) {
+                [self performSegueWithIdentifier:@"profileToImageCrop" sender:self];
+            }
+        }];
+    }
 }
 
 - (IBAction)didTapShareToFacebook:(id)sender {
 }
 
+- (void)didTapProfileImage {
+    [self startLoginFlow];
+}
 
 - (void)updateView {
     if ([[User sharedUser] isLoggedIn]) {
@@ -66,6 +81,7 @@
         self.galleryView.hidden = YES;
     }
     
+    self.flamePointsLabel.text = @([[User sharedUser] flamePoints]).description;
     BOOL isLoggedInToFacebook = [FacebookManager isLoggedInToFacebook];
     self.fbLoginButton.hidden = isLoggedInToFacebook;
     self.fbShareButton.hidden = !isLoggedInToFacebook;
@@ -106,13 +122,57 @@
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:10];
-    titleLabel.text = [Utility percentageStringFromFloat:[competition myPercentage]];
+    UILabel *percentageLabel = (UILabel *)[cell viewWithTag:14];
+    percentageLabel.text = [Utility percentageStringFromFloat:[competition myRatio]];
     
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:11];
     [imageView setImage:[competition opponentsImage]];
     
+    UIView *redBackground = [cell viewWithTag:12];
+    UIView *greenBackground = [cell viewWithTag:13];
+    UIView *largeGreenBackground = [cell viewWithTag:15];
+    UILabel *timeLeft = (UILabel *)[cell viewWithTag:16];
+    
+    redBackground.hidden = [competition timeUntilExpiration] > 0 || [competition myRatio] > .5;
+    greenBackground.hidden = [competition timeUntilExpiration] > 0 || [competition myRatio] <= .5;
+    largeGreenBackground.hidden = [competition timeUntilExpiration] <= 0;
+    timeLeft.hidden = [competition timeUntilExpiration] <= 0;
+    percentageLabel.hidden = [competition timeUntilExpiration] > 0;
+    
+    timeLeft.text = [Utility getHHMMSSFromSeconds:[competition timeUntilExpiration]];
+    
+    if ([competition timeUntilExpiration] > 0) {
+        [self.cellsToRefresh addObject:cell];
+    } else {
+        [self.cellsToRefresh removeObject:cell];
+    }
+    
     return cell;
+}
+
+- (NSMutableSet *)cellsToRefresh {
+    if (!_cellsToRefresh) {
+        _cellsToRefresh = [NSMutableSet set];
+    }
+    return _cellsToRefresh;
+}
+
+- (void)refreshText {
+    BOOL viewNeedsUpdate = NO;
+    
+    for (UICollectionViewCell *cell in self.cellsToRefresh) {
+        UILabel *timeLeft = (UILabel *)[cell viewWithTag:16];
+        NSInteger index = [self.pastCompetitions indexPathForCell:cell].row;
+        Competition *competition = [[User sharedUser] pastCompetitions][index];
+        timeLeft.text = [Utility getHHMMSSFromSeconds:competition.timeUntilExpiration];
+        viewNeedsUpdate |= competition.timeUntilExpiration < 0;
+    }
+    
+    if (viewNeedsUpdate) {
+        [self updateView];
+    }
+    
+    [self performSelector:@selector(refreshText) withObject:nil afterDelay:1.0];
 }
 
 #pragma mark -- collection view delegate
@@ -153,6 +213,15 @@
     [self performSegueWithIdentifier:@"login" sender:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateView];
+    [self refreshText];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -162,6 +231,10 @@
     
     self.userNameTextField.delegate = self;
     self.createAccount.hidden = [[User sharedUser] isLoggedIn];
+    self.profilePicture.tapHandler = ^(void) {
+        [self didTapProfileImage];
+    };
+    self.profilePicture.userInteractionEnabled = YES;
     [self updateView];
     
     [self registerForNotifications];

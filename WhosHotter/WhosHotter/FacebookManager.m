@@ -38,14 +38,24 @@ FacebookManager *sharedInstance = nil;
 
 + (void)loginWithCompletionHandler:(CompletionHandler)handler {
     // The permissions requested from the user
-    NSArray *permissionsArray = @[ @"user_about_me"];
+    NSArray *permissionsArray = @[@"user_about_me"];
     
     // Login PFUser using Facebook
     [PFFacebookUtils initializeFacebook];
     
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        [self getFacebookInformationWithCompletionHandler:handler];
-    }];
+    if ([[User sharedUser] isLoggedIn]) {
+        [PFFacebookUtils linkUser:[PFUser user]
+                      permissions:permissionsArray
+                            block:^(BOOL succeeded, NSError *error) {
+                                if (succeeded) {
+                                    [self getFacebookInformationWithCompletionHandler:handler];
+                                }
+                            }];
+    } else {
+        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            [self getFacebookInformationWithCompletionHandler:handler];
+        }];
+    }
 }
 
 + (BOOL)isLoggedInToFacebook {

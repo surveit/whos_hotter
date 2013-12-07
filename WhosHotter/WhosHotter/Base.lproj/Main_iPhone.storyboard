@@ -165,7 +165,7 @@
                                 <rect key="frame" x="0.0" y="187" width="320" height="334"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty profile.png" id="OiS-om-AJW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty profile.png" id="OiS-om-AJW" customClass="TappableImageView">
                                 <rect key="frame" x="0.0" y="44" width="150" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -229,6 +229,7 @@
                         <outlet property="createAccount" destination="B6X-Bi-NS1" id="IH2-z2-J6L"/>
                         <outlet property="fbLoginButton" destination="Xxn-uB-dp8" id="Sly-RI-nS0"/>
                         <outlet property="fbShareButton" destination="XQ2-dB-Rn4" id="Nap-ho-Dx7"/>
+                        <outlet property="flamePointsLabel" destination="T9m-WW-ZqT" id="Sd9-4s-kvJ"/>
                         <outlet property="galleryView" destination="SbT-FM-NLk" id="Ttt-Ln-mzr"/>
                         <outlet property="pastCompetitions" destination="zC1-2S-q79" id="bg4-Ag-0kT"/>
                         <outlet property="profilePicture" destination="OiS-om-AJW" id="b3C-1h-jgY"/>
@@ -424,14 +425,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="87C-rN-hE3">
-                                <rect key="frame" x="0.0" y="202" width="320" height="275"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="LYO-t7-rG3">
                                 <rect key="frame" x="0.0" y="45" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -441,11 +434,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="qJG-ff-MIj">
-                                <rect key="frame" x="7" y="480" width="307" height="30"/>
+                                <rect key="frame" x="7" y="208" width="307" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yGc-CW-TU8">
+                                <rect key="frame" x="0.0" y="246" width="320" height="271"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red square (profile).png" id="DqO-nN-HGJ">
+                                <rect key="frame" x="7" y="160" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -453,7 +455,7 @@
                     <connections>
                         <outlet property="bottomImageView" destination="02q-Tr-jVx" id="UTE-Xj-qNY"/>
                         <outlet property="commentInputTextField" destination="qJG-ff-MIj" id="ljl-ug-uMG"/>
-                        <outlet property="commentTextField" destination="87C-rN-hE3" id="xHh-ld-P35"/>
+                        <outlet property="commentsTableView" destination="yGc-CW-TU8" id="SLB-pS-SUE"/>
                         <outlet property="topImageView" destination="LYO-t7-rG3" id="pfN-UV-GKp"/>
                     </connections>
                 </viewController>
@@ -509,12 +511,20 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picture frame.png" id="JXi-rt-QZA">
+                                <rect key="frame" x="9" y="52" width="302" height="228"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picture frame.png" id="RAp-Cx-3rm">
+                                <rect key="frame" x="9" y="281" width="302" height="228"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7b7-e4-nrf" customClass="TappableImageView">
-                                <rect key="frame" x="0.0" y="45" width="320" height="240"/>
+                                <rect key="frame" x="14" y="55" width="292" height="218"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bw7-uh-ffN" customClass="TappableImageView">
-                                <rect key="frame" x="0.0" y="280" width="320" height="240"/>
+                                <rect key="frame" x="14" y="284" width="292" height="218"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame Last Result.png" id="8Nx-HW-I8i">
@@ -531,10 +541,6 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Small green square (matching).png" id="ek5-1b-Mya">
                                 <rect key="frame" x="41.5" y="96" width="33" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="versus.png" id="GBF-em-cO0">
-                                <rect key="frame" x="0.0" y="264" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eF5-FV-xEM">
@@ -565,10 +571,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background.png" width="320" height="480"/>
-        <image name="Background.png" width="320" height="480"/>
-        <image name="Background.png" width="320" height="480"/>
-        <image name="Background.png" width="320" height="480"/>
+        <image name="Background.png" width="320" height="568"/>
+        <image name="Background.png" width="320" height="568"/>
+        <image name="Background.png" width="320" height="568"/>
+        <image name="Background.png" width="320" height="568"/>
         <image name="Empty profile.png" width="150" height="146"/>
         <image name="Facebook Connect.png" width="170" height="37"/>
         <image name="Female button opaque.png" width="87" height="88"/>
@@ -578,6 +584,9 @@
         <image name="Frame Last Result.png" width="69" height="69"/>
         <image name="Gallery w Overlap.png" width="320" height="335"/>
         <image name="Male button opaque.png" width="87" height="88"/>
+        <image name="Picture frame.png" width="301" height="238"/>
+        <image name="Picture frame.png" width="301" height="238"/>
+        <image name="Red square (profile).png" width="29" height="25"/>
         <image name="Save Image button.png" width="146" height="57"/>
         <image name="Save profile.png" width="114" height="44"/>
         <image name="Share on Facebook profile.png" width="170" height="36"/>
@@ -586,7 +595,6 @@
         <image name="Upload Photo button.png" width="146" height="57"/>
         <image name="star.png" width="27" height="25"/>
         <image name="user.png" width="24" height="24"/>
-        <image name="versus.png" width="320" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -594,7 +602,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="iYN-DM-HIf"/>
         <segue reference="QnA-fC-gWt"/>
-        <segue reference="kwB-PJ-ZYS"/>
     </inferredMetricsTieBreakers>
 </document>

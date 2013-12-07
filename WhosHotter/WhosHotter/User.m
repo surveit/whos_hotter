@@ -12,6 +12,8 @@
 #import "Config.h"
 #import "FileManager.h"
 #import "NotificationNames.h"
+#import "TimeManager.h"
+
 #import <Parse/Parse.h>
 
 static User *user = nil;
@@ -195,9 +197,21 @@ static int counter = 1;
 
 - (void)checkCompetitionExpiration {
     if ([self.currentCompetition timeUntilExpiration] < 0) {
+        [self.currentCompetition setValue:@(YES) forKey:@"final"];
+        [self rewardFlamePoints:round(100.0*self.currentCompetition.myRatio)];
         self.currentCompetition = nil;
         [self submitForCompetition:nil];
     }
+}
+
+- (void)rewardFlamePoints:(NSInteger)points {
+    NSInteger existingPoints = [[self valueForKey:@"points"] intValue];
+    [self setValue:@(existingPoints + points) forKey:@"points"];
+    [self saveInBackgroundWithCompletionHandler:nil];
+}
+
+- (NSInteger)flamePoints {
+    return [[self valueForKey:@"points"] intValue];
 }
 
 - (BOOL)isLoggedIn {
@@ -217,7 +231,7 @@ static int counter = 1;
     
     if ([self timeUntilStaminaRefill] <= 0) {
         self.model[@"energy"] = @([Config maxEnergy]);
-        self.model[@"timeToRefill"] = @([NSDate timeIntervalSinceReferenceDate] + [Config secondsToRecoverStamina]);
+        self.model[@"timeToRefill"] = @([TimeManager time] + [Config secondsToRecoverStamina]);
         [self.model saveInBackground];
         [self performSelector:@selector(checkStamina) withObject:nil afterDelay:[Config secondsToRecoverStamina]];
     } else {
@@ -226,7 +240,7 @@ static int counter = 1;
 }
 
 - (CGFloat)timeUntilStaminaRefill {
-    return [self.model[@"timeToRefill"] floatValue] - [NSDate timeIntervalSinceReferenceDate];
+    return [self.model[@"timeToRefill"] floatValue] - [TimeManager time];
 }
 
 - (void)notifyOfUserCreated {
@@ -236,7 +250,7 @@ static int counter = 1;
 
 - (void)addDefaultStatsToUser:(PFUser *)pfUser {
     pfUser[@"energy"] = @([Config maxEnergy]);
-    pfUser[@"timeToRefill"] = @([NSDate timeIntervalSinceReferenceDate] + [Config secondsToRecoverStamina]);
+    pfUser[@"timeToRefill"] = @([TimeManager time] + [Config secondsToRecoverStamina]);
 }
 
 - (void)setProfileImage:(UIImage *)image
@@ -278,7 +292,6 @@ static int counter = 1;
 - (void)spendEnergy:(NSInteger)energy {
     if (energy > 0 && self.energy >= energy) {
         self.model[@"energy"] = @(self.energy - energy);
-        NSLog(@"Energy %@",self.model[@"energy"]);
         [self.model saveInBackground];
         [self notifyEnergyUpdated];
     }

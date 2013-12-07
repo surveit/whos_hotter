@@ -35,7 +35,7 @@
 }
 
 + (NSInteger)timePerCompetition {
-    return 86400;
+    return 300;
 }
 
 @end

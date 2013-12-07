@@ -11,6 +11,9 @@
 		3B24E523184DBBCE00461568 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E522184DBBCE00461568 /* MainViewController.m */; };
 		3B24E526184DC35B00461568 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E525184DC35B00461568 /* TestViewController.m */; };
 		3B24E528184F142000461568 /* versus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B24E527184F142000461568 /* versus@2x.png */; };
+		3B24E52C1851B22800461568 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E52B1851B22800461568 /* CommentCell.m */; };
+		3B24E5301851B38600461568 /* TimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E52F1851B38600461568 /* TimeManager.m */; };
+		3B33A8911853107F00756798 /* Picture frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B33A8901853107F00756798 /* Picture frame@2x.png */; };
 		3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DD1839B84F00246822 /* Foundation.framework */; };
 		3BA670E01839B84F00246822 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DF1839B84F00246822 /* CoreGraphics.framework */; };
 		3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670E11839B84F00246822 /* UIKit.framework */; };
@@ -187,13 +190,6 @@
 			remoteGlobalIDString = 3BA670D91839B84F00246822;
 			remoteInfo = WhosHotter;
 		};
-		3BA671481839DFED00246822 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3BA671441839DFEC00246822 /* CloudBackendIOSClient.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2F72EB9616CB288F00C29E08;
-			remoteInfo = CloudBackendIOSClient;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -204,6 +200,11 @@
 		3B24E524184DC35B00461568 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		3B24E525184DC35B00461568 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		3B24E527184F142000461568 /* versus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "versus@2x.png"; sourceTree = "<group>"; };
+		3B24E52A1851B22800461568 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		3B24E52B1851B22800461568 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		3B24E52E1851B38600461568 /* TimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeManager.h; sourceTree = "<group>"; };
+		3B24E52F1851B38600461568 /* TimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeManager.m; sourceTree = "<group>"; };
+		3B33A8901853107F00756798 /* Picture frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Picture frame@2x.png"; sourceTree = "<group>"; };
 		3BA670DA1839B84F00246822 /* WhosHotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhosHotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA670DD1839B84F00246822 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BA670DF1839B84F00246822 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -250,7 +251,6 @@
 		3BA6713F1839C69C00246822 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		3BA671411839D85600246822 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		3BA671421839D85600246822 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
-		3BA671441839DFEC00246822 /* CloudBackendIOSClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CloudBackendIOSClient.xcodeproj; path = "../gae_backend/solutions-mobile-backend-starter-ios-client/CloudBackendIOSClient.xcodeproj"; sourceTree = "<group>"; };
 		3BA6714F183B30E700246822 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		3BA67150183B30E700246822 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		3BA67152183B35B500246822 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -446,7 +446,6 @@
 				3BA671051839B84F00246822 /* WhosHotterTests */,
 				3BA670DC1839B84F00246822 /* Frameworks */,
 				3BA670DB1839B84F00246822 /* Products */,
-				3BA671441839DFEC00246822 /* CloudBackendIOSClient.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -549,6 +548,8 @@
 				3BA67159183B3A7100246822 /* FileCache.m */,
 				3BA6716418416CAE00246822 /* FacebookManager.h */,
 				3BA6716518416CAE00246822 /* FacebookManager.m */,
+				3B24E52E1851B38600461568 /* TimeManager.h */,
+				3B24E52F1851B38600461568 /* TimeManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -575,16 +576,10 @@
 				3BCF65CB184D96AD00C9996A /* BasicNavigationBar.m */,
 				3B24E51D184D9B8000461568 /* BasicNavigationBarView.h */,
 				3B24E51E184D9B8000461568 /* BasicNavigationBarView.m */,
+				3B24E52A1851B22800461568 /* CommentCell.h */,
+				3B24E52B1851B22800461568 /* CommentCell.m */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		3BA671451839DFEC00246822 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3BA671491839DFED00246822 /* dev.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		3BA6715E183B3EFA00246822 /* ViewController */ = {
@@ -644,6 +639,7 @@
 				3BA671DB1842F6F500246822 /* iPhone5-splash@2x.png */,
 				3BA671DC1842F6F500246822 /* Male button opaque@2x.png */,
 				3BA671DD1842F6F500246822 /* Male button@2x.png */,
+				3B33A8901853107F00756798 /* Picture frame@2x.png */,
 				3BA671DE1842F6F500246822 /* Red square (profile)@2x.png */,
 				3BA671DF1842F6F500246822 /* refresh cloud@2x.png */,
 				3BA671E01842F6F500246822 /* Sample Comment View Headshot 2@2x.png */,
@@ -835,12 +831,6 @@
 			mainGroup = 3BA670D11839B84F00246822;
 			productRefGroup = 3BA670DB1839B84F00246822 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3BA671451839DFEC00246822 /* Products */;
-					ProjectRef = 3BA671441839DFEC00246822 /* CloudBackendIOSClient.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3BA670D91839B84F00246822 /* WhosHotter */,
@@ -848,16 +838,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3BA671491839DFED00246822 /* dev.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = dev.app;
-			remoteRef = 3BA671481839DFED00246822 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3BA670D81839B84F00246822 /* Resources */ = {
@@ -908,6 +888,7 @@
 				3BA671FF1842F6F500246822 /* Flame profile@2x.png in Resources */,
 				3BA672091842F6F500246822 /* Sample Comment View Headshot 2@2x.png in Resources */,
 				3BA671FC1842F6F500246822 /* Fire button@2x.png in Resources */,
+				3B33A8911853107F00756798 /* Picture frame@2x.png in Resources */,
 				3BA672AC184477AA00246822 /* rs_female_000056.jpg in Resources */,
 				3BA672AD184477AA00246822 /* rs_female_000057.jpg in Resources */,
 				3BA6727E184477AA00246822 /* rs_female_000010.jpg in Resources */,
@@ -1025,7 +1006,9 @@
 				3BA671271839C03D00246822 /* CompetitionCache.m in Sources */,
 				3BA671431839D85600246822 /* FileManager.m in Sources */,
 				3BA672231843198000246822 /* StatusBarFreeImagePickerViewController.m in Sources */,
+				3B24E5301851B38600461568 /* TimeManager.m in Sources */,
 				3BA67163183B509B00246822 /* CommentViewController.m in Sources */,
+				3B24E52C1851B22800461568 /* CommentCell.m in Sources */,
 				3BA6715A183B3A7100246822 /* FileCache.m in Sources */,
 				3BA671241839BF6A00246822 /* PersistedObject.m in Sources */,
 				3BA67154183B35B500246822 /* ProfileViewController.m in Sources */,
