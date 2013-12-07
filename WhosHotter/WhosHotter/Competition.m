@@ -159,7 +159,7 @@ static NSMutableArray *myRecentCompetitions = nil;
         NSInteger votesForMe = index == 0 ? [self votes0] : [self votes1];
         return (CGFloat)votesForMe * 100.0f / [self totalVotes];
     }
-    return 0.0f;
+    return 50.0f;
 }
 
 - (UIImage *)opponentsImage {

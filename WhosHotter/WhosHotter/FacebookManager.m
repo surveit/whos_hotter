@@ -44,11 +44,13 @@ FacebookManager *sharedInstance = nil;
     [PFFacebookUtils initializeFacebook];
     
     if ([[User sharedUser] isLoggedIn]) {
-        [PFFacebookUtils linkUser:[PFUser user]
+        [PFFacebookUtils linkUser:[PFUser currentUser]
                       permissions:permissionsArray
                             block:^(BOOL succeeded, NSError *error) {
                                 if (succeeded) {
                                     [self getFacebookInformationWithCompletionHandler:handler];
+                                } else {
+                                    [Utility showError:error.userInfo[@"error"]];
                                 }
                             }];
     } else {

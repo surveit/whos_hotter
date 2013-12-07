@@ -11,7 +11,7 @@
 @implementation Utility
 
 + (void)showError:(NSString *)error {
-    [[[UIAlertView alloc] initWithTitle:@"ERROR"
+    [[[UIAlertView alloc] initWithTitle:@"Error"
                                message:error delegate:nil
                       cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }

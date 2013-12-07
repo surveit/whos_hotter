@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *createAccount;
 @property (weak, nonatomic) IBOutlet UILabel *flamePointsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *createAccountLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *fbLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *fbShareButton;
@@ -78,6 +79,7 @@
         self.profilePicture.image = [[User sharedUser] profileImage];
         [self.pastCompetitions reloadData];
         self.createAccount.hidden = YES;
+        self.createAccountLabel.hidden = YES;
         self.galleryView.hidden = YES;
     }
     
@@ -230,7 +232,6 @@
     [self setupCollectionView];
     
     self.userNameTextField.delegate = self;
-    self.createAccount.hidden = [[User sharedUser] isLoggedIn];
     self.profilePicture.tapHandler = ^(void) {
         [self didTapProfileImage];
     };

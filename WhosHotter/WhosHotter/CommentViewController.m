@@ -23,6 +23,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
 @property (nonatomic, readwrite, assign) BOOL isPriorityView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *leftRedSquare;
+@property (weak, nonatomic) IBOutlet UIImageView *leftGreenSquare;
+@property (weak, nonatomic) IBOutlet UIImageView *rightGreenSquare;
+@property (weak, nonatomic) IBOutlet UIImageView *rightRedSquare;
+@property (weak, nonatomic) IBOutlet UILabel *leftPercentage;
+@property (weak, nonatomic) IBOutlet UILabel *rightPercentage;
+
 @end
 
 @implementation CommentViewController
@@ -76,11 +83,37 @@
     [self.bottomImageView setImage:self.competition.bottomImage];
     [self.topImageView setImage:self.competition.topImage];
     [self.commentsTableView reloadData];
+    
+    CGFloat leftPercentage = [self leftPercentageValue];
+    CGFloat rightPercentage = [self rightPercentageValue];
+    
+    self.leftPercentage.text = [Utility percentageStringFromFloat:leftPercentage];
+    self.rightPercentage.text = [Utility percentageStringFromFloat:rightPercentage];
+    
+    self.leftGreenSquare.hidden = leftPercentage < 50.0f;
+    self.leftRedSquare.hidden = leftPercentage >= 50.0f;
+    
+    self.rightGreenSquare.hidden = rightPercentage < 50.0f;
+    self.rightRedSquare.hidden = rightPercentage >= 50.0f;
 }
 
 - (IBAction)didTapClose:(id)sender {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+- (CGFloat)leftPercentageValue {
+    if (self.competition.totalVotes == 0) {
+        return 50.0;
+    }
+    return (CGFloat)self.competition.votes0/self.competition.totalVotes*100.0f;
+}
+
+- (CGFloat)rightPercentageValue {
+    if (self.competition.totalVotes == 0) {
+        return 50.0;
+    }
+    return (CGFloat)self.competition.votes1/self.competition.totalVotes*100.0f;
 }
 
 #pragma mark - uitextfielddelegate
@@ -131,7 +164,7 @@
     CGSize size = [description sizeWithAttributes:@{NSFontAttributeName: [self commentFont]}];
 
     NSMutableAttributedString *coloredText = [[NSMutableAttributedString alloc] initWithString:description];
-    [coloredText addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range: NSMakeRange(0, username.length + 5)];
+    [coloredText addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range: NSMakeRange(0, username.length)];
 
     cell.textLabel.font = font;
     cell.textLabel.attributedText = coloredText;

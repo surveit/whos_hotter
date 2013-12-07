@@ -220,6 +220,13 @@
                                     <action selector="didTapUploadPhoto:" destination="YqP-6w-5ah" eventType="touchUpInside" id="XxA-3X-uAQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find out what they REALLY think..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kY5-nn-Voo">
+                                <rect key="frame" x="60" y="297" width="200" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -227,6 +234,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="createAccount" destination="B6X-Bi-NS1" id="IH2-z2-J6L"/>
+                        <outlet property="createAccountLabel" destination="kY5-nn-Voo" id="qHT-Zf-pQG"/>
                         <outlet property="fbLoginButton" destination="Xxn-uB-dp8" id="Sly-RI-nS0"/>
                         <outlet property="fbShareButton" destination="XQ2-dB-Rn4" id="Nap-ho-Dx7"/>
                         <outlet property="flamePointsLabel" destination="T9m-WW-ZqT" id="Sd9-4s-kvJ"/>
@@ -448,6 +456,32 @@
                                 <rect key="frame" x="7" y="160" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green square (profile).png" id="orm-Xw-TYb">
+                                <rect key="frame" x="7" y="160" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green square (profile).png" id="hjR-i7-KPm">
+                                <rect key="frame" x="274" y="160" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red square (profile).png" id="Q8i-8D-5cI">
+                                <rect key="frame" x="274" y="160" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SvV-RM-EEi">
+                                <rect key="frame" x="9" y="169" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BVb-Id-ElJ">
+                                <rect key="frame" x="276" y="169" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -456,6 +490,12 @@
                         <outlet property="bottomImageView" destination="02q-Tr-jVx" id="UTE-Xj-qNY"/>
                         <outlet property="commentInputTextField" destination="qJG-ff-MIj" id="ljl-ug-uMG"/>
                         <outlet property="commentsTableView" destination="yGc-CW-TU8" id="SLB-pS-SUE"/>
+                        <outlet property="leftGreenSquare" destination="orm-Xw-TYb" id="MYI-2t-Khx"/>
+                        <outlet property="leftPercentage" destination="SvV-RM-EEi" id="dA9-qe-YFe"/>
+                        <outlet property="leftRedSquare" destination="DqO-nN-HGJ" id="XEM-yk-NkZ"/>
+                        <outlet property="rightGreenSquare" destination="hjR-i7-KPm" id="eqc-0m-5uT"/>
+                        <outlet property="rightPercentage" destination="BVb-Id-ElJ" id="izr-kh-Sat"/>
+                        <outlet property="rightRedSquare" destination="Q8i-8D-5cI" id="onW-bY-xby"/>
                         <outlet property="topImageView" destination="LYO-t7-rG3" id="pfN-UV-GKp"/>
                     </connections>
                 </viewController>
@@ -583,9 +623,12 @@
         <image name="Flame profile.png" width="20" height="31"/>
         <image name="Frame Last Result.png" width="69" height="69"/>
         <image name="Gallery w Overlap.png" width="320" height="335"/>
+        <image name="Green square (profile).png" width="29" height="25"/>
+        <image name="Green square (profile).png" width="29" height="25"/>
         <image name="Male button opaque.png" width="87" height="88"/>
         <image name="Picture frame.png" width="301" height="238"/>
         <image name="Picture frame.png" width="301" height="238"/>
+        <image name="Red square (profile).png" width="29" height="25"/>
         <image name="Red square (profile).png" width="29" height="25"/>
         <image name="Save Image button.png" width="146" height="57"/>
         <image name="Save profile.png" width="114" height="44"/>
