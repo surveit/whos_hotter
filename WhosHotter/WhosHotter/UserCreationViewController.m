@@ -22,27 +22,68 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameTakenLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
+@property (nonatomic, readwrite, assign) CGPoint originalCenter;
+
 @end
 
 @implementation UserCreationViewController
 
+- (void)dealloc {
+    [self unregisterForNotifications];
+}
+
 - (IBAction)didTapFemale:(id)sender {
+    if (self.gender == UNKNOWN) {
+        [self transitionInUsername];
+    }
     self.gender = FEMALE;
-    [self transitionInUsername];
     [self animateFemaleResponse];
 }
 
 - (IBAction)didTapMale:(id)sender {
+    if (self.gender == UNKNOWN) {
+        [self transitionInUsername];
+    }
     self.gender = MALE;
-    [self transitionInUsername];
     [self animateMaleResponse];
 }
+
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)unregisterForNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)animateMaleResponse {
     [UIView animateWithDuration:1.0
                      animations:^{
                          [self.maleButton setImage:[self maleButtonImage] forState:UIControlStateNormal];
                          [self.femaleButton setImage:[self blankImage] forState:UIControlStateNormal];
+                     }];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSValue *bounds = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.view.center = CGPointMake(self.view.center.x, self.view.center.y - bounds.CGRectValue.size.height);
+                     }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.view.center = self.originalCenter;
                      }];
 }
 
@@ -158,6 +199,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self registerForKeyboardNotifications];
+    self.originalCenter = self.view.center;
     self.spinner.hidden = YES;
     self.usernameTextField.delegate = self;
 }

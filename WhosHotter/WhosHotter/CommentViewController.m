@@ -11,7 +11,7 @@
 #import "Comment.h"
 #import "Competition.h"
 
-#define kBaseHeight 12
+#define kBaseHeight 14
 #define kCellSpacing 4
 
 @interface CommentViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -179,7 +179,7 @@
 }
 
 - (UIFont *)commentFont {
-    return [UIFont fontWithName:@"HelveticaNeue" size:10];
+    return [UIFont fontWithName:@"HelveticaNeue" size:12];
 }
 
 - (void)viewDidLoad

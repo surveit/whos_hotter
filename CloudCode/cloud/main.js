@@ -41,18 +41,15 @@ function pair(user1, user2, options) {
     });
 }
 
-Parse.Cloud.define("randomUser", function(request,response) {
-    var query = new Parse.Query("User");
-    query.find({
-	success: function(results) {
-	    randomIndex = Math.floor(Math.random()*results.length);
-	    response.success(results[randomIndex]);
-	},
-	error: function(error) {
-	    reponse.error(error);
-	}
-    });
-});
+function permute(array) {
+    for (var i=0;i<array.length;i++) {
+	var randIndex = i + Math.floor((Math.random()*(array.length - i)));
+	var temp = array[i];
+	array[i] = array[randIndex];
+	array[randIndex] = temp;
+    }
+    return array;
+}
 
 Parse.Cloud.define("pairUser", function(request,response) {
     console.log("Start!");
@@ -84,6 +81,43 @@ Parse.Cloud.define("pairUser", function(request,response) {
 	    }
 	});
     }
+});
+
+Parse.Cloud.job("createPairings", function(request, status) {
+    Parse.Cloud.useMasterKey();
+    var query = new Parse.Query("User");
+    query.equalTo("isPaired",false);
+    var Competition = Parse.Object.extend("Competition");
+    query.find({
+	success: function(results) {
+	    var randomUsers = permute(results);
+	    var newCompetitions = new Array();
+	    for (var i=0;i+1<randomUsers.length;i+=2) {
+		user1 = randomUsers[i];
+		user2 = randomUsers[i+1];
+		var newCompetition = new Competition();
+		newCompetition.set("isFinal",false);
+		newCompetition.set("startTime",(new Date).getTime());
+		newCompetition.set("image0",user1.get("profileImage"));
+		newCompetition.set("image1",user2.get("profileImage"));
+		newCompetition.set("random",Math.random());
+		newCompetitions.push(newCompetition);
+	    }
+	    Parse.Object.saveAll(newCompetitions,{
+		success: function(list) {
+		    status.success("Success");
+		},
+		error: function(error) {
+		    console.log(error);
+		    status.error("Error");
+		}
+	    });
+	},
+	error: function(error) {
+	    console.log(error);
+	    status.error("error");
+	}
+    });
 });
 
 Parse.Cloud.job("unpairAllUsers", function(request, status) {

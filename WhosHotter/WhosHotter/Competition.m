@@ -82,7 +82,7 @@ static NSMutableArray *myRecentCompetitions = nil;
 - (void)getComments {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Comment.class)];
     [query whereKey:@"competitionIdentifier" equalTo:self.identifier];
-    [query orderByDescending:@"createdAt"];
+    [query orderByAscending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.comments = [Comment objectsWithModels:objects];
