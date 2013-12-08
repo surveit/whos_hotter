@@ -39,7 +39,8 @@ static CompetitionCache *sharedInstance = nil;
 
 - (void)populate {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Competition.class)];
-    query.skip = arc4random_uniform(60);
+    [query whereKey:@"isFinal" equalTo:@(NO)];
+    [query whereKey:@"random" greaterThan:@(arc4random_uniform(9000)/10000.0f)];
     query.limit = [Config competitionsToCache];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

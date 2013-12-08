@@ -30,8 +30,9 @@ static NSMutableArray *myRecentCompetitions = nil;
 
 + (NSArray *)myRecentCompetitions:(NSInteger)count completionHandler:(ObjectsCompletionHandler)completionBlock {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Competition.class)];
-    [query whereKey:@"userIdentifiers" equalTo:[User identifier]];
+    [query whereKey:@"users" equalTo:[PFUser currentUser]];
     [query orderByDescending:@"createdAt"];
+    [query includeKey:@"users"];
     query.limit = count;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -72,11 +73,7 @@ static NSMutableArray *myRecentCompetitions = nil;
 }
 
 - (void)objectCreatedFromModel {
-    NSArray *userIdentifiers = [self valueForKey:@"userIdentifiers"];
-    if (userIdentifiers.count != 2) {
-        [Utility showError:[NSString stringWithFormat:@"Competition user identifiers has count %lu",userIdentifiers.count]];
-    }
-    
+    NSArray *userIdentifiers = [self valueForKey:@"users"];
     [self getImageFromFile:[self valueForKey:@"image0"] saveSelector:@selector(setTopImageData:)];
     [self getImageFromFile:[self valueForKey:@"image1"] saveSelector:@selector(setBottomImageData:)];
     [self getComments];
@@ -175,7 +172,7 @@ static NSMutableArray *myRecentCompetitions = nil;
 }
 
 - (NSUInteger)myIndex {
-    return [self.userIdentifiers indexOfObject:[User identifier]];
+    return [[[self valueForKey:@"users"] valueForKey:@"objectId"] indexOfObject:[User identifier]];
 }
 
 - (NSArray *)userIdentifiers {

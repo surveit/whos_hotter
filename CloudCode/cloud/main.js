@@ -1,4 +1,3 @@
-
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
 function queue(user) {
@@ -13,13 +12,14 @@ function pair(user1, user2, options) {
     var newCompetition = new Competition();
 
     var competitors = new Array();
-    competitors[0] = user1.id;
-    competitors[1] = user2.id;
-    newCompetition.set("userIdentifiers",competitors);
+    competitors[0] = user1;
+    competitors[1] = user2;
+    newCompetition.set("users",competitors);
     newCompetition.set("isFinal",false);
     newCompetition.set("startTime",(new Date).getTime());
     newCompetition.set("image0",user1.get("profileImage"));
     newCompetition.set("image1",user2.get("profileImage"));
+    newCompetition.set("random",Math.random());
     newCompetition.save().then(function(competition) {
 	console.log("Saved competition");
 	user1.set("isPaired",true);
@@ -84,4 +84,89 @@ Parse.Cloud.define("pairUser", function(request,response) {
 	    }
 	});
     }
+});
+
+Parse.Cloud.job("unpairAllUsers", function(request, status) {
+    Parse.Cloud.useMasterKey();
+    var query = new Parse.Query("User");
+    query.find({
+	success: function(results) {
+	    for (var i =0;i<results.length;i++) {
+		results[i].set("isPaired",false);
+	    }
+	    Parse.Object.saveAll(results, {
+		success: function(list) {
+		    status.success("Success");
+		},
+		error: function(error) {
+		    console.log(error);
+		    status.error("error");
+		}
+	    });
+	},
+	error: function(error) {
+	    console.log(error);
+	    status.error("error");
+	}
+    });
+});
+
+
+Parse.Cloud.job("expireCompetitions", function(request, status) {
+    Parse.Cloud.useMasterKey();
+    var query = new Parse.Query("Competition");
+    query.lessThan("startTime",(new Date).getTime() - 300 * 1000);
+    query.equalTo("isFinal",false);
+    query.include("users");
+    query.find({
+	success: function(results) {
+	    var toSave = new Array();
+	    for (var i=0;i<results.length;i++)
+	    { 
+		var userObjects = results[i].get("users");
+		if (userObjects) {
+		    var total = results[i].get("votes0") + results[i].get("votes1");
+		    var percentage0 = 50;
+		    var percentage1 = 50;
+		    if (total > 0) {
+			percentage0 = results[i].get("votes0") * 100.0 / total;
+			percentage1 = results[i].get("votes1") * 100.0 / total;
+		    }
+		    console.log(userObjects);
+		    userObjects[0].set("isPaired",false);
+		    userObjects[1].set("isPaired",false);
+		    userObjects[0].set("points",userObjects[0].get("points")+percentage0);
+		    userObjects[1].set("points",userObjects[1].get("points")+percentage1);
+		    results[i].set("isFinal",true);
+		    toSave.push(userObjects[0]);
+		    toSave.push(userObjects[1]);
+		}
+	    }
+	    Parse.Object.saveAll(toSave, {
+		success: function(list) {
+		    console.log(toSave);
+		    console.log("Saved users");
+		    Parse.Object.saveAll(results, {
+			success: function(list) {
+			    console.log(results);
+			    console.log("Saved competitions");
+			    status.success("Success!");
+			    
+			},
+			error: function(error) {
+			    console.log(error)
+			    status.error("ERROR");
+			},
+		    });
+		},
+		error: function(error) {
+		    console.log(error)
+		    status.error("ERROR");
+		},
+	    });
+	},
+	error: function(error) {
+		status.error(error);
+	}
+    });
 });

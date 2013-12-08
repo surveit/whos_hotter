@@ -85,8 +85,14 @@ static int counter = 1;
     return self;
 }
 
+- (id)userModel {
+    return self.model;
+}
+
 - (NSArray *)pastCompetitions {
-    return _privatePastCompetitions;
+    return [_privatePastCompetitions sortedArrayUsingComparator:^NSComparisonResult(Competition *obj1, Competition *obj2) {
+         return [[obj2 valueForKey:@"startTime"] compare:[obj1 valueForKey:@"startTime"]];
+    }];
 }
 
 - (NSMutableArray *)privatePastCompetitions {
@@ -168,6 +174,7 @@ static int counter = 1;
         if ([self competitionIdentifier]) {
             self.currentCompetition = [Competition objectWithIdentifier:[self competitionIdentifier]
                                                       completionHandler:^(id object, NSError *error) {
+                                                          self.currentCompetition = object;
                                                           [self checkCompetitionExpiration];
                                                       }];
         } else {

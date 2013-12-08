@@ -551,20 +551,20 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picture frame.png" id="JXi-rt-QZA">
-                                <rect key="frame" x="9" y="52" width="302" height="228"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picture frame.png" id="RAp-Cx-3rm">
                                 <rect key="frame" x="9" y="281" width="302" height="228"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7b7-e4-nrf" customClass="TappableImageView">
-                                <rect key="frame" x="14" y="55" width="292" height="218"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bw7-uh-ffN" customClass="TappableImageView">
+                                <rect key="frame" x="17" y="287" width="286" height="212"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bw7-uh-ffN" customClass="TappableImageView">
-                                <rect key="frame" x="14" y="284" width="292" height="218"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picture frame.png" id="JXi-rt-QZA">
+                                <rect key="frame" x="8.5" y="52" width="302" height="228"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7b7-e4-nrf" customClass="TappableImageView">
+                                <rect key="frame" x="16.5" y="58" width="286" height="212"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame Last Result.png" id="8Nx-HW-I8i">
@@ -572,7 +572,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flame header.png" id="DL4-Rz-yoq">
-                                <rect key="frame" x="131" y="117" width="58" height="96"/>
+                                <rect key="frame" x="131" y="116" width="58" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flame header.png" id="UW9-99-UBl">
@@ -590,6 +590,14 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="umW-Tt-gbb">
+                                <rect key="frame" x="150" y="383" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Zzd-Yo-6hA">
+                                <rect key="frame" x="150" y="154" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -597,11 +605,15 @@
                     <connections>
                         <outlet property="bottomFire" destination="UW9-99-UBl" id="C4y-YB-1dm"/>
                         <outlet property="bottomImage" destination="bw7-uh-ffN" id="a6B-Yy-6pA"/>
+                        <outlet property="bottomPictureFrameImage" destination="RAp-Cx-3rm" id="iWS-2v-fZK"/>
+                        <outlet property="bottomSpinner" destination="Zzd-Yo-6hA" id="h8a-De-lr6"/>
                         <outlet property="frameImage" destination="8Nx-HW-I8i" id="WdZ-Ai-E2m"/>
                         <outlet property="greenSqure" destination="ek5-1b-Mya" id="ncO-5r-PoL"/>
                         <outlet property="percentageLabel" destination="eF5-FV-xEM" id="dke-Yv-gHv"/>
                         <outlet property="topFire" destination="DL4-Rz-yoq" id="C8c-f1-fGR"/>
                         <outlet property="topImage" destination="7b7-e4-nrf" id="aFP-GT-Dhf"/>
+                        <outlet property="topPictureFrameImage" destination="JXi-rt-QZA" id="lbR-Z4-Qan"/>
+                        <outlet property="topSpinner" destination="umW-Tt-gbb" id="oZu-9L-J1O"/>
                         <segue destination="8GW-Xd-OsB" kind="push" identifier="voteToComments" id="kwB-PJ-ZYS"/>
                     </connections>
                 </viewController>
@@ -645,7 +657,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="iYN-DM-HIf"/>
         <segue reference="QnA-fC-gWt"/>
+        <segue reference="kwB-PJ-ZYS"/>
     </inferredMetricsTieBreakers>
 </document>

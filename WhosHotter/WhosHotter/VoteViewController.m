@@ -17,8 +17,6 @@
 
 @interface VoteViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *energyLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *greenSqure;
 @property (weak, nonatomic) IBOutlet UILabel *percentageLabel;
 
@@ -29,7 +27,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *frameImage;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomFire;
 @property (weak, nonatomic) IBOutlet UIImageView *topFire;
-@property (weak, nonatomic) IBOutlet UIImageView *versusBar;
+
+@property (weak, nonatomic) IBOutlet UIImageView *topPictureFrameImage;
+@property (weak, nonatomic) IBOutlet UIImageView *bottomPictureFrameImage;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *topSpinner;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *bottomSpinner;
 
 @property (nonatomic, readwrite, strong) TappableImageView *topImageView;
 @property (nonatomic, readwrite, strong) TappableImageView *bottomImageView;
@@ -41,8 +43,22 @@
 @implementation VoteViewController
 
 - (void)updateView {
-    [self.topImageView setImage:self.currentCompetition.topImage];
-    [self.bottomImageView setImage:self.currentCompetition.bottomImage];
+    if (self.currentCompetition) {
+        [self.topImageView setImage:self.currentCompetition.topImage];
+        [self.bottomImageView setImage:self.currentCompetition.bottomImage];
+        
+        [self.topSpinner stopAnimating];
+        [self.bottomSpinner stopAnimating];
+        
+        self.topSpinner.hidden = YES;
+        self.bottomSpinner.hidden = YES;
+    } else {
+        [self.topSpinner startAnimating];
+        [self.bottomSpinner startAnimating];
+        
+        self.topSpinner.hidden = NO;
+        self.bottomSpinner.hidden = NO;
+    }
 }
 
 - (void)tickUpdate {
@@ -134,6 +150,9 @@
     [self.winnerImageView removeFromSuperview];
     self.winnerImageView = imageView;
     
+    [imageView removeFromSuperview];
+    [self.view insertSubview:imageView belowSubview:self.frameImage];
+    
     __weak VoteViewController *weakSelf = self;
     [imageView setTapHandler:^(){
         [weakSelf performSegueWithIdentifier:@"voteToComments" sender:weakSelf];
@@ -141,6 +160,7 @@
     [self performSelector:@selector(didVote) withObject:nil afterDelay:0.3];
     [UIView animateWithDuration:0.5
                      animations:^{
+                         imageView.transform = CGAffineTransformMakeRotation(0);
                          imageView.frame = self.frameImage.frame;
                          self.frameImage.alpha = 1.0;
                          self.greenSqure.alpha = 1.0;
@@ -157,10 +177,7 @@
                          imageView.tintColor = [UIColor blackColor];
                          CGPoint newCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:4.0]
                                                             to:[Utility multiplyPoint:self.view.center scalar:-3.0]];
-                         CGPoint versusBarNewCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:3.0]
-                                                                     to:[Utility multiplyPoint:self.view.center scalar:-2.0]];
                          imageView.center = newCenter;
-                         self.versusBar.center = versusBarNewCenter;
                      }
                      completion:^(BOOL finished) {
                          [imageView removeFromSuperview];
@@ -169,7 +186,6 @@
 
 - (void)didVote {
     [self goToNextCompetition];
-    [self updateEnergy];
 }
 
 - (void)goToNextCompetition {
@@ -189,8 +205,13 @@
     self.bottomImageView.clipsToBounds = YES;
     self.topImageView.userInteractionEnabled = YES;
     self.bottomImageView.userInteractionEnabled = YES;
-    [self.view insertSubview:self.topImageView belowSubview:self.winnerImageView ?: self.frameImage];
-    [self.view insertSubview:self.bottomImageView belowSubview:self.winnerImageView ?: self.frameImage];
+    [self.view insertSubview:self.topImageView aboveSubview:self.topPictureFrameImage];
+    [self.view insertSubview:self.bottomImageView aboveSubview:self.bottomPictureFrameImage];
+    
+    self.topImageView.transform = CGAffineTransformMakeRotation(0.04);
+    self.topPictureFrameImage.transform = CGAffineTransformMakeRotation(0.04);
+    self.bottomImageView.transform = CGAffineTransformMakeRotation(-0.04);
+    self.bottomPictureFrameImage.transform = CGAffineTransformMakeRotation(-0.04);
     
     /*
     self.topImageView.center = CGPointMake(self.topImageView.center.x + 400, self.topImageView.center.y);
@@ -204,13 +225,10 @@
     
     self.topImageView.alpha = 0.0;
     self.bottomImageView.alpha = 0.0;
-    self.versusBar.center = self.view.center;
-    self.versusBar.alpha = 0;
     [UIView animateWithDuration:0.6
                      animations:^{
                          self.topImageView.alpha = 1.0;
                          self.bottomImageView.alpha = 1.0;
-                         self.versusBar.alpha = 1.0;
                      }];
     
     __weak VoteViewController *weakSelf = self;
@@ -229,10 +247,6 @@
     }
 }
 
-- (void)updateEnergy {
-    self.energyLabel.text = [NSString stringWithFormat:@"%ld",[[User sharedUser] energy]];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -245,7 +259,6 @@
     self.percentageLabel.alpha = 0;
     
     [self tickUpdate];
-    [self updateEnergy];
     
     [self createCompetitionView];
     [self updateView];

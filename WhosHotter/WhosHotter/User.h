@@ -31,8 +31,8 @@ typedef enum {
               image:(UIImage *)profileImage
          completion:(CompletionHandler)handler;
 
+- (id)userModel;
 - (void)populate;
-
 - (void)setProfileImage:(UIImage *)image
       completionHandler:(CompletionHandler)completionHandler;
 
