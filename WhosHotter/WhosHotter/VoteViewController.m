@@ -8,12 +8,14 @@
 
 #import "VoteViewController.h"
 
+#import "BlurView.h"
 #import "CommentViewController.h"
 #import "Competition.h"
 #import "CompetitionCache.h"
 #import "Config.h"
 #import "TappableImageView.h"
 #import "User.h"
+#import "UIImage+ImageEffects.h"
 
 @interface VoteViewController ()
 
@@ -27,9 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *frameImage;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomFire;
 @property (weak, nonatomic) IBOutlet UIImageView *topFire;
+@property (weak, nonatomic) IBOutlet UIImageView *versusBar;
 
-@property (weak, nonatomic) IBOutlet UIImageView *topPictureFrameImage;
-@property (weak, nonatomic) IBOutlet UIImageView *bottomPictureFrameImage;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *topSpinner;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *bottomSpinner;
 
@@ -38,6 +39,7 @@
 @property (nonatomic, readwrite, strong) TappableImageView *winnerImageView;
 @property (nonatomic, readwrite, assign) CGRect topFrame;
 @property (nonatomic, readwrite, assign) CGRect bottomFrame;
+@property (nonatomic, readwrite, assign) CGRect versusBarFrame;
 @end
 
 @implementation VoteViewController
@@ -90,7 +92,7 @@
 }
 
 - (void)showOutOfEnergyPopup {
-    [[[UIAlertView alloc] initWithTitle:@"HI" message:@"OUT OF ENERGY" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    [[User sharedUser] offerEnergyFromViewController:self];
 }
 
 #pragma mark - tap handling
@@ -177,7 +179,11 @@
                          imageView.tintColor = [UIColor blackColor];
                          CGPoint newCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:4.0]
                                                             to:[Utility multiplyPoint:self.view.center scalar:-3.0]];
+                         CGPoint versusBarNewCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:3.0]
+                                                                     to:[Utility multiplyPoint:self.view.center scalar:-2.0]];
                          imageView.center = newCenter;
+                         
+                         self.versusBar.center = versusBarNewCenter;
                      }
                      completion:^(BOOL finished) {
                          [imageView removeFromSuperview];
@@ -192,7 +198,6 @@
     [self createCompetitionView];
     self.previousCompetition = self.currentCompetition;
     self.currentCompetition = [CompetitionCache next];
-    NSLog(@"current competition %@ %@",self.currentCompetition,self.currentCompetition.identifier);
     [self updateView];
 }
 
@@ -205,30 +210,18 @@
     self.bottomImageView.clipsToBounds = YES;
     self.topImageView.userInteractionEnabled = YES;
     self.bottomImageView.userInteractionEnabled = YES;
-    [self.view insertSubview:self.topImageView aboveSubview:self.topPictureFrameImage];
-    [self.view insertSubview:self.bottomImageView aboveSubview:self.bottomPictureFrameImage];
-    
-    self.topImageView.transform = CGAffineTransformMakeRotation(0.04);
-    self.topPictureFrameImage.transform = CGAffineTransformMakeRotation(0.04);
-    self.bottomImageView.transform = CGAffineTransformMakeRotation(-0.04);
-    self.bottomPictureFrameImage.transform = CGAffineTransformMakeRotation(-0.04);
-    
-    /*
-    self.topImageView.center = CGPointMake(self.topImageView.center.x + 400, self.topImageView.center.y);
-    self.bottomImageView.center = CGPointMake(self.bottomImageView.center.x - 400, self.bottomImageView.center.y);
-    [UIView animateWithDuration:0.6
-                     animations:^{
-                         self.topImageView.frame = self.topFrame;
-                         self.bottomImageView.frame = self.bottomFrame;
-                     }];
-     */
+    [self.view insertSubview:self.topImageView belowSubview:self.winnerImageView ?: self.frameImage];
+    [self.view insertSubview:self.bottomImageView belowSubview:self.winnerImageView ?: self.frameImage];
     
     self.topImageView.alpha = 0.0;
     self.bottomImageView.alpha = 0.0;
+    self.versusBar.alpha = 0.0;
+    self.versusBar.frame = self.versusBarFrame;
     [UIView animateWithDuration:0.6
                      animations:^{
                          self.topImageView.alpha = 1.0;
                          self.bottomImageView.alpha = 1.0;
+                         self.versusBar.alpha = 1.0;
                      }];
     
     __weak VoteViewController *weakSelf = self;
@@ -253,6 +246,7 @@
 
     self.topFrame = self.topImage.frame;
     self.bottomFrame = self.bottomImage.frame;
+    self.versusBarFrame = self.versusBar.frame;
     
     self.greenSqure.alpha = 0;
     self.frameImage.alpha = 0;

@@ -32,7 +32,25 @@ function pair(user1, user2, options) {
 	Parse.Object.saveAll([user1, user2], {
 	    success: function(list) {
 		console.log("Saved users");
-		options.success(competition.id);
+		var query1 = new Parse.Query(Parse.Installation);
+		query1.equalTo("userId", user1.id);
+		var query2 = new Parse.Query(Parse.Installation);
+		query2.equalTo("userId", user2.id);
+		var pushQuery = Parse.Query.or(query1,query2);
+
+		Parse.Push.send({
+		    where: pushQuery, // Set our Installation query
+		    data: {
+			alert: "We just found a new match for you. Come see who it is!"
+		    }
+		}, {
+		    success: function() {
+			options.success(newCompetition.id);
+		    },
+		    error: function(error) {
+			options.success(newCompetition.id);
+		    }
+		});
 	    },
 	    error: function(error) {
 		options.error(error);
@@ -159,6 +177,7 @@ Parse.Cloud.job("expireCompetitions", function(request, status) {
 	    { 
 		var userObjects = results[i].get("users");
 		if (userObjects) {
+		    console.log("Updating users");
 		    var total = results[i].get("votes0") + results[i].get("votes1");
 		    var percentage0 = 50;
 		    var percentage1 = 50;
@@ -166,15 +185,18 @@ Parse.Cloud.job("expireCompetitions", function(request, status) {
 			percentage0 = results[i].get("votes0") * 100.0 / total;
 			percentage1 = results[i].get("votes1") * 100.0 / total;
 		    }
+		    console.log(percentage0);
+		    console.log(percentage1);
 		    console.log(userObjects);
 		    userObjects[0].set("isPaired",false);
 		    userObjects[1].set("isPaired",false);
 		    userObjects[0].set("points",userObjects[0].get("points")+percentage0);
 		    userObjects[1].set("points",userObjects[1].get("points")+percentage1);
-		    results[i].set("isFinal",true);
+		    console.log("set final true");
 		    toSave.push(userObjects[0]);
 		    toSave.push(userObjects[1]);
 		}
+		results[i].set("isFinal",true);
 	    }
 	    Parse.Object.saveAll(toSave, {
 		success: function(list) {
@@ -182,7 +204,7 @@ Parse.Cloud.job("expireCompetitions", function(request, status) {
 		    console.log("Saved users");
 		    Parse.Object.saveAll(results, {
 			success: function(list) {
-			    console.log(results);
+			    console.log(results.length);
 			    console.log("Saved competitions");
 			    status.success("Success!");
 			    
@@ -200,7 +222,8 @@ Parse.Cloud.job("expireCompetitions", function(request, status) {
 	    });
 	},
 	error: function(error) {
-		status.error(error);
+	    console.log(error);
+	    status.error("ERROR");
 	}
     });
 });

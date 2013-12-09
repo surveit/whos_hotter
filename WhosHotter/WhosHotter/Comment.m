@@ -8,6 +8,7 @@
 
 #import "Comment.h"
 #import "Config.h"
+#import "EventLogger.h"
 #import "User.h"
 
 #import <Parse/Parse.h>
@@ -21,8 +22,10 @@
     [comment setValue:text forKey:@"text"];
     [comment setValue:identifier forKey:@"competitionIdentifier"];
     [comment setValue:[User identifier] forKey:@"userIdentifier"];
-    [comment setValue:[User username] forKey:@"username"];
+    [comment setValue:[[User sharedUser] isLoggedIn] ? [User username] : @"Anonymous" forKey:@"username"];
     [comment saveInBackgroundWithCompletionHandler:nil];
+    
+    [EventLogger logEvent:@"commentCreated"];
     
     return comment;
 }

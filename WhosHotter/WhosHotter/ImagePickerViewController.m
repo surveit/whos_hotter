@@ -8,6 +8,7 @@
 
 #import "ImagePickerViewController.h"
 
+#import "EventLogger.h"
 #import "ImageCroppingViewController.h"
 #import "StatusBarFreeImagePickerViewController.h"
 
@@ -46,6 +47,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     self.uncroppedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [EventLogger logEvent:@"pickedImage"];
     [self performSegueWithIdentifier:@"cropImage" sender:self];
 }
 

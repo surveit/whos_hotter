@@ -13,7 +13,7 @@
 + (void)showError:(NSString *)error {
     [[[UIAlertView alloc] initWithTitle:@"Error"
                                message:error delegate:nil
-                      cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+                      cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 + (NSString *)percentageStringFromFloat:(CGFloat)value {
@@ -46,5 +46,12 @@
     seconds %= 60;
     return [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)hours,(long)minutes,(long)seconds];
 }
+
++ (NSString *)getMMSSFromSeconds:(NSInteger)seconds {
+    NSInteger minutes = seconds / 60;
+    seconds %= 60;
+    return [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
+}
+
 
 @end

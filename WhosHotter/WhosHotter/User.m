@@ -10,6 +10,7 @@
 
 #import "Competition.h"
 #import "Config.h"
+#import "FacebookManager.h"
 #import "FileManager.h"
 #import "NotificationNames.h"
 #import "TimeManager.h"
@@ -21,13 +22,15 @@ static int counter = 1;
 
 #define kProfileImageFilename @"user_profile.png"
 
-@interface User ()
+@interface User () <UIAlertViewDelegate>
 
 @property (nonatomic, readwrite, strong) PFUser *model;
 @property (nonatomic, readwrite, strong) PFFile *profileImageFile;
 
 @property (nonatomic, readwrite, strong) Competition *currentCompetition;
 @property (nonatomic, readwrite, strong) NSMutableArray *privatePastCompetitions;
+
+@property (nonatomic, readwrite, strong) UIViewController *energyOfferingViewController;
 
 @end
 
@@ -79,7 +82,9 @@ static int counter = 1;
         if (!_model) {
             [self createAnonymousUser];
         } else {
-            [_model refreshInBackgroundWithBlock:nil];
+            [_model refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                [self updateCompetition];
+            }];
         }
     }
     return self;
@@ -102,10 +107,14 @@ static int counter = 1;
     return _privatePastCompetitions;
 }
 
+- (void)setProfileImageFile:(PFFile *)profileImageFile {
+    _profileImageFile = profileImageFile;
+    [self setValue:profileImageFile forKey:@"profileImage"];
+}
+
 - (void)populate {
     if (self.model) {
         [self getCompetitions:nil];
-        [self updateCompetition];
         [self checkStamina];
     }
 }
@@ -142,14 +151,16 @@ static int counter = 1;
              [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                  if (succeeded) {
                      weakSelf.model = user;
-                     [weakSelf setValue:weakSelf.profileImageFile forKey:@"profileImage"];
                      [weakSelf saveInBackgroundWithCompletionHandler:^(BOOL success, NSError *error) {
                          if (success) {
                              [weakSelf notifyOfUserCreated];
                              [weakSelf submitForCompetition:nil];
+                             [weakSelf notifyEnergyUpdated];
                          }
                      }];
                  }
+                 
+                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
                  
                  if (handler) {
                      handler(succeeded,error);
@@ -191,34 +202,29 @@ static int counter = 1;
 }
 
 - (void)fetchCompetitionWithIdentifier:(NSString *)identifier {
-    [Competition cachedObjectWithIdentifier:identifier
-                          completionHandler:^(id object, NSError *error) {
-                              Competition *competition = (Competition *)object;
-                              [self.privatePastCompetitions addObject:competition];
-                              if (self.privatePastCompetitions.count == self.pastCompetitionIdentifiers.count) {
-                                  [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_COMPETITIONS_UPDATED
-                                                                                      object:nil];
-                              }
-                          }];
+    [Competition objectWithIdentifier:identifier
+                    completionHandler:^(id object, NSError *error) {
+                        Competition *competition = (Competition *)object;
+                        [self.privatePastCompetitions addObject:competition];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_COMPETITIONS_UPDATED
+                                                                            object:nil];
+                    }];
 }
 
 - (void)checkCompetitionExpiration {
     if ([self.currentCompetition timeUntilExpiration] < 0) {
         [self.currentCompetition setValue:@(YES) forKey:@"final"];
-        [self rewardFlamePoints:round(100.0*self.currentCompetition.myRatio)];
         self.currentCompetition = nil;
         [self submitForCompetition:nil];
     }
 }
 
-- (void)rewardFlamePoints:(NSInteger)points {
-    NSInteger existingPoints = [[self valueForKey:@"points"] intValue];
-    [self setValue:@(existingPoints + points) forKey:@"points"];
-    [self saveInBackgroundWithCompletionHandler:nil];
-}
-
 - (NSInteger)flamePoints {
-    return [[self valueForKey:@"points"] intValue];
+    NSNumber *points = [self valueForKey:@"points"];
+    if ([points isKindOfClass:NSNumber.class]) {
+        return [[self valueForKey:@"points"] intValue];
+    }
+    return 0;
 }
 
 - (BOOL)isLoggedIn {
@@ -239,6 +245,7 @@ static int counter = 1;
     if ([self timeUntilStaminaRefill] <= 0) {
         self.model[@"energy"] = @([Config maxEnergy]);
         self.model[@"timeToRefill"] = @([TimeManager time] + [Config secondsToRecoverStamina]);
+        [self notifyEnergyUpdated];
         [self.model saveInBackground];
         [self performSelector:@selector(checkStamina) withObject:nil afterDelay:[Config secondsToRecoverStamina]];
     } else {
@@ -258,12 +265,13 @@ static int counter = 1;
 - (void)addDefaultStatsToUser:(PFUser *)pfUser {
     pfUser[@"energy"] = @([Config maxEnergy]);
     pfUser[@"timeToRefill"] = @([TimeManager time] + [Config secondsToRecoverStamina]);
+    [self notifyEnergyUpdated];
 }
 
 - (void)setProfileImage:(UIImage *)image
       completionHandler:(CompletionHandler)completionHandler {
     if (image) {
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
         PFFile *imageFile = [PFFile fileWithData:imageData];
         [FileManager saveData:imageData fileName:kProfileImageFilename];
         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -287,7 +295,9 @@ static int counter = 1;
     [Competition createCompetition:^(id object, NSError *error) {
         if (!error) {
             NSString *competitionIdentifier = (NSString *)object;
-            [self fetchCompetitionWithIdentifier:competitionIdentifier];
+            if (competitionIdentifier.length > 0) {
+                [self fetchCompetitionWithIdentifier:competitionIdentifier];
+            }
         }
         
         if (completionHandler) {
@@ -324,8 +334,46 @@ static int counter = 1;
                                                       userInfo:@{@"percent" : @((CGFloat)self.energy / [Config maxEnergy])}];
 }
 
-- (void)showError:(NSError *)error {
-    
+- (void)offerEnergyFromViewController:(UIViewController *)controller {
+    self.energyOfferingViewController = controller;
+    if (![self isLoggedIn]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Out Of Votes!"
+                                                            message:@"Upload a photo to refill now?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"I'll Wait"
+                                                  otherButtonTitles:@"OK",nil];
+        [alertView show];
+    } else if (![FacebookManager isLoggedInToFacebook]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Out Of Votes!"
+                                                            message:@"Sign in with Facebook to refill now?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"I'll Wait"
+                                                  otherButtonTitles:@"OK",nil];
+        [alertView show];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Out Of Votes!"
+                                                            message:@"Share something on Facebook to refill now?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"I'll Wait"
+                                                  otherButtonTitles:@"OK",nil];
+        [alertView show];
+    }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        if (![self isLoggedIn]) {
+            [self.energyOfferingViewController.tabBarController setSelectedIndex:1];
+        } else if (![FacebookManager isLoggedInToFacebook]) {
+            [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+                [_energyOfferingViewController.tabBarController setSelectedIndex:1];
+            }];
+        } else {
+            [self.energyOfferingViewController.tabBarController setSelectedIndex:1];
+        }
+    }
+    self.energyOfferingViewController = nil;
+}
+
 
 @end

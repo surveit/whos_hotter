@@ -11,13 +11,14 @@
 #import "Config.h"
 #import "NotificationNames.h"
 #import "User.h"
+#import "Utility.h"
 
 @interface BasicNavigationBarView ()
 
 @property (weak, nonatomic) IBOutlet UIProgressView *staminaBar;
 @property (weak, nonatomic) IBOutlet UIImageView *flameHeader;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (nonatomic, readwrite, strong) BasicNavigationBarView *actualView;
+@property (weak, nonatomic) IBOutlet UILabel *refillCountdown;
 
 @end
 
@@ -32,7 +33,7 @@
         [self setFrame:frame];
         [self addSubview:self.actualView];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(updateStamina:)
+                                                 selector:@selector(updateStaminaFromNotification:)
                                                      name:NOTIFICATION_USED_STAMINA
                                                    object:nil];
         self.userInteractionEnabled = NO;
@@ -44,7 +45,7 @@
                                                       self.actualView.staminaBar.frame.origin.y,
                                                       progressImage.size.width,
                                                       progressImage.size.height);
-        [self.actualView.staminaBar setProgress:[self progress] animated:YES];
+        [self updateStamina:[self progress]];
     }
     return self;
 }
@@ -53,9 +54,31 @@
     return (CGFloat)[[User sharedUser] energy] / [Config maxEnergy];
 }
 
-- (void)updateStamina:(NSNotification *)notification {
+- (void)updateStaminaFromNotification:(NSNotification *)notification {
     CGFloat percent = [notification.userInfo[@"percent"] floatValue];
-    [self.actualView.staminaBar setProgress:percent animated:YES];
+    [self updateStamina:percent];
+}
+
+- (void)updateStamina:(CGFloat)percent {
+    if (percent == 0) {
+        self.actualView.staminaBar.hidden = YES;
+        self.actualView.refillCountdown.hidden = NO;
+        [self updateCountdown];
+    } else {
+        self.actualView.refillCountdown.hidden = YES;
+        self.actualView.staminaBar.hidden = NO;
+        [self.actualView.staminaBar setProgress:percent animated:YES];
+        [self removeCountdown];
+    }
+}
+
+- (void)updateCountdown {
+    self.actualView.refillCountdown.text = [Utility getMMSSFromSeconds:MAX(0,(NSInteger)[[User sharedUser] timeUntilStaminaRefill])];
+    [self performSelector:@selector(updateCountdown) withObject:nil afterDelay:1.0];
+}
+
+- (void)removeCountdown {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (CGSize)staminaBarSize {
@@ -72,6 +95,7 @@
                      animations:^{
                          self.staminaBar.alpha = 0;
                          self.flameHeader.alpha = 0;
+                         self.refillCountdown.alpha = 0;
                      }];
 }
 
@@ -84,6 +108,7 @@
                      animations:^{
                          self.staminaBar.alpha = 1;
                          self.flameHeader.alpha = 1;
+                         self.refillCountdown.alpha = 1;
                      }];
 }
 

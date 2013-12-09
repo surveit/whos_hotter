@@ -10,6 +10,7 @@
 
 #import "CommentViewController.h"
 #import "Competition.h"
+#import "EventLogger.h"
 #import "FacebookManager.h"
 #import "FileManager.h"
 #import "NotificationNames.h"
@@ -35,8 +36,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *galleryView;
 
 @property (nonatomic, readwrite, strong) NSMutableSet *cellsToRefresh;
+@property (weak, nonatomic) IBOutlet UILabel *findingMatchLabel;
 
 @property (nonatomic, assign) Gender gender;
+@property (weak, nonatomic) IBOutlet UIView *facebookLoadingView;
 
 @end
 
@@ -51,17 +54,23 @@
 }
 
 - (IBAction)didTapLoginToFacebook:(id)sender {
+    self.fbLoginButton.userInteractionEnabled = NO;
+    self.facebookLoadingView.hidden = NO;
     if ([[User sharedUser] isLoggedIn]) {
         [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
             if (success) {
                 [self updateView];
             }
+            self.facebookLoadingView.hidden = YES;
+            self.fbLoginButton.userInteractionEnabled = YES;
         }];
     } else {
         [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
             if (success) {
                 [self performSegueWithIdentifier:@"profileToImageCrop" sender:self];
             }
+            self.facebookLoadingView.hidden = YES;
+            self.fbLoginButton.userInteractionEnabled = YES;
         }];
     }
 }
@@ -81,6 +90,7 @@
         self.createAccount.hidden = YES;
         self.createAccountLabel.hidden = YES;
         self.galleryView.hidden = YES;
+        self.findingMatchLabel.hidden = [[[User sharedUser] pastCompetitions] count] > 0;
     }
     
     self.flamePointsLabel.text = @([[User sharedUser] flamePoints]).description;
@@ -212,6 +222,7 @@
 }
 
 - (void)startLoginFlow {
+    [EventLogger logEvent:@"tappedUploadPhoto"];
     [self performSegueWithIdentifier:@"login" sender:self];
 }
 

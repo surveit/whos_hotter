@@ -20,7 +20,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <progressView opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="center" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" progress="0.5" progressImage="Energy bar outline.png" trackImage="Energy bar filler.png" translatesAutoresizingMaskIntoConstraints="NO" id="7sh-re-Tfl">
-                    <rect key="frame" x="34" y="16" width="50" height="11"/>
+                    <rect key="frame" x="34" y="16.5" width="50" height="11"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </progressView>
@@ -28,11 +28,19 @@
                     <rect key="frame" x="135" y="14.5" width="50" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPP-RC-LrF">
+                    <rect key="frame" x="34" y="7" width="80" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="flameHeader" destination="bts-5A-t2c" id="6Tw-cO-Imb"/>
+                <outlet property="refillCountdown" destination="WPP-RC-LrF" id="KQl-XF-DRz"/>
                 <outlet property="staminaBar" destination="7sh-re-Tfl" id="G9Z-D8-Hxx"/>
             </connections>
         </view>

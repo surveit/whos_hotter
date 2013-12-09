@@ -10,6 +10,8 @@
 
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
+
+#import "EventLogger.h"
 #import "User.h"
 
 FacebookManager *sharedInstance = nil;
@@ -43,29 +45,37 @@ FacebookManager *sharedInstance = nil;
     // Login PFUser using Facebook
     [PFFacebookUtils initializeFacebook];
     
+    [EventLogger logEvent:@"connectToFacebook"];
+    
     if ([[User sharedUser] isLoggedIn]) {
         [PFFacebookUtils linkUser:[PFUser currentUser]
                       permissions:permissionsArray
                             block:^(BOOL succeeded, NSError *error) {
                                 if (succeeded) {
-                                    [self getFacebookInformationWithCompletionHandler:handler];
+                                    [[User sharedUser] refillEnergy];
                                 } else {
                                     [Utility showError:error.userInfo[@"error"]];
                                 }
+                                if (handler) {
+                                    handler(succeeded,error);
+                                }
                             }];
     } else {
-        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-            [self getFacebookInformationWithCompletionHandler:handler];
-        }];
+        [FBSession openActiveSessionWithReadPermissions:permissionsArray
+                                           allowLoginUI:YES
+                                      completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                          if (!error) {
+                                              [[self sharedInstance] getFacebookInformationWithCompletionHandler:handler];
+                                          } else if (handler) {
+                                              NSLog(@"Error %@",error);
+                                              handler(NO,error);
+                                          }
+                                      }];
     }
 }
 
 + (BOOL)isLoggedInToFacebook {
     return [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]];
-}
-
-+ (void)getFacebookInformationWithCompletionHandler:(CompletionHandler)handler {
-    [[self sharedInstance] getFacebookInformationWithCompletionHandler:handler];
 }
 
 + (UIImage *)profileImage {
@@ -77,6 +87,8 @@ FacebookManager *sharedInstance = nil;
 }
 
 - (void)getFacebookInformationWithCompletionHandler:(CompletionHandler)handler {
+    [EventLogger logEvent:@"facebookConnected"];
+    
     FBRequest *request = [FBRequest requestForMe];
     
     self.handler = handler;
@@ -125,6 +137,7 @@ FacebookManager *sharedInstance = nil;
         self.handler(YES,nil);
         self.handler = nil;
     }
+    [[User sharedUser] refillEnergy];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

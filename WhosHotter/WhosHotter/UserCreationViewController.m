@@ -8,6 +8,7 @@
 
 #import "UserCreationViewController.h"
 
+#import "EventLogger.h"
 #import "FacebookManager.h"
 #import "User.h"
 
@@ -130,12 +131,15 @@
     } else if (self.usernameTextField.text.length == 0) {
         [self showAlertForInvalidUserName];
     } else {
+        self.createButton.userInteractionEnabled = NO;
+        [EventLogger logEvent:@"validateUserName"];
         self.spinner.hidden = NO;
         [self.spinner startAnimating];
         [[User sharedUser] createLogin:self.usernameTextField.text password:@"NOPASSWORD"
                                 gender:self.gender
                                  image:self.profileImage
                             completion:^(BOOL success, NSError *error) {
+                                self.createButton.userInteractionEnabled = YES;
                                 [self userCreated:success];
                             }];
     }
@@ -145,8 +149,10 @@
     self.spinner.hidden = YES;
     [self.spinner stopAnimating];
     if (!success) {
+        [EventLogger logEvent:@"userCreateError"];
         [self showAlertForUserNameTaken];
     } else {
+        [EventLogger logEvent:@"userCreateSuccess"];
         [[self navigationController] popToRootViewControllerAnimated:YES];
     }
 }
@@ -185,7 +191,7 @@
     [[[UIAlertView alloc] initWithTitle:@"Error"
                                 message:@"Please choose a user name with no spaces, between 4 and 20 characters."
                                delegate:nil
-                      cancelButtonTitle:@"Okay"
+                      cancelButtonTitle:@"OK"
                       otherButtonTitles:nil] show];
 }
 
@@ -193,7 +199,7 @@
     [[[UIAlertView alloc] initWithTitle:@"Error"
                                 message:@"You need to pick a gender to continue!"
                                delegate:nil
-                      cancelButtonTitle:@"Okay"
+                      cancelButtonTitle:@"OK"
                       otherButtonTitles:nil] show];
 }
 

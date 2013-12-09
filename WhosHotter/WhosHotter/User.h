@@ -32,19 +32,22 @@ typedef enum {
          completion:(CompletionHandler)handler;
 
 - (id)userModel;
-- (void)populate;
-- (void)setProfileImage:(UIImage *)image
-      completionHandler:(CompletionHandler)completionHandler;
-
 - (NSInteger)flamePoints;
 - (BOOL)isLoggedIn;
-- (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
-- (void)submitForCompetition:(SingleObjectCompletionHandler)completionHandler;
 - (UIImage *)profileImage;
 - (NSArray *)pastCompetitions;
+- (CGFloat)timeUntilStaminaRefill;
+
+- (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
+- (void)submitForCompetition:(SingleObjectCompletionHandler)completionHandler;
 
 - (void)spendEnergy:(NSInteger)energy;
 - (NSInteger)energy;
 - (void)refillEnergy;
+- (void)offerEnergyFromViewController:(UIViewController *)controller;
+
+- (void)populate;
+- (void)setProfileImage:(UIImage *)image
+      completionHandler:(CompletionHandler)completionHandler;
 
 @end

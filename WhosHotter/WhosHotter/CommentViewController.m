@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *commentInputTextField;
 @property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
 @property (nonatomic, readwrite, assign) BOOL isPriorityView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLeftLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *leftRedSquare;
 @property (weak, nonatomic) IBOutlet UIImageView *leftGreenSquare;
@@ -29,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *rightRedSquare;
 @property (weak, nonatomic) IBOutlet UILabel *leftPercentage;
 @property (weak, nonatomic) IBOutlet UILabel *rightPercentage;
+@property (weak, nonatomic) IBOutlet UILabel *noCommentsLabel;
 
 @end
 
@@ -79,6 +81,15 @@
     
 }
 
+- (void)updateTimer {
+    if (self.competition.timeUntilExpiration > 0) {
+        self.timeLeftLabel.text = [NSString stringWithFormat:@"LIVE %@",[Utility getHHMMSSFromSeconds:self.competition.timeUntilExpiration]];
+        [self performSelector:@selector(updateTimer) withObject:nil afterDelay:1.0];
+    } else {
+        self.timeLeftLabel.text = @"COMPLETE 00:00:00";
+    }
+}
+
 - (void)updateView {
     [self.bottomImageView setImage:self.competition.bottomImage];
     [self.topImageView setImage:self.competition.topImage];
@@ -95,6 +106,7 @@
     
     self.rightGreenSquare.hidden = rightPercentage < 50.0f;
     self.rightRedSquare.hidden = rightPercentage >= 50.0f;
+    self.noCommentsLabel.hidden = self.competition.comments.count > 0;
 }
 
 - (IBAction)didTapClose:(id)sender {
@@ -179,7 +191,7 @@
 }
 
 - (UIFont *)commentFont {
-    return [UIFont fontWithName:@"HelveticaNeue" size:12];
+    return [UIFont fontWithName:@"HelveticaNeue" size:14];
 }
 
 - (void)viewDidLoad
@@ -198,11 +210,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.isPriorityView = YES;
+    [self updateTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.isPriorityView = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 @end

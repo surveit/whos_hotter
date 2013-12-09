@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "FileCache.h"
 
+#import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
 
 @interface InitializationManager ()
@@ -37,6 +38,7 @@
     [Parse setApplicationId:@"ZSuSP6FYo8JfpSgPHrdETAPz8DCCjuGVNXGRXfS3"
                   clientKey:@"xztuf8Gy8RNdecL9l2uKDDlvjz3iLFujk2mLmNez"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
+    [Crashlytics startWithAPIKey:@"841ee581cc7e652c6644a04164d5638302a00365"];
 }
 
 - (void)initializeCaches {

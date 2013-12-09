@@ -27,7 +27,7 @@
 }
 
 + (NSInteger)secondsToRecoverStamina {
-    return 3600;
+    return 1200;
 }
 
 + (NSInteger)energyCostPerVote {

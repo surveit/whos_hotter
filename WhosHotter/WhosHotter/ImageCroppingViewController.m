@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, readwrite, strong) UIImage *croppedImage;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *uploadSpinner;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 @end
 
@@ -32,6 +34,7 @@
     self.scrollView.delegate = self;
     self.imageView.image = self.profileImage;
     self.imageView.frame = CGRectMake(0, 0, self.profileImage.size.width, self.profileImage.size.height);
+    self.uploadSpinner.hidden = YES;
     
     [self.scrollView setContentSize:self.profileImage.size];
     [self.scrollView setMaximumZoomScale:MAX(1.0,[self minZoomScale])];
@@ -53,6 +56,13 @@
 }
 
 - (IBAction)didTapDone:(id)sender {
+    
+    UIGraphicsBeginImageContext(self.imageView.image.size);
+    CALayer *layer = self.imageView.layer;
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *unorientedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     CGSize imageSize = CGSizeMake(self.scrollView.frame.size.width/self.scrollView.zoomScale,
                                   self.scrollView.frame.size.height/self.scrollView.zoomScale);
     
@@ -61,15 +71,24 @@
                                      imageSize.width,
                                      imageSize.height);
     
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.profileImage CGImage], clippedRect);
-    self.croppedImage = [UIImage imageWithCGImage:imageRef scale:self.scrollView.zoomScale orientation:self.imageView.image.imageOrientation];
+    CGImageRef imageRef = CGImageCreateWithImageInRect(unorientedImage.CGImage, clippedRect);
+    self.croppedImage = [UIImage imageWithCGImage:imageRef scale:self.scrollView.zoomScale orientation:UIImageOrientationUp];
     CGImageRelease(imageRef);
     
     if ([[User sharedUser] isLoggedIn]) {
+        self.uploadSpinner.hidden = NO;
+        self.saveButton.userInteractionEnabled = NO;
+        [self.uploadSpinner startAnimating];
         [[User sharedUser] setProfileImage:self.croppedImage
                          completionHandler:^(BOOL success, NSError *error) {
                              if (success) {
+                                 [[User sharedUser] saveInBackgroundWithCompletionHandler:nil];
                                  [self.navigationController popToRootViewControllerAnimated:YES];
+                                 [self.uploadSpinner stopAnimating];
+                                 self.uploadSpinner.hidden = YES;
+                             } else {
+                                 [Utility showError:error.userInfo[@"error"]];
+                                 self.saveButton.userInteractionEnabled = YES;
                              }
                          }];
     } else {
