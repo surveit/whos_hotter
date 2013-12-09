@@ -131,6 +131,7 @@
     } else if (self.usernameTextField.text.length == 0) {
         [self showAlertForInvalidUserName];
     } else {
+        [self.usernameTextField resignFirstResponder];
         self.createButton.userInteractionEnabled = NO;
         [EventLogger logEvent:@"validateUserName"];
         self.spinner.hidden = NO;
