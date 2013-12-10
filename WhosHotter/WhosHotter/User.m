@@ -272,7 +272,7 @@ static int counter = 1;
 - (void)setProfileImage:(UIImage *)image
       completionHandler:(CompletionHandler)completionHandler {
     if (image) {
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
         PFFile *imageFile = [PFFile fileWithData:imageData];
         [FileManager saveData:imageData fileName:kProfileImageFilename];
         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

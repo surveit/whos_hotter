@@ -10,11 +10,12 @@
 
 #import "Comment.h"
 #import "Competition.h"
+#import "Report.h"
 
-#define kBaseHeight 14
+#define kBaseHeight 16
 #define kCellSpacing 4
 
-@interface CommentViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface CommentViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *commentTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
@@ -109,11 +110,6 @@
     self.noCommentsLabel.hidden = self.competition.comments.count > 0;
 }
 
-- (IBAction)didTapClose:(id)sender {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
-}
-
 - (CGFloat)leftPercentageValue {
     if (self.competition.totalVotes == 0) {
         return 50.0;
@@ -126,6 +122,21 @@
         return 50.0;
     }
     return (CGFloat)self.competition.votes1/self.competition.totalVotes*100.0f;
+}
+
+- (IBAction)didTapReportButton:(id)sender {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Report"
+                                                        message:@"Report as offensive?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"OK",nil];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [Report reportWithCompetition:self.competition];
+    }
 }
 
 #pragma mark - uitextfielddelegate
@@ -169,25 +180,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment"];
+    
     cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, 320, 22);
     UIFont *font = [self commentFont];
     NSString *username = [self.competition.comments[indexPath.row] username];
     NSString *description = [self.competition.comments[indexPath.row] description];
-    CGSize size = [description sizeWithAttributes:@{NSFontAttributeName: [self commentFont]}];
 
     NSMutableAttributedString *coloredText = [[NSMutableAttributedString alloc] initWithString:description];
     [coloredText addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range: NSMakeRange(0, username.length)];
 
     cell.textLabel.font = font;
     cell.textLabel.attributedText = coloredText;
-    cell.textLabel.numberOfLines = ceil(size.width / 300);
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *description = [self.competition.comments[indexPath.row] description];
     CGSize size = [description sizeWithAttributes:@{NSFontAttributeName: [self commentFont]}];
-    return ceil(size.width / 300) * kBaseHeight + kCellSpacing;
+    return ceil(size.width / 290) * kBaseHeight + kCellSpacing;
 }
 
 - (UIFont *)commentFont {
@@ -202,6 +214,7 @@
     self.commentsTableView.delegate = self;
     [self.commentsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"comment"];
     self.commentInputTextField.delegate = self;
+    self.commentsTableView.contentInset = UIEdgeInsetsMake(0, 10.0, 0, 10.0);
     self.commentTextField.userInteractionEnabled = NO;
     [self updateView];
     [self registerForKeyboardNotifications];

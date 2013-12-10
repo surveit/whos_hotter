@@ -176,7 +176,6 @@
 - (void)animateAway:(TappableImageView *)imageView {
     [UIView animateWithDuration:0.4
                      animations:^{
-                         imageView.tintColor = [UIColor blackColor];
                          CGPoint newCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:4.0]
                                                             to:[Utility multiplyPoint:self.view.center scalar:-3.0]];
                          CGPoint versusBarNewCenter = [Utility addPoint:[Utility multiplyPoint:imageView.center scalar:3.0]
