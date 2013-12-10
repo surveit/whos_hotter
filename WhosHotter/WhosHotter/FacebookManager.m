@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "Competition.h"
 #import "EventLogger.h"
 #import "User.h"
 
@@ -86,6 +87,23 @@ FacebookManager *sharedInstance = nil;
     return [[self sharedInstance] gender] ? [[[self sharedInstance] gender] isEqualToString:@"male"] ? MALE : FEMALE : UNKNOWN;
 }
 
+/*
++ (void)shareVote:(Competition *)competition {
+    FBRequest* newAction = [[FBRequest alloc] initForPostWithSession:[FBSession activeSession] graphPath:[NSString stringWithFormat:@"me/friendsmashsample:smash?profile=%llu", uFriendID] graphObject:nil];
+    
+    FBRequestConnection* conn = [[FBRequestConnection alloc] init];
+    
+    [conn addRequest:newAction completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if(error) {
+            NSLog(@"Sending OG Story Failed: %@", result[@"id"]);
+            return;
+        }
+        
+        NSLog(@"OG action ID: %@", result[@"id"]);
+    }];
+    [conn start];
+}*/
+
 - (void)getFacebookInformationWithCompletionHandler:(CompletionHandler)handler {
     [EventLogger logEvent:@"facebookConnected"];
     
@@ -102,7 +120,7 @@ FacebookManager *sharedInstance = nil;
             self.facebookId = userData[@"id"];
             self.gender = userData[@"gender"];
             
-            self.pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", self.facebookId]];
+            self.pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?picture?width=9999&height=9999&return_ssl_resources=1", self.facebookId]];
             
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:self.pictureURL
                                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy

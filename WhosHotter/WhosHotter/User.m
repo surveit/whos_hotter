@@ -15,6 +15,7 @@
 #import "NotificationNames.h"
 #import "TimeManager.h"
 
+#import <Surveit/Surveit.h>
 #import <Parse/Parse.h>
 
 static User *user = nil;
@@ -22,7 +23,7 @@ static int counter = 1;
 
 #define kProfileImageFilename @"user_profile.png"
 
-@interface User () <UIAlertViewDelegate>
+@interface User () <UIAlertViewDelegate, SurveitDelegate>
 
 @property (nonatomic, readwrite, strong) PFUser *model;
 @property (nonatomic, readwrite, strong) PFFile *profileImageFile;
@@ -343,6 +344,13 @@ static int counter = 1;
                                                   cancelButtonTitle:@"I'll Wait"
                                                   otherButtonTitles:@"OK",nil];
         [alertView show];
+    } else if ([Surveit hasPaidSurvey]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Out Of Votes!"
+                                                            message:@"Take a brief survey to refill now?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"I'll Wait"
+                                                  otherButtonTitles:@"OK",nil];
+        [alertView show];
     } else if (![FacebookManager isLoggedInToFacebook]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Out Of Votes!"
                                                             message:@"Sign in with Facebook to refill now?"
@@ -364,6 +372,8 @@ static int counter = 1;
     if (buttonIndex == 1) {
         if (![self isLoggedIn]) {
             [self.energyOfferingViewController.tabBarController setSelectedIndex:1];
+        } else if ([Surveit hasPaidSurvey]) {
+            [self performSelector:@selector(showPaidSurvey) withObject:nil afterDelay:1.0];
         } else if (![FacebookManager isLoggedInToFacebook]) {
             [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
                 [_energyOfferingViewController.tabBarController setSelectedIndex:1];
@@ -375,5 +385,13 @@ static int counter = 1;
     self.energyOfferingViewController = nil;
 }
 
+- (void)showPaidSurvey {
+    [Surveit showPaidSurvey];
+    [Surveit setSurveitDelegate:self];
+}
+
+- (void)surveyDidCompleteWithRewardAmount:(NSInteger)amount ofCurrency:(NSString *)currency {
+    [self refillEnergy];
+}
 
 @end

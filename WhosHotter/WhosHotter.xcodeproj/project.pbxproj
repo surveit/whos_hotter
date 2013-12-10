@@ -14,6 +14,9 @@
 		3B24E52C1851B22800461568 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E52B1851B22800461568 /* CommentCell.m */; };
 		3B24E5301851B38600461568 /* TimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B24E52F1851B38600461568 /* TimeManager.m */; };
 		3B33A8911853107F00756798 /* Picture frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B33A8901853107F00756798 /* Picture frame@2x.png */; };
+		3B4640691856F66200632FFC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4640681856F66200632FFC /* Parse.framework */; };
+		3B46406D1856F71700632FFC /* Surveit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B46406C1856F71700632FFC /* Surveit.framework */; };
+		3B46406F1856F76300632FFC /* SurveitSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B46406E1856F76300632FFC /* SurveitSDK.bundle */; };
 		3B53651118543750001E8E34 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B53651018543750001E8E34 /* Crashlytics.framework */; };
 		3B53651718553D86001E8E34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */; };
 		3B53651A18555577001E8E34 /* EventLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651918555577001E8E34 /* EventLogger.m */; };
@@ -44,6 +47,7 @@
 		3B53655118559644001E8E34 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B53653718559644001E8E34 /* Icon@2x.png */; };
 		3B53655218559644001E8E34 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B53653818559644001E8E34 /* iTunesArtwork.png */; };
 		3B53655318559644001E8E34 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B53653918559644001E8E34 /* iTunesArtwork@2x.png */; };
+		3B5365591856F59E001E8E34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5365581856F59E001E8E34 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DD1839B84F00246822 /* Foundation.framework */; };
 		3BA670E01839B84F00246822 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DF1839B84F00246822 /* CoreGraphics.framework */; };
 		3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670E11839B84F00246822 /* UIKit.framework */; };
@@ -59,7 +63,6 @@
 		3BA671021839B84F00246822 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670E11839B84F00246822 /* UIKit.framework */; };
 		3BA6710A1839B84F00246822 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BA671081839B84F00246822 /* InfoPlist.strings */; };
 		3BA6710C1839B84F00246822 /* WhosHotterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6710B1839B84F00246822 /* WhosHotterTests.m */; };
-		3BA671161839B87000246822 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA671151839B87000246822 /* Parse.framework */; };
 		3BA6711A1839B8DC00246822 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA671191839B8DC00246822 /* User.m */; };
 		3BA6711D1839B93C00246822 /* InitializationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6711C1839B93C00246822 /* InitializationManager.m */; };
 		3BA671211839BF6000246822 /* Competition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA671201839BF6000246822 /* Competition.m */; };
@@ -235,6 +238,9 @@
 		3B24E52E1851B38600461568 /* TimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeManager.h; sourceTree = "<group>"; };
 		3B24E52F1851B38600461568 /* TimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeManager.m; sourceTree = "<group>"; };
 		3B33A8901853107F00756798 /* Picture frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Picture frame@2x.png"; sourceTree = "<group>"; };
+		3B4640681856F66200632FFC /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = SOURCE_ROOT; };
+		3B46406C1856F71700632FFC /* Surveit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Surveit.framework; sourceTree = "<group>"; };
+		3B46406E1856F76300632FFC /* SurveitSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SurveitSDK.bundle; sourceTree = "<group>"; };
 		3B53651018543750001E8E34 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3B53651518553D86001E8E34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
@@ -267,6 +273,7 @@
 		3B53653718559644001E8E34 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		3B53653818559644001E8E34 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		3B53653918559644001E8E34 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		3B5365581856F59E001E8E34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		3BA670DA1839B84F00246822 /* Hotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA670DD1839B84F00246822 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BA670DF1839B84F00246822 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -287,7 +294,6 @@
 		3BA671071839B84F00246822 /* WhosHotterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WhosHotterTests-Info.plist"; sourceTree = "<group>"; };
 		3BA671091839B84F00246822 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3BA6710B1839B84F00246822 /* WhosHotterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhosHotterTests.m; sourceTree = "<group>"; };
-		3BA671151839B87000246822 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = SOURCE_ROOT; };
 		3BA671181839B8DC00246822 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		3BA671191839B8DC00246822 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		3BA6711B1839B93C00246822 /* InitializationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationManager.h; sourceTree = "<group>"; };
@@ -467,11 +473,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B5365591856F59E001E8E34 /* AdSupport.framework in Frameworks */,
 				3BA671391839C1D500246822 /* SystemConfiguration.framework in Frameworks */,
 				3B53651118543750001E8E34 /* Crashlytics.framework in Frameworks */,
 				3BA671371839C1CF00246822 /* StoreKit.framework in Frameworks */,
 				3BA671351839C1C900246822 /* Security.framework in Frameworks */,
 				3BA671331839C1C200246822 /* QuartzCore.framework in Frameworks */,
+				3B4640691856F66200632FFC /* Parse.framework in Frameworks */,
 				3BA671311839C1BC00246822 /* MobileCoreServices.framework in Frameworks */,
 				3BA6712F1839C1B600246822 /* libz.1.1.3.dylib in Frameworks */,
 				3BA6712D1839C1AE00246822 /* CoreLocation.framework in Frameworks */,
@@ -479,9 +487,9 @@
 				3BA6712B1839C1A300246822 /* CFNetwork.framework in Frameworks */,
 				3BA671291839C19A00246822 /* AudioToolbox.framework in Frameworks */,
 				3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */,
-				3BA671161839B87000246822 /* Parse.framework in Frameworks */,
 				3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */,
 				3BA6716818416D2700246822 /* FacebookSDK.framework in Frameworks */,
+				3B46406D1856F71700632FFC /* Surveit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +559,8 @@
 		3BA670D11839B84F00246822 = {
 			isa = PBXGroup;
 			children = (
+				3B46406E1856F76300632FFC /* SurveitSDK.bundle */,
+				3B46406C1856F71700632FFC /* Surveit.framework */,
 				3B53651D18559644001E8E34 /* icon */,
 				3B53651018543750001E8E34 /* Crashlytics.framework */,
 				3BFC07E1184B2BCD005F279D /* XIBs */,
@@ -576,6 +586,7 @@
 		3BA670DC1839B84F00246822 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B5365581856F59E001E8E34 /* AdSupport.framework */,
 				3BA671381839C1D500246822 /* SystemConfiguration.framework */,
 				3BA671361839C1CF00246822 /* StoreKit.framework */,
 				3BA671341839C1C900246822 /* Security.framework */,
@@ -602,8 +613,8 @@
 				3BA6713D1839C52B00246822 /* Views */,
 				3BA6711E1839BF4D00246822 /* PFModels */,
 				3BA671171839B8CC00246822 /* Models */,
-				3BA671151839B87000246822 /* Parse.framework */,
 				3BA670EC1839B84F00246822 /* AppDelegate.h */,
+				3B4640681856F66200632FFC /* Parse.framework */,
 				3BA670ED1839B84F00246822 /* AppDelegate.m */,
 				3BA670EF1839B84F00246822 /* Main_iPhone.storyboard */,
 				3BA670F21839B84F00246822 /* Main_iPad.storyboard */,
@@ -989,6 +1000,7 @@
 				3BCF65CE184D986D00C9996A /* BasicNavigationBar.xib in Resources */,
 				3B53654A18559644001E8E34 /* Icon-76.png in Resources */,
 				3BA672A8184477AA00246822 /* rs_female_000052.jpg in Resources */,
+				3B46406F1856F76300632FFC /* SurveitSDK.bundle in Resources */,
 				3BA67276184477AA00246822 /* rs_female_000002.jpg in Resources */,
 				3BA672111842F6F500246822 /* Small red square matching@2x.png in Resources */,
 				3BA671F71842F6F500246822 /* Energy bar outline@2x.png in Resources */,
@@ -1327,16 +1339,19 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shuham BAO (73AC24L2TM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/shuhan/whos_hotter/WhosHotter,
 					/Users/shuhan/Documents/FacebookSDK,
+					/Users/shuhan/whos_hotter/WhosHotter,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhosHotter/WhosHotter-Prefix.pch";
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E003AEEE-3E0C-43A5-BEC1-6790A5CCDE8C";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1350,16 +1365,18 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shuham BAO (73AC24L2TM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/shuhan/whos_hotter/WhosHotter,
 					/Users/shuhan/Documents/FacebookSDK,
+					/Users/shuhan/whos_hotter/WhosHotter,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhosHotter/WhosHotter-Prefix.pch";
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E003AEEE-3E0C-43A5-BEC1-6790A5CCDE8C";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -15,6 +15,7 @@
 
 #import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
+#import <Surveit/Surveit.h>
 
 @interface InitializationManager ()
 
@@ -39,6 +40,9 @@
                   clientKey:@"xztuf8Gy8RNdecL9l2uKDDlvjz3iLFujk2mLmNez"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
     [Crashlytics startWithAPIKey:@"841ee581cc7e652c6644a04164d5638302a00365"];
+    [Surveit startSessionWithAppIdentifier:@"755876163"
+                                    secret:@"d989606806f643bda4ede02c4d5b131d"
+                                 debugMode:YES];
 }
 
 - (void)initializeCaches {
