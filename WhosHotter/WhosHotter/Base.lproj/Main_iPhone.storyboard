@@ -466,6 +466,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background.png" id="Sau-X7-xxu">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="LYO-t7-rG3">
                                 <rect key="frame" x="0.0" y="44" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -475,15 +479,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a comment..." minimumFontSize="17" id="qJG-ff-MIj">
-                                <rect key="frame" x="7" y="208" width="307" height="30"/>
+                                <rect key="frame" x="7" y="231" width="307" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yGc-CW-TU8">
-                                <rect key="frame" x="0.0" y="246" width="320" height="291"/>
+                                <rect key="frame" x="0.0" y="265" width="320" height="272"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Red square (profile).png" id="DqO-nN-HGJ">
                                 <rect key="frame" x="7" y="160" width="40" height="40"/>
@@ -552,6 +556,20 @@
                                     <action selector="didTapShare:" destination="8GW-Xd-OsB" eventType="touchUpInside" id="tSo-Hg-YA1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kor-hu-ZQa">
+                                <rect key="frame" x="10" y="205.5" width="140" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.20784313725490194" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KXp-p7-Zia">
+                                <rect key="frame" x="170" y="205.5" width="140" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.20784313725490194" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -564,10 +582,12 @@
                         <outlet property="leftGreenSquare" destination="orm-Xw-TYb" id="MYI-2t-Khx"/>
                         <outlet property="leftPercentage" destination="SvV-RM-EEi" id="dA9-qe-YFe"/>
                         <outlet property="leftRedSquare" destination="DqO-nN-HGJ" id="XEM-yk-NkZ"/>
+                        <outlet property="leftUsername" destination="kor-hu-ZQa" id="Jwg-Lf-qPd"/>
                         <outlet property="noCommentsLabel" destination="mxw-l8-VVf" id="rbp-mf-XVQ"/>
                         <outlet property="rightGreenSquare" destination="hjR-i7-KPm" id="eqc-0m-5uT"/>
                         <outlet property="rightPercentage" destination="BVb-Id-ElJ" id="izr-kh-Sat"/>
                         <outlet property="rightRedSquare" destination="Q8i-8D-5cI" id="onW-bY-xby"/>
+                        <outlet property="rightUsername" destination="KXp-p7-Zia" id="rla-6o-ewj"/>
                         <outlet property="timeLeftLabel" destination="YVM-L9-9Wa" id="jLO-aH-1XM"/>
                         <outlet property="topImageView" destination="LYO-t7-rG3" id="pfN-UV-GKp"/>
                     </connections>
@@ -657,11 +677,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="umW-Tt-gbb">
-                                <rect key="frame" x="150" y="383" width="20" height="20"/>
+                                <rect key="frame" x="151" y="390" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Zzd-Yo-6hA">
-                                <rect key="frame" x="150" y="154" width="20" height="20"/>
+                                <rect key="frame" x="150" y="150" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="versusBar.png" id="D3u-6j-maY">
@@ -692,9 +712,6 @@
     </scenes>
     <resources>
         <image name="Background.png" width="320" height="568"/>
-        <image name="Background.png" width="320" height="568"/>
-        <image name="Background.png" width="320" height="568"/>
-        <image name="Background.png" width="320" height="568"/>
         <image name="Empty profile.png" width="150" height="146"/>
         <image name="Facebook Connect.png" width="170" height="37"/>
         <image name="Facebook Share.png" width="39" height="39"/>
@@ -703,19 +720,14 @@
         <image name="Frame Last Result.png" width="69" height="69"/>
         <image name="Gallery w Overlap.png" width="320" height="335"/>
         <image name="Green square (profile).png" width="29" height="25"/>
-        <image name="Green square (profile).png" width="29" height="25"/>
-        <image name="Green square (profile).png" width="29" height="25"/>
-        <image name="Large_flame.png" width="80" height="127"/>
         <image name="Large_flame.png" width="80" height="127"/>
         <image name="Male button opaque.png" width="87" height="88"/>
-        <image name="Red square (profile).png" width="29" height="25"/>
         <image name="Red square (profile).png" width="29" height="25"/>
         <image name="Report_button.png" width="23" height="23"/>
         <image name="Save Image button.png" width="146" height="57"/>
         <image name="Save profile.png" width="114" height="44"/>
         <image name="Share on Facebook profile.png" width="170" height="36"/>
         <image name="Small green square (matching).png" width="22" height="19"/>
-        <image name="Upload Photo button.png" width="146" height="57"/>
         <image name="Upload Photo button.png" width="146" height="57"/>
         <image name="star.png" width="27" height="25"/>
         <image name="user.png" width="24" height="24"/>
@@ -727,7 +739,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="kwB-PJ-ZYS"/>
         <segue reference="QnA-fC-gWt"/>
-        <segue reference="iYN-DM-HIf"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -241,7 +241,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"voteToComments"]) {
         CommentViewController *destinationViewController = [segue destinationViewController];
-        destinationViewController.competition = self.previousCompetition;
+        if (sender == [User sharedUser]) {
+            destinationViewController.competition = [[User sharedUser] pastCompetitions][0];
+        } else {
+            destinationViewController.competition = self.previousCompetition;
+        }
     }
 }
 

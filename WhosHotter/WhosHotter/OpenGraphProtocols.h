@@ -24,3 +24,9 @@
 @property (nonatomic, readwrite) id<OGPerson>person;
 
 @end
+
+@protocol OGCompeteAction <FBOpenGraphAction>
+
+@property (nonatomic, readwrite) id<OGPerson>person;
+
+@end

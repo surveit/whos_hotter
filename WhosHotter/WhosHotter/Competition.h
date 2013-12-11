@@ -40,6 +40,8 @@
 
 - (CGFloat)myRatio;
 - (UIImage *)opponentsImage;
+- (NSString *)opponentsUsername;
+
 - (NSInteger)timeUntilExpiration;
 
 - (NSString *)chosenUsername;

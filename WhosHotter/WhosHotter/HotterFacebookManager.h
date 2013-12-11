@@ -8,9 +8,10 @@
 
 #import "FacebookManager.h"
 
+@class Competition;
+
 @interface HotterFacebookManager : FacebookManager
 
-+ (void)postPhoto:(UIImage *)image
-         username:(NSString *)username;
++ (void)shareCompetition:(Competition *)competition;
 
 @end

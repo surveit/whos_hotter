@@ -76,7 +76,6 @@ static NSMutableArray *myRecentCompetitions = nil;
 }
 
 - (void)objectCreatedFromModel {
-    NSArray *userIdentifiers = [self valueForKey:@"users"];
     [self getImageFromFile:[self valueForKey:@"image0"] saveSelector:@selector(setTopImageData:)];
     [self getImageFromFile:[self valueForKey:@"image1"] saveSelector:@selector(setBottomImageData:)];
     [self getComments];
@@ -192,6 +191,14 @@ static NSMutableArray *myRecentCompetitions = nil;
     NSUInteger index = [self myIndex];
     if (index != NSNotFound) {
         return index == 0 ? [self bottomImage] : [self topImage];
+    }
+    return nil;
+}
+
+- (NSString *)opponentsUsername {
+    NSUInteger index = [self myIndex];
+    if (index != NSNotFound) {
+        return index == 0 ? [self valueForKey:@"username1"] : [self valueForKey:@"username0"];
     }
     return nil;
 }

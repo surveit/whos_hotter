@@ -36,6 +36,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *fbShareButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *leftUsername;
+@property (weak, nonatomic) IBOutlet UILabel *rightUsername;
+
 @end
 
 @implementation CommentViewController
@@ -111,7 +114,10 @@
     self.rightRedSquare.hidden = rightPercentage >= 50.0f;
     self.noCommentsLabel.hidden = self.competition.comments.count > 0;
     
-    self.fbShareButton.hidden = ![FacebookManager isLoggedInToFacebook];
+    self.fbShareButton.hidden = ![HotterFacebookManager isLoggedInToFacebook];
+    
+    self.leftUsername.text = [self.competition valueForKey:@"username0"];
+    self.rightUsername.text = [self.competition valueForKey:@"username1"];
 }
 
 - (CGFloat)leftPercentageValue {
@@ -130,12 +136,7 @@
 
 
 - (IBAction)didTapShare:(id)sender {
-    if (self.competition.isMyCompetition) {
-        //do something
-    } else {
-        [HotterFacebookManager postPhoto:self.competition.chosenImage
-                                username:self.competition.chosenUsername];
-    }
+    [HotterFacebookManager shareCompetition:self.competition];
 }
 
 - (IBAction)didTapReportButton:(id)sender {
@@ -191,12 +192,13 @@
     NSString *description = [self.competition.comments[indexPath.row] description];
 
     NSMutableAttributedString *coloredText = [[NSMutableAttributedString alloc] initWithString:description];
-    [coloredText addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range: NSMakeRange(0, username.length)];
+    [coloredText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:50.0/255.0 green:53/255.0 blue:181/255.0 alpha:1.0] range: NSMakeRange(0, username.length)];
 
     cell.textLabel.font = font;
     cell.textLabel.attributedText = coloredText;
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background@2x"]];
     return cell;
 }
 

@@ -9,7 +9,7 @@
 #import "UserCreationViewController.h"
 
 #import "EventLogger.h"
-#import "FacebookManager.h"
+#import "HotterFacebookManager.h"
 #import "User.h"
 
 @interface UserCreationViewController () <UITextFieldDelegate>
@@ -204,9 +204,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([FacebookManager gender] == MALE) {
+    if ([HotterFacebookManager gender] == MALE) {
         [self didTapMale:nil];
-    } else if ([FacebookManager gender] == FEMALE) {
+    } else if ([HotterFacebookManager gender] == FEMALE) {
         [self didTapFemale:nil];
     }
 }

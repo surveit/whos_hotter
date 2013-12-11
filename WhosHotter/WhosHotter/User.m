@@ -8,10 +8,11 @@
 
 #import "User.h"
 
+#import "CommentViewController.h"
 #import "Competition.h"
 #import "Config.h"
-#import "FacebookManager.h"
 #import "FileManager.h"
+#import "HotterFacebookManager.h"
 #import "NotificationNames.h"
 #import "TimeManager.h"
 
@@ -351,7 +352,7 @@ static int counter = 1;
                                                   cancelButtonTitle:@"I'll Wait"
                                                   otherButtonTitles:@"OK",nil];
         [alertView show];
-    } else if (![FacebookManager isLoggedInToFacebook]) {
+    } else if (![HotterFacebookManager isLoggedInToFacebook]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Out Of Votes!"
                                                             message:@"Sign in with Facebook to refill now?"
                                                            delegate:self
@@ -374,12 +375,12 @@ static int counter = 1;
             [self.energyOfferingViewController.tabBarController setSelectedIndex:1];
         } else if ([Surveit hasPaidSurvey]) {
             [self performSelector:@selector(showPaidSurvey) withObject:nil afterDelay:0.0];
-        } else if (![FacebookManager isLoggedInToFacebook]) {
-            [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+        } else if (![HotterFacebookManager isLoggedInToFacebook]) {
+            [HotterFacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
                 [_energyOfferingViewController.tabBarController setSelectedIndex:1];
             }];
-        } else {
-            [self.energyOfferingViewController.tabBarController setSelectedIndex:1];
+        } else if (self.pastCompetitions.count > 0) {
+            [self.energyOfferingViewController performSegueWithIdentifier:@"voteToComments" sender:self];
         }
     }
     self.energyOfferingViewController = nil;

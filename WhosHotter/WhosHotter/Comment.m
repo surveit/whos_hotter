@@ -32,7 +32,7 @@
 
 + (NSString *)isValidCommentText:(NSString *)text {
     if (text.length >= [Config maxCommentLength]) {
-        return [NSString stringWithFormat:@"Comments must be fewer than %ld characeters!",[Config maxCommentLength]];
+        return [NSString stringWithFormat:@"Comments must be fewer than %ld characeters!",(long)[Config maxCommentLength]];
     }
     return nil;
 }

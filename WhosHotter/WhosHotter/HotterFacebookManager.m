@@ -10,6 +10,19 @@
 
 #import "Competition.h"
 #import "OpenGraphProtocols.h"
+#import "TimeManager.h"
+
+@interface FacebookManager (HotterFacebookManager)
+
++ (instancetype)sharedInstance;
+
+@end
+
+@interface HotterFacebookManager () <UIAlertViewDelegate>
+
+@property (nonatomic, readwrite, strong) Competition *competitionToShare;
+
+@end
 
 @implementation HotterFacebookManager
 
@@ -37,15 +50,82 @@
     return result;
 }
 
++ (void)shareCompetition:(Competition *)competition {
+    UIAlertView *share = [[UIAlertView alloc] initWithTitle:@"Share?"
+                                                    message:@"Share this competition on Facebook?"
+                                                   delegate:[self sharedInstance]
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"OK", nil];
+    [share show];
+    [[self sharedInstance] setCompetitionToShare:competition];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        if (self.competitionToShare.isMyCompetition) {
+            [HotterFacebookManager postMyCompetitionAgainst:self.competitionToShare.opponentsImage
+                                                   username:self.competitionToShare.opponentsUsername
+                                                   timeLeft:self.competitionToShare.timeUntilExpiration];
+        } else {
+            [HotterFacebookManager postPhoto:self.competitionToShare.chosenImage
+                                    username:self.competitionToShare.chosenUsername];
+        }
+    }
+}
 
 + (void)getPublishPermissions:(CompletionHandler)handler {
-    [[FBSession activeSession] reauthorizeWithPublishPermissions:@[@"publish_actions"]
-                                                 defaultAudience:FBSessionDefaultAudienceEveryone
-                                               completionHandler:^(FBSession *session, NSError *error) {
-                                                   if (handler) {
-                                                       handler(error == nil,error);
-                                                   }
-                                               }];
+    if (![[[FBSession activeSession] permissions] containsObject:@"publish_actions"]) {
+        [[FBSession activeSession] requestNewPublishPermissions:@[@"publish_actions"]
+                                                defaultAudience:FBSessionDefaultAudienceEveryone
+                                              completionHandler:^(FBSession *session, NSError *error) {
+                                                  if (handler) {
+                                                      handler(error == nil,error);
+                                                  }
+                                              }];
+    } else if (handler) {
+        handler (YES, nil);
+    }
+}
+
++ (void)postMyCompetitionAgainst:(UIImage *)image
+                        username:(NSString *)username
+                        timeLeft:(NSInteger)timeLeft {
+    [self getPublishPermissions:^(BOOL success, NSError *error) {
+        if (success) {
+            FBRequestConnection *connection = [[FBRequestConnection alloc] init];
+            
+            // First request uploads the photo.
+            FBRequest *request1 = [FBRequest requestForUploadPhoto:image];
+            [connection addRequest:request1
+                 completionHandler:
+             ^(FBRequestConnection *connection, id result, NSError *error) {
+                 if (!error) {
+                 }
+             }
+                    batchEntryName:@"photopost"
+             ];
+            
+            // Second request retrieves photo information for just-created
+            // photo so we can grab its source.
+            FBRequest *request2 = [FBRequest
+                                   requestForGraphPath:@"{result=photopost:$.id}"];
+            [connection addRequest:request2
+                 completionHandler:
+             ^(FBRequestConnection *connection, id result, NSError *error) {
+                 if (!error &&
+                     result) {
+                     NSString *source = [result objectForKey:@"source"];
+                     [self postOpenGraphActionWithPhotoURL:source
+                                                  username:username
+                                                  timeLeft:timeLeft];
+                 }
+             }
+             ];
+            
+            [connection start];
+        }
+    }];
 }
 
 + (void)postPhoto:(UIImage *)image
@@ -121,7 +201,7 @@
          } else {
              alertText = @"Failed to share on Facebook.";
          }
-         [[[UIAlertView alloc] initWithTitle:@"Result"
+         [[[UIAlertView alloc] initWithTitle:@"Share Vote"
                                      message:alertText
                                     delegate:nil
                            cancelButtonTitle:@"OK"
@@ -131,5 +211,49 @@
      ];
 }
 
++ (void)postOpenGraphActionWithPhotoURL:(NSString*)photoURL
+                               username:(NSString *)username
+                               timeLeft:(NSInteger)timeLeft
+{
+    // First create the Open Graph meal object for the meal we ate.
+    id<OGPerson> person = [self userForUsername:username];
+    
+    // Now create an Open Graph eat action with the meal, our location,
+    // and the people we were with.
+    id<OGCompeteAction> action = (id<OGCompeteAction>)[FBGraphObject graphObject];
+    action.person = person;
+    [action setObject:@(timeLeft).description forKey:@"expires_in"];
+    
+    if (photoURL) {
+        NSMutableDictionary *image = [[NSMutableDictionary alloc] init];
+        [image setObject:photoURL forKey:@"url"];
+        
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        [images addObject:image];
+        
+        action.image = images;
+    }
+    
+    // Create the request and post the action to the
+    // "me/<YOUR_APP_NAMESPACE>:eat" path.
+    [FBRequestConnection startForPostWithGraphPath:@"me/hotterapp:compete%20against"
+                                       graphObject:action
+                                 completionHandler:
+     ^(FBRequestConnection *connection, id result, NSError *error) {
+         NSString *alertText;
+         if (!error) {
+             alertText = @"Shared on Facebook!";
+         } else {
+             alertText = @"Failed to share on Facebook.";
+         }
+         [[[UIAlertView alloc] initWithTitle:@"Share Competition"
+                                     message:alertText
+                                    delegate:nil
+                           cancelButtonTitle:@"OK"
+                           otherButtonTitles:nil]
+          show];
+     }
+     ];
+}
 
 @end

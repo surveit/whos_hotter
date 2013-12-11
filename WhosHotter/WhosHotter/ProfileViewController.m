@@ -11,8 +11,8 @@
 #import "CommentViewController.h"
 #import "Competition.h"
 #import "EventLogger.h"
-#import "FacebookManager.h"
 #import "FileManager.h"
+#import "HotterFacebookManager.h"
 #import "NotificationNames.h"
 #import "User.h"
 #import "ImageCroppingViewController.h"
@@ -58,7 +58,7 @@
     self.fbLoginButton.userInteractionEnabled = NO;
     self.facebookLoadingView.hidden = NO;
     if ([[User sharedUser] isLoggedIn]) {
-        [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+        [HotterFacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
             if (success) {
                 [self updateView];
             }
@@ -66,7 +66,7 @@
             self.fbLoginButton.userInteractionEnabled = YES;
         }];
     } else {
-        [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
+        [HotterFacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
             if (success) {
                 [self performSegueWithIdentifier:@"profileToImageCrop" sender:self];
             }
@@ -100,7 +100,7 @@
     }
     
     self.flamePointsLabel.text = @([[User sharedUser] flamePoints]).description;
-    BOOL isLoggedInToFacebook = [FacebookManager isLoggedInToFacebook] && [[User sharedUser] isLoggedIn];
+    BOOL isLoggedInToFacebook = [HotterFacebookManager isLoggedInToFacebook] && [[User sharedUser] isLoggedIn];
     self.fbLoginButton.hidden = isLoggedInToFacebook;
     self.fbShareButton.hidden = !isLoggedInToFacebook;
 }
@@ -207,7 +207,7 @@
         [viewController setCompetition:self.competitionToSegueTo];
     } else if ([segue.identifier isEqualToString:@"profileToImageCrop"]) {
         ImageCroppingViewController *viewController = (ImageCroppingViewController *)[segue destinationViewController];
-        [viewController setProfileImage:[FacebookManager profileImage]];
+        [viewController setProfileImage:[HotterFacebookManager profileImage]];
     }
 }
 

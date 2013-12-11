@@ -12,6 +12,7 @@
 #import "CompetitionCache.h"
 #import "Config.h"
 #import "FacebookManager.h"
+#import "HotterFacebookManager.h"
 #import "FileCache.h"
 #import "User.h"
 
@@ -52,7 +53,7 @@
     [CompetitionCache initialize];
 #endif
     if ([[User sharedUser] isLoggedIn]) {
-        [FacebookManager initialize];
+        [HotterFacebookManager initialize];
     }
 }
 

@@ -32,9 +32,9 @@ FacebookManager *sharedInstance = nil;
 
 @implementation FacebookManager
 
-+ (FacebookManager *)sharedInstance {
++ (instancetype)sharedInstance {
     if (sharedInstance == nil) {
-        sharedInstance = [[FacebookManager alloc] init];
+        sharedInstance = [[self alloc] init];
     }
     return sharedInstance;
 }
@@ -46,10 +46,7 @@ FacebookManager *sharedInstance = nil;
 + (void)loginWithCompletionHandler:(CompletionHandler)handler {
     // The permissions requested from the user
     NSArray *permissionsArray = @[@"user_about_me"];
-    
-    // Login PFUser using Facebook
-    [PFFacebookUtils initializeFacebook];
-    
+
     [EventLogger logEvent:@"connectToFacebook"];
     
     [FBSession openActiveSessionWithReadPermissions:permissionsArray
@@ -59,7 +56,6 @@ FacebookManager *sharedInstance = nil;
                                           [[User sharedUser] refillEnergy];
                                           [[self sharedInstance] getFacebookInformationWithCompletionHandler:handler];
                                       } else if (handler) {
-                                          NSLog(@"Error %@",error);
                                           handler(NO,error);
                                       }
                                   }];
