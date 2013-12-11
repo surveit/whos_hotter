@@ -20,6 +20,7 @@
 		3B4640721856FCA900632FFC /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4640711856FCA900632FFC /* Report.m */; };
 		3B46407618570A9200632FFC /* HotterFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B46407518570A9200632FFC /* HotterFacebookManager.m */; };
 		3B4640781858647100632FFC /* Report_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4640771858647100632FFC /* Report_button@2x.png */; };
+		3B46407A1858730E00632FFC /* Large_flame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4640791858730E00632FFC /* Large_flame@2x.png */; };
 		3B53651118543750001E8E34 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B53651018543750001E8E34 /* Crashlytics.framework */; };
 		3B53651718553D86001E8E34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */; };
 		3B53651A18555577001E8E34 /* EventLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651918555577001E8E34 /* EventLogger.m */; };
@@ -250,6 +251,7 @@
 		3B46407418570A9200632FFC /* HotterFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotterFacebookManager.h; sourceTree = "<group>"; };
 		3B46407518570A9200632FFC /* HotterFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotterFacebookManager.m; sourceTree = "<group>"; };
 		3B4640771858647100632FFC /* Report_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Report_button@2x.png"; sourceTree = "<group>"; };
+		3B4640791858730E00632FFC /* Large_flame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Large_flame@2x.png"; sourceTree = "<group>"; };
 		3B53651018543750001E8E34 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3B53651518553D86001E8E34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				3BA671D81842F6F500246822 /* Gallery w Overlap@2x.png */,
 				3BA671D91842F6F500246822 /* Green square (profile)@2x.png */,
 				3BA671DA1842F6F500246822 /* Hotter@2x.png */,
+				3B4640791858730E00632FFC /* Large_flame@2x.png */,
 				3BA671DB1842F6F500246822 /* iPhone5-splash@2x.png */,
 				3BA671DC1842F6F500246822 /* Male button opaque@2x.png */,
 				3BA671DD1842F6F500246822 /* Male button@2x.png */,
@@ -1052,6 +1055,7 @@
 				3B53654E18559644001E8E34 /* Icon-Small.png in Resources */,
 				3BA672AD184477AA00246822 /* rs_female_000057.jpg in Resources */,
 				3BA6727E184477AA00246822 /* rs_female_000010.jpg in Resources */,
+				3B46407A1858730E00632FFC /* Large_flame@2x.png in Resources */,
 				3BA672BA184477AA00246822 /* rs_female_000070.jpg in Resources */,
 				3BA672AE184477AA00246822 /* rs_female_000058.jpg in Resources */,
 				3BA6720F1842F6F500246822 /* Share on Facebook profile@2x.png in Resources */,
@@ -1363,7 +1367,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhosHotter/WhosHotter-Prefix.pch";
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1389,7 +1393,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhosHotter/WhosHotter-Prefix.pch";
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E003AEEE-3E0C-43A5-BEC1-6790A5CCDE8C";

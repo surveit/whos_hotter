@@ -77,6 +77,11 @@
 }
 
 - (IBAction)didTapShareToFacebook:(id)sender {
+    if ([[[User sharedUser] pastCompetitions] count] > 0) {
+        Competition *competition = [[User sharedUser] pastCompetitions][0];
+        self.competitionToSegueTo = competition;
+        [self performSegueWithIdentifier:@"profileToComments" sender:self];
+    }
 }
 
 - (void)didTapProfileImage {
