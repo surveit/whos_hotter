@@ -13,13 +13,13 @@
 #import "Config.h"
 #import "FacebookManager.h"
 #import "FileCache.h"
+#import "User.h"
 
 #import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
 #import <Surveit/Surveit.h>
 
 @interface InitializationManager ()
-
 
 @end
 
@@ -43,7 +43,7 @@
     [Crashlytics startWithAPIKey:@"841ee581cc7e652c6644a04164d5638302a00365"];
     [Surveit startSessionWithAppIdentifier:@"755876163"
                                     secret:@"d989606806f643bda4ede02c4d5b131d"
-                                 debugMode:YES];
+                                 debugMode:NO];
 }
 
 - (void)initializeCaches {
@@ -51,14 +51,14 @@
 #ifndef CREATING_USER_FLOW
     [CompetitionCache initialize];
 #endif
-    [FacebookManager initialize];
+    if ([[User sharedUser] isLoggedIn]) {
+        [FacebookManager initialize];
+    }
 }
 
 - (void)setupConfig {
-    if ([[UINavigationBar appearance] respondsToSelector:@selector(setBackIndicatorImage:)]) {
-        [[UINavigationBar appearance] setBackIndicatorImage:[Utility imageNamed:@"Back button@2x" scale:2.0]];
-        [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[Utility imageNamed:@"Back button@2x" scale:2.0]];
-    }
+    [[UINavigationBar appearance] setBackIndicatorImage:[Utility imageNamed:@"Back button@2x" scale:2.0]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[Utility imageNamed:@"Back button@2x" scale:2.0]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor clearColor]}];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50.f) forBarMetrics:UIBarMetricsDefault];

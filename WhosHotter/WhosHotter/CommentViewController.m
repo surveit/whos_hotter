@@ -50,7 +50,6 @@
     }
     
     if (self.commentInputTextField.text.length == 0) {
-        [self showAlertViewForMessage:@"Can't post an empty comment!"];
         return;
     }
     
@@ -155,16 +154,6 @@
 }
 
 #pragma mark - uitextfielddelegate
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    NSString *error = [Comment isValidCommentText:textField.text];
-    if (error) {
-        [self showAlertViewForMessage:error];
-    } else {
-        [textField resignFirstResponder];
-    }
-    return !error;
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString *error = [Comment isValidCommentText:textField.text];
     if (error) {

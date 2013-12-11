@@ -368,12 +368,12 @@ static int counter = 1;
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         if (![self isLoggedIn]) {
             [self.energyOfferingViewController.tabBarController setSelectedIndex:1];
         } else if ([Surveit hasPaidSurvey]) {
-            [self performSelector:@selector(showPaidSurvey) withObject:nil afterDelay:1.0];
+            [self performSelector:@selector(showPaidSurvey) withObject:nil afterDelay:0.0];
         } else if (![FacebookManager isLoggedInToFacebook]) {
             [FacebookManager loginWithCompletionHandler:^(BOOL success, NSError *error) {
                 [_energyOfferingViewController.tabBarController setSelectedIndex:1];

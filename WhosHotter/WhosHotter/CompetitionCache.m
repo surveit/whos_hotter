@@ -65,7 +65,7 @@ static CompetitionCache *sharedInstance = nil;
     self.currentCompetition = nil;
     
     for (Competition *competition in self.cachedCompetitions) {
-        if ([competition hasAllAssets]) {
+        if ([competition hasAllAssets] && [competition timeUntilExpiration] > 600.0f) {
             self.currentCompetition = competition;
             break;
         }

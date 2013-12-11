@@ -19,7 +19,7 @@
     // create arbitrary OG objects for this app; your OG objects
     // will have URLs hosted by your server.
     NSString *format =
-    @"http://ask.surveit.com/opengraph.php?"
+    @"http://hotterapp.surveit.com/opengraph.php?"
     @"fb:app_id=1417735615126992&og:type=%@&"
     @"og:title=%@&og:description=%%22%@%%22&"
     @"body=%@";
@@ -117,18 +117,14 @@
      ^(FBRequestConnection *connection, id result, NSError *error) {
          NSString *alertText;
          if (!error) {
-             alertText = [NSString stringWithFormat:
-                          @"Posted Open Graph action, id: %@",
-                          [result objectForKey:@"id"]];
+             alertText = @"Shared on Facebook!";
          } else {
-             alertText = [NSString stringWithFormat:
-                          @"error: domain = %@, code = %d",
-                          error.domain, error.code];
+             alertText = @"Failed to share on Facebook.";
          }
          [[[UIAlertView alloc] initWithTitle:@"Result"
                                      message:alertText
                                     delegate:nil
-                           cancelButtonTitle:@"Thanks!"
+                           cancelButtonTitle:@"OK"
                            otherButtonTitles:nil]
           show];
      }

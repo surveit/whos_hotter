@@ -13,7 +13,6 @@
 + (NSInteger)competitionsToCache;
 + (NSInteger)maxCommentLength;
 + (NSInteger)maxEnergy;
-+ (NSInteger)staminaPerVote;
 + (NSInteger)secondsToRecoverStamina;
 + (NSInteger)energyCostPerVote;
 + (NSInteger)timePerCompetition;

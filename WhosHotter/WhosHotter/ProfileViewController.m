@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *fbLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *fbShareButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *cheatButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *pastCompetitions;
 @property (nonatomic, readwrite, strong) Competition *competitionToSegueTo;
 @property (weak, nonatomic) IBOutlet UIImageView *galleryView;
@@ -94,7 +95,7 @@
     }
     
     self.flamePointsLabel.text = @([[User sharedUser] flamePoints]).description;
-    BOOL isLoggedInToFacebook = [FacebookManager isLoggedInToFacebook];
+    BOOL isLoggedInToFacebook = [FacebookManager isLoggedInToFacebook] && [[User sharedUser] isLoggedIn];
     self.fbLoginButton.hidden = isLoggedInToFacebook;
     self.fbShareButton.hidden = !isLoggedInToFacebook;
 }
@@ -239,6 +240,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+ 
+#ifdef DEBUG
+    self.cheatButton.hidden = NO;
+#else
+    self.cheatButton.hidden = YES;
+#endif
     
     [self setupCollectionView];
     

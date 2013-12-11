@@ -82,7 +82,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
 
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    //[PFPush handlePush:userInfo];
+    [PFPush handlePush:userInfo];
 }
 
 @end

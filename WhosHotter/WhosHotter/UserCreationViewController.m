@@ -128,7 +128,7 @@
 - (IBAction)didTapDone:(id)sender {
     if (self.gender == UNKNOWN) {
         [self showAlertToChooseGender];
-    } else if (self.usernameTextField.text.length == 0) {
+    } else if (![User isUserNameValid:self.usernameTextField.text]) {
         [self showAlertForInvalidUserName];
     } else {
         [self.usernameTextField resignFirstResponder];
@@ -161,16 +161,6 @@
 #pragma mark -- Text field delegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.usernameTakenLabel.hidden = YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if ([User isUserNameValid:textField.text]) {
-        [textField resignFirstResponder];
-        return YES;
-    } else {
-        [self showAlertForInvalidUserName];
-        return NO;
-    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

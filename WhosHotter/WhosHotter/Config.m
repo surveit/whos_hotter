@@ -11,7 +11,7 @@
 @implementation Config
 
 + (NSInteger)competitionsToCache {
-    return 10;
+    return 20;
 }
 
 + (NSInteger)maxCommentLength {
@@ -20,10 +20,6 @@
 
 + (NSInteger)maxEnergy {
     return 100;
-}
-
-+ (NSInteger)staminaPerVote {
-    return 10;
 }
 
 + (NSInteger)secondsToRecoverStamina {
@@ -35,7 +31,7 @@
 }
 
 + (NSInteger)timePerCompetition {
-    return 300;
+    return 86400;
 }
 
 @end

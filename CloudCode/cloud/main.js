@@ -171,7 +171,7 @@ Parse.Cloud.job("unpairAllUsers", function(request, status) {
 Parse.Cloud.job("expireCompetitions", function(request, status) {
     Parse.Cloud.useMasterKey();
     var query = new Parse.Query("Competition");
-    query.lessThan("startTime",(new Date).getTime() - 300 * 1000);
+    query.lessThan("startTime",(new Date).getTime() - 86400 * 1000);
     query.equalTo("isFinal",false);
     query.include("users");
     query.find({

@@ -19,6 +19,7 @@
 		3B46406F1856F76300632FFC /* SurveitSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B46406E1856F76300632FFC /* SurveitSDK.bundle */; };
 		3B4640721856FCA900632FFC /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4640711856FCA900632FFC /* Report.m */; };
 		3B46407618570A9200632FFC /* HotterFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B46407518570A9200632FFC /* HotterFacebookManager.m */; };
+		3B4640781858647100632FFC /* Report_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4640771858647100632FFC /* Report_button@2x.png */; };
 		3B53651118543750001E8E34 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B53651018543750001E8E34 /* Crashlytics.framework */; };
 		3B53651718553D86001E8E34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */; };
 		3B53651A18555577001E8E34 /* EventLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651918555577001E8E34 /* EventLogger.m */; };
@@ -248,6 +249,7 @@
 		3B464073185707BF00632FFC /* OpenGraphProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGraphProtocols.h; sourceTree = "<group>"; };
 		3B46407418570A9200632FFC /* HotterFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotterFacebookManager.h; sourceTree = "<group>"; };
 		3B46407518570A9200632FFC /* HotterFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotterFacebookManager.m; sourceTree = "<group>"; };
+		3B4640771858647100632FFC /* Report_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Report_button@2x.png"; sourceTree = "<group>"; };
 		3B53651018543750001E8E34 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3B53651518553D86001E8E34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
@@ -784,13 +786,13 @@
 				3B33A8901853107F00756798 /* Picture frame@2x.png */,
 				3BA671DE1842F6F500246822 /* Red square (profile)@2x.png */,
 				3BA671DF1842F6F500246822 /* refresh cloud@2x.png */,
+				3B4640771858647100632FFC /* Report_button@2x.png */,
 				3BA671E01842F6F500246822 /* Sample Comment View Headshot 2@2x.png */,
 				3BA671E11842F6F500246822 /* Sample Comment View Headshot@2x.png */,
 				3BA671E21842F6F500246822 /* Sample Matching View Headshot Botton@2x.png */,
 				3BA671E31842F6F500246822 /* Sample Matching View Headshot Top@2x.png */,
 				3BA671E41842F6F500246822 /* Save Image button@2x.png */,
 				3BA671E51842F6F500246822 /* Save profile@2x.png */,
-				3B53651B1855592A001E8E34 /* versusBar@2x.png */,
 				3BA671E61842F6F500246822 /* Share on Facebook profile@2x.png */,
 				3BA671E71842F6F500246822 /* Small green square (matching)@2x.png */,
 				3BA671E81842F6F500246822 /* Small red square matching@2x.png */,
@@ -803,6 +805,7 @@
 				3BA671EF1842F6F500246822 /* Upload Photo button@2x.png */,
 				3BA671F01842F6F500246822 /* user@2x.png */,
 				3B24E527184F142000461568 /* versus@2x.png */,
+				3B53651B1855592A001E8E34 /* versusBar@2x.png */,
 				3BA671F11842F6F500246822 /* Wide green rectangle profile@2x.png */,
 			);
 			name = Images;
@@ -1128,6 +1131,7 @@
 				3BA671FB1842F6F500246822 /* Female button@2x.png in Resources */,
 				3BA672B9184477AA00246822 /* rs_female_000069.jpg in Resources */,
 				3BA672BC184477AA00246822 /* rs_female_000072.jpg in Resources */,
+				3B4640781858647100632FFC /* Report_button@2x.png in Resources */,
 				3BA672B2184477AA00246822 /* rs_female_000062.jpg in Resources */,
 				3BA672041842F6F500246822 /* iPhone5-splash@2x.png in Resources */,
 				3BA6727C184477AA00246822 /* rs_female_000008.jpg in Resources */,

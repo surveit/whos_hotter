@@ -100,6 +100,8 @@
     if (self.currentCompetition) {
         if ([self.currentCompetition canAffrdEnergy]) {
             [self.currentCompetition voteFor0];
+            self.topImageView.tapHandler = nil;
+            self.bottomImageView.tapHandler = nil;
             __weak VoteViewController *weakSelf = self;
             CGFloat percentage = [self topPercentage];
             [self addFire:self.topFire completionHandler:^(BOOL finished) {
@@ -116,6 +118,8 @@
     if (self.currentCompetition) {
         if ([self.currentCompetition canAffrdEnergy]) {
             [self.currentCompetition voteFor1];
+            self.topImageView.tapHandler = nil;
+            self.bottomImageView.tapHandler = nil;
             __weak VoteViewController *weakSelf = self;
             CGFloat percentage = [self bottomPercentage];
             [self addFire:self.bottomFire completionHandler:^(BOOL finished) {
@@ -207,8 +211,6 @@
     self.bottomImageView.contentMode = self.bottomImage.contentMode;
     self.topImageView.clipsToBounds = YES;
     self.bottomImageView.clipsToBounds = YES;
-    self.topImageView.userInteractionEnabled = YES;
-    self.bottomImageView.userInteractionEnabled = YES;
     [self.view insertSubview:self.topImageView belowSubview:self.winnerImageView ?: self.frameImage];
     [self.view insertSubview:self.bottomImageView belowSubview:self.winnerImageView ?: self.frameImage];
     
@@ -221,6 +223,10 @@
                          self.topImageView.alpha = 1.0;
                          self.bottomImageView.alpha = 1.0;
                          self.versusBar.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished) {
+                         self.topImageView.userInteractionEnabled = YES;
+                         self.bottomImageView.userInteractionEnabled = YES;
                      }];
     
     __weak VoteViewController *weakSelf = self;

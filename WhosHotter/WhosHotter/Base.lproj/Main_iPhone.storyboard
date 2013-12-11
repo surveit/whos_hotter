@@ -54,9 +54,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="zC1-2S-q79">
-                                <rect key="frame" x="0.0" y="189" width="320" height="332"/>
+                                <rect key="frame" x="0.0" y="193" width="320" height="332"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="zII-ki-P4X">
                                     <size key="itemSize" width="106" height="106"/>
@@ -162,7 +162,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gallery w Overlap.png" id="SbT-FM-NLk">
-                                <rect key="frame" x="0.0" y="187" width="320" height="334"/>
+                                <rect key="frame" x="0.0" y="192" width="320" height="334"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty profile.png" id="OiS-om-AJW" customClass="TappableImageView">
@@ -186,7 +186,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapLoginToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="bcm-PC-ZGX"/>
                                     <action selector="didTapShareToFacebook:" destination="YqP-6w-5ah" eventType="touchUpInside" id="gsT-OB-olE"/>
                                 </connections>
                             </button>
@@ -258,6 +257,7 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="user.png" id="IzZ-mm-EHU"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="cheatButton" destination="QX0-GP-iDC" id="2dg-Dp-fcR"/>
                         <outlet property="createAccount" destination="B6X-Bi-NS1" id="IH2-z2-J6L"/>
                         <outlet property="createAccountLabel" destination="kY5-nn-Voo" id="qHT-Zf-pQG"/>
                         <outlet property="facebookLoadingView" destination="Kv0-3i-A79" id="aYF-rN-Xvm"/>
@@ -532,10 +532,10 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u2E-g1-p6x">
-                                <rect key="frame" x="250" y="535" width="60" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="u2E-g1-p6x">
+                                <rect key="frame" x="290" y="538" width="23" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Report">
+                                <state key="normal" image="Report_button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -626,11 +626,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bw7-uh-ffN" customClass="TappableImageView">
-                                <rect key="frame" x="0.0" y="277" width="320" height="242"/>
+                                <rect key="frame" x="-1" y="284" width="322" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7b7-e4-nrf" customClass="TappableImageView">
-                                <rect key="frame" x="-0.5" y="42" width="320" height="245"/>
+                                <rect key="frame" x="-1" y="44" width="322" height="240"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame Last Result.png" id="8Nx-HW-I8i">
@@ -703,6 +703,7 @@
         <image name="Green square (profile).png" width="29" height="25"/>
         <image name="Male button opaque.png" width="87" height="88"/>
         <image name="Red square (profile).png" width="29" height="25"/>
+        <image name="Report_button.png" width="23" height="23"/>
         <image name="Save Image button.png" width="146" height="57"/>
         <image name="Save profile.png" width="114" height="44"/>
         <image name="Share on Facebook profile.png" width="170" height="36"/>
@@ -718,7 +719,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kwB-PJ-ZYS"/>
         <segue reference="QnA-fC-gWt"/>
+        <segue reference="iYN-DM-HIf"/>
     </inferredMetricsTieBreakers>
 </document>
