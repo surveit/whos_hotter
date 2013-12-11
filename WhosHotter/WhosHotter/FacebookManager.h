@@ -13,6 +13,7 @@
 
 + (void)loginWithCompletionHandler:(CompletionHandler)handler;
 + (BOOL)isLoggedInToFacebook;
++ (void)initialize;
 
 + (UIImage *)profileImage;
 + (Gender)gender;

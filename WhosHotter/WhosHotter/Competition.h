@@ -24,6 +24,8 @@
 @property (nonatomic, readonly, assign) BOOL invalid;
 
 - (BOOL)canAffrdEnergy;
+- (BOOL)isMyCompetition;
+
 - (NSInteger)votes0;
 - (NSInteger)votes1;
 - (NSInteger)totalVotes;
@@ -39,5 +41,8 @@
 - (CGFloat)myRatio;
 - (UIImage *)opponentsImage;
 - (NSInteger)timeUntilExpiration;
+
+- (NSString *)chosenUsername;
+- (UIImage *)chosenImage;
 
 @end

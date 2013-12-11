@@ -542,6 +542,16 @@
                                     <action selector="didTapReportButton:" destination="8GW-Xd-OsB" eventType="touchUpInside" id="P26-OD-Hb9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zM2-Vr-DZJ">
+                                <rect key="frame" x="141" y="160" width="39" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Facebook Share.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapShare:" destination="8GW-Xd-OsB" eventType="touchUpInside" id="tSo-Hg-YA1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -550,6 +560,7 @@
                         <outlet property="bottomImageView" destination="02q-Tr-jVx" id="UTE-Xj-qNY"/>
                         <outlet property="commentInputTextField" destination="qJG-ff-MIj" id="ljl-ug-uMG"/>
                         <outlet property="commentsTableView" destination="yGc-CW-TU8" id="SLB-pS-SUE"/>
+                        <outlet property="fbShareButton" destination="zM2-Vr-DZJ" id="9me-cy-9CI"/>
                         <outlet property="leftGreenSquare" destination="orm-Xw-TYb" id="MYI-2t-Khx"/>
                         <outlet property="leftPercentage" destination="SvV-RM-EEi" id="dA9-qe-YFe"/>
                         <outlet property="leftRedSquare" destination="DqO-nN-HGJ" id="XEM-yk-NkZ"/>
@@ -683,6 +694,7 @@
         <image name="Background.png" width="320" height="568"/>
         <image name="Empty profile.png" width="150" height="146"/>
         <image name="Facebook Connect.png" width="170" height="37"/>
+        <image name="Facebook Share.png" width="39" height="39"/>
         <image name="Female button opaque.png" width="87" height="88"/>
         <image name="Flame header.png" width="14" height="24"/>
         <image name="Flame profile.png" width="20" height="31"/>

@@ -61,11 +61,11 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [PFFacebookUtils handleOpenURL:url];
+    return [[FBSession activeSession] handleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [PFFacebookUtils handleOpenURL:url];
+    return [[FBSession activeSession] handleOpenURL:url];
 }
 
 - (void)application:(UIApplication *)application

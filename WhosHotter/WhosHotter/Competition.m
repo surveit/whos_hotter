@@ -24,6 +24,9 @@ static NSMutableArray *myRecentCompetitions = nil;
 @property (nonatomic, readwrite, assign) BOOL invalid;
 @property (nonatomic, readwrite, strong) NSArray *comments;
 
+@property (nonatomic, readwrite, assign) BOOL votedFor0;
+@property (nonatomic, readwrite, assign) BOOL votedFor1;
+
 @end
 
 @implementation Competition
@@ -142,12 +145,38 @@ static NSMutableArray *myRecentCompetitions = nil;
     [self incrementKey:@"votes0"];
     [self saveInBackgroundWithCompletionHandler:nil];
     [[User sharedUser] spendEnergy:[Config energyCostPerVote]];
+    self.votedFor0 = YES;
 }
 
 - (void)voteFor1 {
     [self incrementKey:@"votes1"];
     [self saveInBackgroundWithCompletionHandler:nil];
     [[User sharedUser] spendEnergy:[Config energyCostPerVote]];
+    self.votedFor1 = YES;
+}
+
+- (NSString *)chosenUsername {
+    if (self.votedFor0) {
+        return [self valueForKey:@"username0"];
+    }
+    if (self.votedFor1) {
+        return [self valueForKey:@"username1"];
+    }
+    return nil;
+}
+
+- (UIImage *)chosenImage {
+    if (self.votedFor0) {
+        return [self topImage];
+    }
+    if (self.votedFor1) {
+        return [self bottomImage];
+    }
+    return nil;
+}
+
+- (BOOL)isMyCompetition {
+    return [self myIndex] != NSNotFound;
 }
 
 - (CGFloat)myRatio {
@@ -172,7 +201,12 @@ static NSMutableArray *myRecentCompetitions = nil;
 }
 
 - (NSUInteger)myIndex {
-    return [[[self valueForKey:@"users"] valueForKey:@"objectId"] indexOfObject:[User identifier]];
+    NSArray *users = [self valueForKey:@"users"];
+    if (users) {
+        return [[users valueForKey:@"objectId"] indexOfObject:[User identifier]];
+    } else {
+        return NSNotFound;
+    }
 }
 
 - (NSArray *)userIdentifiers {

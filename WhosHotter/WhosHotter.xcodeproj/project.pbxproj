@@ -18,6 +18,7 @@
 		3B46406D1856F71700632FFC /* Surveit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B46406C1856F71700632FFC /* Surveit.framework */; };
 		3B46406F1856F76300632FFC /* SurveitSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B46406E1856F76300632FFC /* SurveitSDK.bundle */; };
 		3B4640721856FCA900632FFC /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4640711856FCA900632FFC /* Report.m */; };
+		3B46407618570A9200632FFC /* HotterFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B46407518570A9200632FFC /* HotterFacebookManager.m */; };
 		3B53651118543750001E8E34 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B53651018543750001E8E34 /* Crashlytics.framework */; };
 		3B53651718553D86001E8E34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */; };
 		3B53651A18555577001E8E34 /* EventLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53651918555577001E8E34 /* EventLogger.m */; };
@@ -244,6 +245,9 @@
 		3B46406E1856F76300632FFC /* SurveitSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SurveitSDK.bundle; sourceTree = "<group>"; };
 		3B4640701856FCA900632FFC /* Report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Report.h; sourceTree = "<group>"; };
 		3B4640711856FCA900632FFC /* Report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Report.m; sourceTree = "<group>"; };
+		3B464073185707BF00632FFC /* OpenGraphProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGraphProtocols.h; sourceTree = "<group>"; };
+		3B46407418570A9200632FFC /* HotterFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotterFacebookManager.h; sourceTree = "<group>"; };
+		3B46407518570A9200632FFC /* HotterFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotterFacebookManager.m; sourceTree = "<group>"; };
 		3B53651018543750001E8E34 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3B53651518553D86001E8E34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		3B53651618553D86001E8E34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
@@ -681,6 +685,8 @@
 				3B24E52F1851B38600461568 /* TimeManager.m */,
 				3B53651818555577001E8E34 /* EventLogger.h */,
 				3B53651918555577001E8E34 /* EventLogger.m */,
+				3B46407418570A9200632FFC /* HotterFacebookManager.h */,
+				3B46407518570A9200632FFC /* HotterFacebookManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -746,6 +752,7 @@
 			isa = PBXGroup;
 			children = (
 				3BA67160183B41F700246822 /* Downloadable.h */,
+				3B464073185707BF00632FFC /* OpenGraphProtocols.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -1201,6 +1208,7 @@
 				3BA67154183B35B500246822 /* ProfileViewController.m in Sources */,
 				3BA6711D1839B93C00246822 /* InitializationManager.m in Sources */,
 				3BA6713C1839C33100246822 /* Config.m in Sources */,
+				3B46407618570A9200632FFC /* HotterFacebookManager.m in Sources */,
 				3BA6721D1843007D00246822 /* ImagePickerViewController.m in Sources */,
 				3BA670EA1839B84F00246822 /* main.m in Sources */,
 			);

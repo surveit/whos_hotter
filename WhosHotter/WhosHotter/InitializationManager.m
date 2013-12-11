@@ -11,6 +11,7 @@
 #import "User.h"
 #import "CompetitionCache.h"
 #import "Config.h"
+#import "FacebookManager.h"
 #import "FileCache.h"
 
 #import <Crashlytics/Crashlytics.h>
@@ -50,6 +51,7 @@
 #ifndef CREATING_USER_FLOW
     [CompetitionCache initialize];
 #endif
+    [FacebookManager initialize];
 }
 
 - (void)setupConfig {

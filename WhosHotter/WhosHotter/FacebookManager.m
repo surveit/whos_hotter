@@ -39,6 +39,10 @@ FacebookManager *sharedInstance = nil;
     return sharedInstance;
 }
 
++ (void)initialize {
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
+}
+
 + (void)loginWithCompletionHandler:(CompletionHandler)handler {
     // The permissions requested from the user
     NSArray *permissionsArray = @[@"user_about_me"];
@@ -48,35 +52,21 @@ FacebookManager *sharedInstance = nil;
     
     [EventLogger logEvent:@"connectToFacebook"];
     
-    if ([[User sharedUser] isLoggedIn]) {
-        [PFFacebookUtils linkUser:[PFUser currentUser]
-                      permissions:permissionsArray
-                            block:^(BOOL succeeded, NSError *error) {
-                                if (succeeded) {
-                                    [[User sharedUser] refillEnergy];
-                                } else {
-                                    [Utility showError:error.userInfo[@"error"]];
-                                }
-                                if (handler) {
-                                    handler(succeeded,error);
-                                }
-                            }];
-    } else {
-        [FBSession openActiveSessionWithReadPermissions:permissionsArray
-                                           allowLoginUI:YES
-                                      completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                                          if (!error) {
-                                              [[self sharedInstance] getFacebookInformationWithCompletionHandler:handler];
-                                          } else if (handler) {
-                                              NSLog(@"Error %@",error);
-                                              handler(NO,error);
-                                          }
-                                      }];
-    }
+    [FBSession openActiveSessionWithReadPermissions:permissionsArray
+                                       allowLoginUI:YES
+                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                      if (!error) {
+                                          [[User sharedUser] refillEnergy];
+                                          [[self sharedInstance] getFacebookInformationWithCompletionHandler:handler];
+                                      } else if (handler) {
+                                          NSLog(@"Error %@",error);
+                                          handler(NO,error);
+                                      }
+                                  }];
 }
 
 + (BOOL)isLoggedInToFacebook {
-    return [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]];
+    return [[FBSession activeSession] isOpen];
 }
 
 + (UIImage *)profileImage {
@@ -86,23 +76,6 @@ FacebookManager *sharedInstance = nil;
 + (Gender)gender {
     return [[self sharedInstance] gender] ? [[[self sharedInstance] gender] isEqualToString:@"male"] ? MALE : FEMALE : UNKNOWN;
 }
-
-/*
-+ (void)shareVote:(Competition *)competition {
-    FBRequest* newAction = [[FBRequest alloc] initForPostWithSession:[FBSession activeSession] graphPath:[NSString stringWithFormat:@"me/friendsmashsample:smash?profile=%llu", uFriendID] graphObject:nil];
-    
-    FBRequestConnection* conn = [[FBRequestConnection alloc] init];
-    
-    [conn addRequest:newAction completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if(error) {
-            NSLog(@"Sending OG Story Failed: %@", result[@"id"]);
-            return;
-        }
-        
-        NSLog(@"OG action ID: %@", result[@"id"]);
-    }];
-    [conn start];
-}*/
 
 - (void)getFacebookInformationWithCompletionHandler:(CompletionHandler)handler {
     [EventLogger logEvent:@"facebookConnected"];

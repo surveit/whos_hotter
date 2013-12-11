@@ -20,6 +20,8 @@ function pair(user1, user2, options) {
     newCompetition.set("image0",user1.get("profileImage"));
     newCompetition.set("image1",user2.get("profileImage"));
     newCompetition.set("random",Math.random());
+    newCompetition.set("username0",user1.get("username"));
+    newCompetition.set("username1",user2.get("username"));
     newCompetition.save().then(function(competition) {
 	console.log("Saved competition");
 	user1.set("isPaired",true);
@@ -119,6 +121,8 @@ Parse.Cloud.job("createPairings", function(request, status) {
 		newCompetition.set("image0",user1.get("profileImage"));
 		newCompetition.set("image1",user2.get("profileImage"));
 		newCompetition.set("random",Math.random());
+		newCompetition.set("username0",user1.get("username"));
+		newCompetition.set("username1",user2.get("username"));
 		newCompetitions.push(newCompetition);
 	    }
 	    Parse.Object.saveAll(newCompetitions,{
@@ -188,13 +192,17 @@ Parse.Cloud.job("expireCompetitions", function(request, status) {
 		    console.log(percentage0);
 		    console.log(percentage1);
 		    console.log(userObjects);
-		    userObjects[0].set("isPaired",false);
-		    userObjects[1].set("isPaired",false);
-		    userObjects[0].set("points",userObjects[0].get("points")+percentage0);
-		    userObjects[1].set("points",userObjects[1].get("points")+percentage1);
+		    if (userObjects[0]) {
+			userObjects[0].set("isPaired",false);
+			userObjects[0].set("points",userObjects[0].get("points")+percentage0);
+			toSave.push(userObjects[0]);
+		    }
+		    if (userObjects[1]) {
+			userObjects[1].set("isPaired",false);
+			userObjects[1].set("points",userObjects[1].get("points")+percentage1);
+			toSave.push(userObjects[1]);
+		    }
 		    console.log("set final true");
-		    toSave.push(userObjects[0]);
-		    toSave.push(userObjects[1]);
 		}
 		results[i].set("isFinal",true);
 	    }

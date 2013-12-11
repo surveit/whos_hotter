@@ -10,6 +10,7 @@
 
 #import "Comment.h"
 #import "Competition.h"
+#import "HotterFacebookManager.h"
 #import "Report.h"
 
 #define kBaseHeight 16
@@ -32,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *leftPercentage;
 @property (weak, nonatomic) IBOutlet UILabel *rightPercentage;
 @property (weak, nonatomic) IBOutlet UILabel *noCommentsLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *fbShareButton;
 
 @end
 
@@ -108,6 +111,8 @@
     self.rightGreenSquare.hidden = rightPercentage < 50.0f;
     self.rightRedSquare.hidden = rightPercentage >= 50.0f;
     self.noCommentsLabel.hidden = self.competition.comments.count > 0;
+    
+    self.fbShareButton.hidden = ![FacebookManager isLoggedInToFacebook];
 }
 
 - (CGFloat)leftPercentageValue {
@@ -122,6 +127,16 @@
         return 50.0;
     }
     return (CGFloat)self.competition.votes1/self.competition.totalVotes*100.0f;
+}
+
+
+- (IBAction)didTapShare:(id)sender {
+    if (self.competition.isMyCompetition) {
+        //do something
+    } else {
+        [HotterFacebookManager postPhoto:self.competition.chosenImage
+                                username:self.competition.chosenUsername];
+    }
 }
 
 - (IBAction)didTapReportButton:(id)sender {
