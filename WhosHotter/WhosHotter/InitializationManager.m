@@ -30,10 +30,9 @@
     [self initializeParse];
     [self initializeCaches];
     [self setupConfig];
+    [self setupUser];
 #ifdef CREATING_USER_FLOW
     [self performSelector:@selector(createFakeUser) withObject:nil afterDelay:5];
-#else
-    [self setupUser];
 #endif
 }
 

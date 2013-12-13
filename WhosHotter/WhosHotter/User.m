@@ -69,8 +69,9 @@ static int counter = 1;
 + (void)createFakeUser {
     User *newUser = [[User alloc] init];
     user = newUser;
+    
     NSString *imageName = [NSString stringWithFormat:@"rs_female_0000%02d.jpg",counter];
-    [newUser createLogin:[NSString stringWithFormat:@"user_%d",counter]
+    [newUser createLogin:@"none"
                 password:@"noMatter"
                   gender:FEMALE
                    image:[UIImage imageNamed:imageName]
@@ -147,6 +148,8 @@ static int counter = 1;
     
     __weak User *weakSelf = self;
     
+    self.model = user;
+    
     [self setProfileImage:profileImage
      completionHandler:^(BOOL success, NSError *error) {
          if (success) {
@@ -170,7 +173,6 @@ static int counter = 1;
              }];
          }
      }];
-
 }
 
 #pragma mark -- model getters
@@ -246,17 +248,30 @@ static int counter = 1;
     
     if ([self timeUntilStaminaRefill] <= 0) {
         self.model[@"energy"] = @([Config maxEnergy]);
-        self.model[@"timeToRefill"] = @([TimeManager time] + [Config secondsToRecoverStamina]);
         [self notifyEnergyUpdated];
         [self.model saveInBackground];
-        [self performSelector:@selector(checkStamina) withObject:nil afterDelay:[Config secondsToRecoverStamina]];
+        [self resetTimeToRefill];
     } else {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkStamina) object:nil];
         [self performSelector:@selector(checkStamina) withObject:nil afterDelay:[self timeUntilStaminaRefill]];
     }
 }
 
-- (CGFloat)timeUntilStaminaRefill {
-    return [self.model[@"timeToRefill"] floatValue] - [TimeManager time];
+- (void)startRefillTimer {
+    [[NSUserDefaults standardUserDefaults] setObject:@([TimeManager time] + [Config secondsToRecoverStamina]) forKey:@"timeToRefill"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkStamina) object:nil];
+    [self performSelector:@selector(checkStamina) withObject:nil afterDelay:(double)[Config secondsToRecoverStamina]];
+}
+
+- (void)resetTimeToRefill {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"timeToRefill"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (double)timeUntilStaminaRefill {
+    return [[NSUserDefaults standardUserDefaults] doubleForKey:@"timeToRefill"] - [TimeManager time];
 }
 
 - (void)notifyOfUserCreated {
@@ -266,7 +281,6 @@ static int counter = 1;
 
 - (void)addDefaultStatsToUser:(PFUser *)pfUser {
     pfUser[@"energy"] = @([Config maxEnergy]);
-    pfUser[@"timeToRefill"] = @([TimeManager time] + [Config secondsToRecoverStamina]);
     [self notifyEnergyUpdated];
 }
 
@@ -313,6 +327,10 @@ static int counter = 1;
         self.model[@"energy"] = @(self.energy - energy);
         [self.model saveInBackground];
         [self notifyEnergyUpdated];
+    }
+    
+    if (self.energy == 0 && [self timeUntilStaminaRefill] < 0) {
+        [self startRefillTimer];
     }
 }
 

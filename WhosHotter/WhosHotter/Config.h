@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+//#define CREATING_USER_FLOW
+
 @interface Config : NSObject
 
 + (NSInteger)competitionsToCache;
 + (NSInteger)maxCommentLength;
 + (NSInteger)maxEnergy;
-+ (NSInteger)secondsToRecoverStamina;
++ (double)secondsToRecoverStamina;
 + (NSInteger)energyCostPerVote;
 + (NSInteger)timePerCompetition;
 

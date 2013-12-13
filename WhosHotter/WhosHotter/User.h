@@ -31,12 +31,13 @@ typedef enum {
               image:(UIImage *)profileImage
          completion:(CompletionHandler)handler;
 
+- (void)checkStamina;
 - (id)userModel;
 - (NSInteger)flamePoints;
 - (BOOL)isLoggedIn;
 - (UIImage *)profileImage;
 - (NSArray *)pastCompetitions;
-- (CGFloat)timeUntilStaminaRefill;
+- (double)timeUntilStaminaRefill;
 
 - (void)getCompetitions:(ObjectsCompletionHandler)completionHandler;
 - (void)submitForCompetition:(SingleObjectCompletionHandler)completionHandler;

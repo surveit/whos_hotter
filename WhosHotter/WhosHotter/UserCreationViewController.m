@@ -136,7 +136,8 @@
         [EventLogger logEvent:@"validateUserName"];
         self.spinner.hidden = NO;
         [self.spinner startAnimating];
-        [[User sharedUser] createLogin:self.usernameTextField.text password:@"NOPASSWORD"
+        [[User sharedUser] createLogin:self.usernameTextField.text
+                              password:@"NOPASSWORD"
                                 gender:self.gender
                                  image:self.profileImage
                             completion:^(BOOL success, NSError *error) {
