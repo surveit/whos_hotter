@@ -13,6 +13,7 @@
 #import "Competition.h"
 #import "CompetitionCache.h"
 #import "Config.h"
+#import "EventLogger.h"
 #import "TappableImageView.h"
 #import "User.h"
 #import "UIImage+ImageEffects.h"
@@ -99,6 +100,7 @@
 - (void)didTapTop {
     if (self.currentCompetition) {
         if ([self.currentCompetition canAffrdEnergy]) {
+            [EventLogger logEvent:@"vote"];
             [self.currentCompetition voteFor0];
             self.topImageView.tapHandler = nil;
             self.bottomImageView.tapHandler = nil;
@@ -117,6 +119,7 @@
 - (void)didTapBottom {
     if (self.currentCompetition) {
         if ([self.currentCompetition canAffrdEnergy]) {
+            [EventLogger logEvent:@"vote"];
             [self.currentCompetition voteFor1];
             self.topImageView.tapHandler = nil;
             self.bottomImageView.tapHandler = nil;

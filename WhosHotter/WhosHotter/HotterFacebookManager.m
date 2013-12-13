@@ -51,26 +51,13 @@
 }
 
 + (void)shareCompetition:(Competition *)competition {
-    UIAlertView *share = [[UIAlertView alloc] initWithTitle:@"Share?"
-                                                    message:@"Share this competition on Facebook?"
-                                                   delegate:[self sharedInstance]
-                                          cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"OK", nil];
-    [share show];
-    [[self sharedInstance] setCompetitionToShare:competition];
-}
-
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        if (self.competitionToShare.isMyCompetition) {
-            [HotterFacebookManager postMyCompetitionAgainst:self.competitionToShare.opponentsImage
-                                                   username:self.competitionToShare.opponentsUsername
-                                                   timeLeft:self.competitionToShare.timeUntilExpiration];
-        } else {
-            [HotterFacebookManager postPhoto:self.competitionToShare.chosenImage
-                                    username:self.competitionToShare.chosenUsername];
-        }
+    if (competition.isMyCompetition) {
+        [HotterFacebookManager postMyCompetitionAgainst:competition.opponentsImage
+                                               username:competition.opponentsUsername
+                                               timeLeft:competition.timeUntilExpiration];
+    } else {
+        [HotterFacebookManager postPhoto:competition.chosenImage
+                                username:competition.chosenUsername];
     }
 }
 
@@ -197,16 +184,20 @@
      ^(FBRequestConnection *connection, id result, NSError *error) {
          NSString *alertText;
          if (!error) {
-             alertText = @"Shared on Facebook!";
+             alertText = @"Awesome! You successfully shared this on Facebook!";
+             [[[UIAlertView alloc] initWithTitle:@"Success!"
+                                         message:alertText
+                                        delegate:nil
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil] show];
          } else {
              alertText = @"Failed to share on Facebook.";
+             [[[UIAlertView alloc] initWithTitle:@"Error"
+                                         message:alertText
+                                        delegate:nil
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil] show];
          }
-         [[[UIAlertView alloc] initWithTitle:@"Share Vote"
-                                     message:alertText
-                                    delegate:nil
-                           cancelButtonTitle:@"OK"
-                           otherButtonTitles:nil]
-          show];
      }
      ];
 }
@@ -242,16 +233,20 @@
      ^(FBRequestConnection *connection, id result, NSError *error) {
          NSString *alertText;
          if (!error) {
-             alertText = @"Shared on Facebook!";
+             alertText = @"Awesome! You successfully shared this on Facebook!";
+             [[[UIAlertView alloc] initWithTitle:@"Success!"
+                                         message:alertText
+                                        delegate:nil
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil] show];
          } else {
              alertText = @"Failed to share on Facebook.";
+             [[[UIAlertView alloc] initWithTitle:@"Error"
+                                         message:alertText
+                                        delegate:nil
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil] show];
          }
-         [[[UIAlertView alloc] initWithTitle:@"Share Competition"
-                                     message:alertText
-                                    delegate:nil
-                           cancelButtonTitle:@"OK"
-                           otherButtonTitles:nil]
-          show];
      }
      ];
 }

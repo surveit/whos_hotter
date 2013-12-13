@@ -162,7 +162,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gallery w Overlap.png" id="SbT-FM-NLk">
-                                <rect key="frame" x="0.0" y="192" width="320" height="334"/>
+                                <rect key="frame" x="0.0" y="190" width="320" height="334"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty profile.png" id="OiS-om-AJW" customClass="TappableImageView">
@@ -739,7 +739,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kwB-PJ-ZYS"/>
         <segue reference="QnA-fC-gWt"/>
+        <segue reference="iYN-DM-HIf"/>
     </inferredMetricsTieBreakers>
 </document>
