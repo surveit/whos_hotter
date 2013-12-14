@@ -59,7 +59,7 @@ function pair(user1, user2, options) {
 	    },
 	});
     });
-}
+}    
 
 function permute(array) {
     for (var i=0;i<array.length;i++) {
@@ -127,7 +127,27 @@ Parse.Cloud.job("createPairings", function(request, status) {
 	    }
 	    Parse.Object.saveAll(newCompetitions,{
 		success: function(list) {
-		    status.success("Success");
+		    for (var i=0;i+1<randomUsers.length;i+=2) {
+			user1 = randomUsers[i];
+			user2 = randomUsers[i+1];
+			competition = list[i/2];
+			
+			user1.set("isPaired",true);
+			user2.set("isPaired",true);
+			user1.set("activeCompetitionIdentifier",competition.id);
+			user2.set("activeCompetitionIdentifier",competition.id);
+			user1.add("competitionIdentifiers",competition.id);
+			user2.add("competitionIdentifiers",competition.id);
+		    }
+		    Parse.Object.saveAll(randomUsers,{
+			success: function(list) {
+			    status.success();
+			},
+			error: function(error) {
+			    console.log(error);
+			    status.error("error");
+			}
+		    });
 		},
 		error: function(error) {
 		    console.log(error);
