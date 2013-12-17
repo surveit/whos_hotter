@@ -12,6 +12,7 @@
 #import "Competition.h"
 #import "Config.h"
 #import "FileManager.h"
+#import "LocalNotificationManager.h"
 #import "HotterFacebookManager.h"
 #import "NotificationNames.h"
 #import "TimeManager.h"
@@ -117,7 +118,9 @@ static int counter = 1;
 
 - (void)populate {
     if (self.model) {
-        [self getCompetitions:nil];
+        if ([self isLoggedIn]) {
+            [self getCompetitions:nil];
+        }
         [self checkStamina];
     }
 }
@@ -246,6 +249,10 @@ static int counter = 1;
         return;
     }
     
+    if ([self energy] > 0) {
+        return;
+    }
+    
     if ([self timeUntilStaminaRefill] <= 0) {
         self.model[@"energy"] = @([Config maxEnergy]);
         [self notifyEnergyUpdated];
@@ -258,6 +265,9 @@ static int counter = 1;
 }
 
 - (void)startRefillTimer {
+    [LocalNotificationManager createLocalNotificationWithText:@"You've got more votes! Come check out the new matchups!"
+                                                         time:[[NSDate date] dateByAddingTimeInterval:[Config secondsToRecoverStamina]]];
+    
     [[NSUserDefaults standardUserDefaults] setObject:@([TimeManager time] + [Config secondsToRecoverStamina]) forKey:@"timeToRefill"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

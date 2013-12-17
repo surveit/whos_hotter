@@ -178,6 +178,10 @@ static NSMutableArray *myRecentCompetitions = nil;
     return [self myIndex] != NSNotFound;
 }
 
+- (BOOL)canBeVotedOn {
+    return self.timeUntilExpiration > 600.0f;
+}
+
 - (CGFloat)myRatio {
     NSUInteger index = [self myIndex];
     if (index != NSNotFound && [self totalVotes] > 0) {

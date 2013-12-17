@@ -25,6 +25,7 @@
 
 - (BOOL)canAffrdEnergy;
 - (BOOL)isMyCompetition;
+- (BOOL)canBeVotedOn;
 
 - (NSInteger)votes0;
 - (NSInteger)votes1;

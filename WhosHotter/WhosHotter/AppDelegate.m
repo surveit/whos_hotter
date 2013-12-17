@@ -51,7 +51,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[User sharedUser] checkStamina];
+    [[User sharedUser] populate];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

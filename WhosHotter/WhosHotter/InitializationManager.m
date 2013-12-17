@@ -30,7 +30,6 @@
     [self initializeParse];
     [self initializeCaches];
     [self setupConfig];
-    [self setupUser];
 #ifdef CREATING_USER_FLOW
     [self performSelector:@selector(createFakeUser) withObject:nil afterDelay:5];
 #endif
@@ -62,10 +61,6 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor clearColor]}];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50.f) forBarMetrics:UIBarMetricsDefault];
-}
-
-- (void)setupUser {
-    [[User sharedUser] populate];
 }
 
 - (void)createFakeUser {

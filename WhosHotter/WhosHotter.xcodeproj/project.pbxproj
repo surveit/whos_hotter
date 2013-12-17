@@ -52,6 +52,7 @@
 		3B53655218559644001E8E34 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B53653818559644001E8E34 /* iTunesArtwork.png */; };
 		3B53655318559644001E8E34 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B53653918559644001E8E34 /* iTunesArtwork@2x.png */; };
 		3B5365591856F59E001E8E34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5365581856F59E001E8E34 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3B8440C818602A47003CAA34 /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8440C718602A47003CAA34 /* LocalNotificationManager.m */; };
 		3BA670DE1839B84F00246822 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DD1839B84F00246822 /* Foundation.framework */; };
 		3BA670E01839B84F00246822 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670DF1839B84F00246822 /* CoreGraphics.framework */; };
 		3BA670E21839B84F00246822 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA670E11839B84F00246822 /* UIKit.framework */; };
@@ -208,6 +209,8 @@
 		3B53653818559644001E8E34 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		3B53653918559644001E8E34 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		3B5365581856F59E001E8E34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		3B8440C618602A47003CAA34 /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotificationManager.h; sourceTree = "<group>"; };
+		3B8440C718602A47003CAA34 /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotificationManager.m; sourceTree = "<group>"; };
 		3BA670DA1839B84F00246822 /* Hotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA670DD1839B84F00246822 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BA670DF1839B84F00246822 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -551,6 +554,8 @@
 				3BA6713F1839C69C00246822 /* Comment.m */,
 				3B4640701856FCA900632FFC /* Report.h */,
 				3B4640711856FCA900632FFC /* Report.m */,
+				3B8440C618602A47003CAA34 /* LocalNotificationManager.h */,
+				3B8440C718602A47003CAA34 /* LocalNotificationManager.m */,
 			);
 			name = PFModels;
 			sourceTree = "<group>";
@@ -898,6 +903,7 @@
 				3BA671241839BF6A00246822 /* PersistedObject.m in Sources */,
 				3BA67154183B35B500246822 /* ProfileViewController.m in Sources */,
 				3BA6711D1839B93C00246822 /* InitializationManager.m in Sources */,
+				3B8440C818602A47003CAA34 /* LocalNotificationManager.m in Sources */,
 				3BA6713C1839C33100246822 /* Config.m in Sources */,
 				3B46407618570A9200632FFC /* HotterFacebookManager.m in Sources */,
 				3BA6721D1843007D00246822 /* ImagePickerViewController.m in Sources */,
@@ -1053,8 +1059,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7E3953D3-F594-4E5E-B499-83B93A0598A6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E3953D3-F594-4E5E-B499-83B93A0598A6";
+				PROVISIONING_PROFILE = "5176106B-10AF-49E1-A6AE-98D27C22D99C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5176106B-10AF-49E1-A6AE-98D27C22D99C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -1078,8 +1084,8 @@
 				INFOPLIST_FILE = "WhosHotter/WhosHotter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7E3953D3-F594-4E5E-B499-83B93A0598A6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E3953D3-F594-4E5E-B499-83B93A0598A6";
+				PROVISIONING_PROFILE = "5176106B-10AF-49E1-A6AE-98D27C22D99C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5176106B-10AF-49E1-A6AE-98D27C22D99C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

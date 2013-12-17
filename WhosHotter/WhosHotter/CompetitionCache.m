@@ -37,6 +37,10 @@ static CompetitionCache *sharedInstance = nil;
     return [[self sharedInstance] next];
 }
 
++ (void)flush {
+    [sharedInstance.cachedCompetitions removeAllObjects];
+}
+
 - (void)populate {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Competition.class)];
     [query whereKey:@"isFinal" equalTo:@(NO)];
@@ -65,7 +69,7 @@ static CompetitionCache *sharedInstance = nil;
     self.currentCompetition = nil;
     
     for (Competition *competition in self.cachedCompetitions) {
-        if ([competition hasAllAssets] && [competition timeUntilExpiration] > 600.0f) {
+        if ([competition hasAllAssets] && [competition canBeVotedOn]) {
             self.currentCompetition = competition;
             break;
         }
@@ -84,7 +88,7 @@ static CompetitionCache *sharedInstance = nil;
 - (void)removeInvalidCompetitions {
     NSMutableArray *invalidCompetitions = [NSMutableArray array];
     for (Competition *competition in self.cachedCompetitions) {
-        if ([competition invalid]) {
+        if ([competition invalid] || [competition canBeVotedOn]) {
             [invalidCompetitions addObject:competition];
         }
     }
