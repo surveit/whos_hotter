@@ -80,6 +80,7 @@ Parse.Cloud.define("pairUser", function(request,response) {
     } else {
 	var query = new Parse.Query("User");
 	query.equalTo("isPaired",false);
+	query.greaterThan("gender",0);
 	console.log("username:");
 	console.log(userObject.get("username"));
 	query.notEqualTo("username",userObject.get("username"));
@@ -107,6 +108,7 @@ Parse.Cloud.job("createPairings", function(request, status) {
     Parse.Cloud.useMasterKey();
     var query = new Parse.Query("User");
     query.equalTo("isPaired",false);
+    query.greaterThan("gender",0);
     var Competition = Parse.Object.extend("Competition");
     query.find({
 	success: function(results) {
@@ -116,6 +118,7 @@ Parse.Cloud.job("createPairings", function(request, status) {
 		user1 = randomUsers[i];
 		user2 = randomUsers[i+1];
 		var newCompetition = new Competition();
+		newCompetition.set("users",[user1,user2]);
 		newCompetition.set("isFinal",false);
 		newCompetition.set("startTime",(new Date).getTime());
 		newCompetition.set("image0",user1.get("profileImage"));
